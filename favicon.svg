@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect x="2" y="2" width="60" height="60" rx="10" fill="#080B0D" stroke="#384047" stroke-width="2"/>
+  <text x="32" y="41" text-anchor="middle" fill="#F5F0E7" font-family="Georgia, 'Times New Roman', serif" font-size="29" font-weight="700" letter-spacing="-2.5">UA</text>
+  <path d="M19 50H45" stroke="#D52D32" stroke-width="3" stroke-linecap="round"/>
+</svg>
