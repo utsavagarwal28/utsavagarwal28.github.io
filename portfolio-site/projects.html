@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Projects — Utsav Agarwal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css"></head><body>
+<nav><a class="logo" href="index.html" aria-label="Home">UA</a>
+<button class="burger" aria-label="Menu" aria-expanded="false">&#9776;</button>
+<div class="links" id="links"><a href="index.html#about">About</a><a href="projects.html" class=on>Projects</a><a href="experience.html">Experience</a><a href="#contact">Contact</a><a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume</a></div></nav>
+<main class="view on">
+<!-- PROJECT: LBE VR -->
+<section class="snap"><div class="split"><div class="pane"><p class="eyebrow">Company Project</p><h2>LBE VR</h2><p style="color:var(--mu)">Immersive, shared-space VR for location-based entertainment venues.</p><ul><li>VR gameplay and shared physical-space interactions</li><li>Arena setup and configuration</li><li>Multiplayer integration with Photon Fusion</li><li>Modular utilities and reusable workflows</li></ul><div class="tags"><span>Unity</span><span>C#</span><span>Photon Fusion</span><span>VR</span></div><div class="row"><button class="more" aria-expanded="false">Read more</button></div><div class="det">Players share a real arena while the game tracks them in a common virtual space. My work covers the Unity systems that configure each arena, the UI around it, and the networking that keeps everyone in sync.</div></div><div class="vis"><img class="bg" loading="lazy" src="assets/lbe-vr.webp" alt="LBE VR project image"></div></div></section>
+<!-- PROJECT: Enemy AI -->
+<section class="snap"><div class="split flip"><div class="pane"><p class="eyebrow">Personal Project</p><h2>Enemy AI</h2><p style="color:var(--mu)">Enemy perception, patrol and decision-making for stealth gameplay.</p><ul><li>Patrol routes between waypoints</li><li>Detection and awareness cones</li><li>Suspicious, alerted and searching states</li><li>State transitions tied to player actions</li></ul><div class="tags"><span>Unity</span><span>C#</span><span>State Machines</span><span>AI</span></div><div class="row"><button class="more" aria-expanded="false">Read more</button></div><div class="det">Each enemy runs a finite state machine: patrol, become suspicious when something is seen or heard, investigate, then alert or return to patrol. Detection is driven by vision cones and line-of-sight checks.</div></div><div class="vis"><img class="bg" loading="lazy" src="assets/enemy-ai.webp" alt="Enemy AI project image"><span class="cap">Illustrative concept art, not gameplay capture</span></div></div></section>
+<!-- PROJECT: Fight Arena -->
+<section class="snap"><div class="split"><div class="pane"><p class="eyebrow">Personal Project</p><h2>Fight Arena</h2><p style="color:var(--mu)">A Tekken-inspired 3D fighting-game prototype.</p><ul><li>Character movement and combat mechanics</li><li>Animation control</li><li>Camera behavior and arena boundaries</li><li>Gameplay UI and visual feedback</li></ul><div class="tags"><span>Unity</span><span>C#</span><span>Animator</span><span>Gameplay</span></div><div class="row"><button class="more" aria-expanded="false">Read more</button></div><div class="det">A two-fighter arena built around responsive movement, attack chains and animation-driven hit windows, with a camera that frames both fighters inside the arena bounds.</div></div><div class="vis"><img class="bg" loading="lazy" src="assets/fight-arena.webp" alt="Fight Arena project image"><span class="cap">Reference artwork, not a capture of this project</span></div></div></section>
+
+<!-- CONTACT -->
+<section class="snap contact" id="contact"><div><p class="eyebrow" style="display:inline-block;text-align:left">Contact</p><h2>Let’s build something meaningful.</h2><p>Open to game development opportunities in gameplay systems, AI and VR. Send a message and I’ll reply soon.</p><a class="btn" href="mailto:utsavagarwal2002@gmail.com">Let’s Talk</a><a class="m" href="mailto:utsavagarwal2002@gmail.com">utsavagarwal2002@gmail.com</a></div></section>
+</main>
+<script src="script.js"></script></body></html>
