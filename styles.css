@@ -50,7 +50,9 @@ h1{font-size:clamp(44px,7vw,92px)}h2{font-size:clamp(34px,4.4vw,60px);line-heigh
 .contact p{margin:16px auto 28px;color:var(--mu);max-width:44ch}.contact a.m{display:block;margin-top:18px;color:var(--gd);font-size:15px}
 /* journey */
 .jour{align-items:center;padding:var(--pad)}
-.jour:before{background:linear-gradient(90deg,rgba(8,11,13,.88) 0,rgba(8,11,13,.25) 55%,rgba(8,11,13,.8))}
+.jour:before{background:linear-gradient(90deg,rgba(8,11,13,.96) 0%,rgba(8,11,13,.82) 55%,rgba(8,11,13,.90) 100%)}
+.jour h1,.jour .jw p,.jour .tl li{color:#f5f0e7;text-shadow:0 2px 12px rgba(0,0,0,.9)}
+.jour .tl b{text-shadow:0 2px 10px rgba(0,0,0,.9)}
 .jour .bg{object-position:40% 50%}
 .jw{position:relative;display:flex;justify-content:space-between;align-items:center;gap:40px;width:100%;flex-wrap:wrap}
 .jw p{max-width:40ch;margin-top:18px;color:#e6e0d4}
