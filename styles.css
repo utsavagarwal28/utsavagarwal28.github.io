@@ -355,3 +355,26 @@ h1{font-size:clamp(44px,7vw,92px)}h2{font-size:clamp(34px,4.4vw,60px);line-heigh
     background:rgba(255,255,255,.12);
   }
 }
+
+/* Match company list bullets to the alternating card backgrounds. */
+/* Parchment cards: terracotta bullets. */
+.company-pair:nth-of-type(1) .company-entry:first-child .pane ul li::marker,
+.company-pair:nth-of-type(2) .company-entry:last-child .pane ul li::marker{
+  color:#9A4E42;
+}
+
+/* Earthy-crimson cards: light peach bullets. */
+.company-pair:nth-of-type(1) .company-entry:last-child .pane ul li::marker,
+.company-pair:nth-of-type(2) .company-entry:first-child .pane ul li::marker{
+  color:#F1B38E;
+}
+
+/* On tablet and mobile, the visual order is parchment–crimson–parchment–crimson. */
+@media(max-width:1100px){
+  .company-pair:nth-of-type(2) .company-entry:first-child .pane ul li::marker{
+    color:#9A4E42;
+  }
+  .company-pair:nth-of-type(2) .company-entry:last-child .pane ul li::marker{
+    color:#F1B38E;
+  }
+}
