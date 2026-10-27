@@ -109,3 +109,249 @@ h1{font-size:clamp(44px,7vw,92px)}h2{font-size:clamp(34px,4.4vw,60px);line-heigh
 .more{background:none;border:1px solid var(--bd);color:var(--tx);padding:12px 20px;cursor:pointer;font:500 14px var(--sans);min-height:44px}
 .more:hover{border-color:var(--gd)}.det{display:none;border-left:2px solid var(--ac);padding:4px 0 4px 16px;color:#d9d4c9;font-size:14px}.det.on{display:block}
 .row{display:flex;gap:12px;flex-wrap:wrap}
+
+/* Paired company experience layout */
+.company-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));height:calc(100vh - var(--nav) - env(safe-area-inset-top,0px));min-height:calc(100vh - var(--nav) - env(safe-area-inset-top,0px));scroll-snap-align:start;scroll-snap-stop:always}
+.company-entry{height:100%;min-height:100%;min-width:0;scroll-snap-align:none;align-items:center;justify-content:center;padding:clamp(22px,3vw,46px);background:var(--pa);color:#1a1410}
+.company-entry .pane{width:100%;max-width:580px;margin:auto;padding:0;gap:clamp(10px,1.5vw,16px);background:transparent;color:#1a1410}
+.company-entry .role{color:#1a1410}
+.company-entry .when{color:#8c2b25}
+.company-entry .pane>p:not(.eyebrow):not(.when){color:#33281d}
+.company-entry .pane ul{color:#33281d;font-size:clamp(13px,1.1vw,15px);gap:6px}
+.company-entry .tags span{border-color:rgba(26,20,16,.28);color:#33281d;background:rgba(255,255,255,.16)}
+.company-entry .logo-t{border-color:rgba(26,20,16,.24);background:rgba(255,255,255,.25)}
+@media(max-width:1100px){.company-pair{display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:minmax(calc(100vh - var(--nav) - env(safe-area-inset-top,0px)),auto);height:auto;min-height:0;scroll-snap-align:none;scroll-snap-stop:normal}.company-entry{height:auto;min-height:calc(100vh - var(--nav) - env(safe-area-inset-top,0px));scroll-snap-align:start;scroll-snap-stop:always;padding:var(--pad)}.company-entry .pane{max-width:680px}}
+
+/* Alternate the company panels for stronger visual rhythm. A = parchment, B = earthy crimson. */
+.company-pair:nth-of-type(1) .company-entry:first-child,
+.company-pair:nth-of-type(2) .company-entry:last-child{
+  background:#E5D0AD;
+  color:#1A1410;
+}
+.company-pair:nth-of-type(1) .company-entry:last-child,
+.company-pair:nth-of-type(2) .company-entry:first-child{
+  background:#743238;
+  color:#FFF4E8;
+}
+
+/* Parchment panels: warm, ink-dark typography and restrained terracotta accents. */
+.company-pair:nth-of-type(1) .company-entry:first-child .eyebrow,
+.company-pair:nth-of-type(2) .company-entry:last-child .eyebrow{
+  color:#704137;
+  border-left-color:#9A4E42;
+}
+.company-pair:nth-of-type(1) .company-entry:first-child .role,
+.company-pair:nth-of-type(2) .company-entry:last-child .role{
+  color:#1A1410;
+}
+.company-pair:nth-of-type(1) .company-entry:first-child .when,
+.company-pair:nth-of-type(2) .company-entry:last-child .when{
+  color:#863C32;
+}
+.company-pair:nth-of-type(1) .company-entry:first-child .pane>p:not(.eyebrow):not(.when),
+.company-pair:nth-of-type(2) .company-entry:last-child .pane>p:not(.eyebrow):not(.when),
+.company-pair:nth-of-type(1) .company-entry:first-child .pane ul,
+.company-pair:nth-of-type(2) .company-entry:last-child .pane ul{
+  color:#33251F;
+}
+.company-pair:nth-of-type(1) .company-entry:first-child .tags span,
+.company-pair:nth-of-type(2) .company-entry:last-child .tags span{
+  color:#33251F;
+  border-color:rgba(51,37,31,.28);
+  background:rgba(255,255,255,.18);
+}
+
+/* Earthy-crimson panels: soft ivory text and muted peach highlights. */
+.company-pair:nth-of-type(1) .company-entry:last-child .eyebrow,
+.company-pair:nth-of-type(2) .company-entry:first-child .eyebrow{
+  color:#F3C7B3;
+  border-left-color:#E9A184;
+}
+.company-pair:nth-of-type(1) .company-entry:last-child .role,
+.company-pair:nth-of-type(2) .company-entry:first-child .role{
+  color:#FFF4E8;
+}
+.company-pair:nth-of-type(1) .company-entry:last-child .when,
+.company-pair:nth-of-type(2) .company-entry:first-child .when{
+  color:#F3C197;
+}
+.company-pair:nth-of-type(1) .company-entry:last-child .pane>p:not(.eyebrow):not(.when),
+.company-pair:nth-of-type(2) .company-entry:first-child .pane>p:not(.eyebrow):not(.when),
+.company-pair:nth-of-type(1) .company-entry:last-child .pane ul,
+.company-pair:nth-of-type(2) .company-entry:first-child .pane ul{
+  color:#F3E3D9;
+}
+.company-pair:nth-of-type(1) .company-entry:last-child .pane ul li::marker,
+.company-pair:nth-of-type(2) .company-entry:first-child .pane ul li::marker{
+  color:#F1B38E;
+}
+.company-pair:nth-of-type(1) .company-entry:last-child .tags span,
+.company-pair:nth-of-type(2) .company-entry:first-child .tags span{
+  color:#FFF0E5;
+  border-color:rgba(255,240,229,.38);
+  background:rgba(255,255,255,.07);
+}
+.company-pair:nth-of-type(1) .company-entry:last-child .logo-t,
+.company-pair:nth-of-type(2) .company-entry:first-child .logo-t{
+  border-color:rgba(255,240,229,.35);
+  background:rgba(255,255,255,.08);
+}
+.company-entry .logo-t{
+  box-shadow:0 8px 24px rgba(25,12,10,.12);
+}
+.company-entry{
+  border:1px solid rgba(26,20,16,.09);
+}
+.company-pair:nth-of-type(1) .company-entry:last-child,
+.company-pair:nth-of-type(2) .company-entry:first-child{
+  border-color:rgba(255,240,229,.14);
+}
+.company-entry a{
+  text-decoration-color:currentColor;
+  text-underline-offset:3px;
+}
+
+/* Tablet/mobile order is A-B-A-B rather than mirroring the desktop second pair. */
+@media(max-width:1100px){
+  .company-pair:nth-of-type(2) .company-entry:first-child{
+    background:#E5D0AD;
+    color:#1A1410;
+    border-color:rgba(26,20,16,.09);
+  }
+  .company-pair:nth-of-type(2) .company-entry:first-child .eyebrow{
+    color:#704137;
+    border-left-color:#9A4E42;
+  }
+  .company-pair:nth-of-type(2) .company-entry:first-child .role{
+    color:#1A1410;
+  }
+  .company-pair:nth-of-type(2) .company-entry:first-child .when{
+    color:#863C32;
+  }
+  .company-pair:nth-of-type(2) .company-entry:first-child .pane>p:not(.eyebrow):not(.when),
+  .company-pair:nth-of-type(2) .company-entry:first-child .pane ul{
+    color:#33251F;
+  }
+  .company-pair:nth-of-type(2) .company-entry:first-child .tags span{
+    color:#33251F;
+    border-color:rgba(51,37,31,.28);
+    background:rgba(255,255,255,.18);
+  }
+  .company-pair:nth-of-type(2) .company-entry:first-child .logo-t{
+    border-color:rgba(26,20,16,.24);
+    background:rgba(255,255,255,.25);
+  }
+  .company-pair:nth-of-type(2) .company-entry:last-child{
+    background:#743238;
+    color:#FFF4E8;
+    border-color:rgba(255,240,229,.14);
+  }
+  .company-pair:nth-of-type(2) .company-entry:last-child .eyebrow{
+    color:#F3C7B3;
+    border-left-color:#E9A184;
+  }
+  .company-pair:nth-of-type(2) .company-entry:last-child .role{
+    color:#FFF4E8;
+  }
+  .company-pair:nth-of-type(2) .company-entry:last-child .when{
+    color:#F3C197;
+  }
+  .company-pair:nth-of-type(2) .company-entry:last-child .pane>p:not(.eyebrow):not(.when),
+  .company-pair:nth-of-type(2) .company-entry:last-child .pane ul{
+    color:#F3E3D9;
+  }
+  .company-pair:nth-of-type(2) .company-entry:last-child .pane ul li::marker{
+    color:#F1B38E;
+  }
+  .company-pair:nth-of-type(2) .company-entry:last-child .tags span{
+    color:#FFF0E5;
+    border-color:rgba(255,240,229,.38);
+    background:rgba(255,255,255,.07);
+  }
+  .company-pair:nth-of-type(2) .company-entry:last-child .logo-t{
+    border-color:rgba(255,240,229,.35);
+    background:rgba(255,255,255,.08);
+  }
+}
+
+/* Company website and LinkedIn buttons */
+.company-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:2px;
+}
+.company-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:42px;
+  padding:9px 14px;
+  border:1px solid currentColor;
+  border-radius:3px;
+  font:600 12px/1.25 var(--sans);
+  letter-spacing:.015em;
+  text-decoration:none;
+  transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease;
+}
+.company-btn span{
+  display:inline-grid;
+  place-items:center;
+  min-width:16px;
+  font:700 12px/1 var(--sans);
+}
+.company-btn:hover{transform:translateY(-1px)}
+.company-btn:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+
+/* Parchment cards use muted terracotta outlines with a warm translucent fill. */
+.company-pair:nth-of-type(1) .company-entry:first-child .company-btn,
+.company-pair:nth-of-type(2) .company-entry:last-child .company-btn{
+  color:#793B32;
+  border-color:rgba(121,59,50,.42);
+  background:rgba(255,255,255,.28);
+}
+.company-pair:nth-of-type(1) .company-entry:first-child .company-btn:hover,
+.company-pair:nth-of-type(2) .company-entry:last-child .company-btn:hover{
+  color:#FFF8F0;
+  border-color:#793B32;
+  background:#793B32;
+}
+
+/* Crimson cards use a pale button face and dark text for clear contrast. */
+.company-pair:nth-of-type(1) .company-entry:last-child .company-btn,
+.company-pair:nth-of-type(2) .company-entry:first-child .company-btn{
+  color:#632A30;
+  border-color:#F0D9CB;
+  background:#F0D9CB;
+}
+.company-pair:nth-of-type(1) .company-entry:last-child .company-btn:hover,
+.company-pair:nth-of-type(2) .company-entry:first-child .company-btn:hover{
+  color:#FFF4E8;
+  border-color:#F0D9CB;
+  background:rgba(255,255,255,.12);
+}
+
+/* Keep the intended A-B-A-B sequence when company cards stack on tablet/mobile. */
+@media(max-width:1100px){
+  .company-pair:nth-of-type(2) .company-entry:first-child .company-btn{
+    color:#793B32;
+    border-color:rgba(121,59,50,.42);
+    background:rgba(255,255,255,.28);
+  }
+  .company-pair:nth-of-type(2) .company-entry:first-child .company-btn:hover{
+    color:#FFF8F0;
+    border-color:#793B32;
+    background:#793B32;
+  }
+  .company-pair:nth-of-type(2) .company-entry:last-child .company-btn{
+    color:#632A30;
+    border-color:#F0D9CB;
+    background:#F0D9CB;
+  }
+  .company-pair:nth-of-type(2) .company-entry:last-child .company-btn:hover{
+    color:#FFF4E8;
+    border-color:#F0D9CB;
+    background:rgba(255,255,255,.12);
+  }
+}
