@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101214">
+  <meta name="description" content="Resume of Utsav Agarwal — Game Programmer specialising in Unity, VR, AI and multiplayer systems.">
+  <title>Resume — Utsav Agarwal</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body { background: #101214; color: #17191b; font-family: Inter, Arial, sans-serif; }
+    .resume-topbar {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: .65rem clamp(1rem, 4vw, 3rem);
+      background: rgba(12,14,15,.97); border-bottom: 1px solid rgba(255,255,255,.12); color: #f5f1e8;
+    }
+    .resume-topbar a { color: #f5f1e8; text-decoration: none; }
+    .resume-topbar .brand { font-weight: 700; letter-spacing: .12em; }
+    .resume-actions { display:flex; gap:.6rem; align-items:center; }
+    .resume-action { border:1px solid #b53a3e; background:#b53a3e; color:#fff; padding:.6rem .85rem; border-radius:2px; font:600 .82rem Inter,Arial,sans-serif; cursor:pointer; }
+    .resume-action.secondary { background:transparent; border-color:rgba(255,255,255,.35); }
+
+    /* The resume itself is a fixed A4 canvas. The viewport changes only its uniform scale. */
+    .resume-viewport { width:100%; padding:16px 0 28px; display:flex; justify-content:center; align-items:flex-start; overflow:hidden; }
+    .resume-stage { position:relative; flex:0 0 auto; width:794px; height:1122.54px; }
+    .resume-sheet {
+      position:absolute; top:0; left:0; width:794px; height:1122.54px;
+      aspect-ratio:210 / 297; transform-origin:top left; overflow:hidden; padding:32px 42px 27px;
+      background:#fff; box-shadow:0 12px 50px rgba(0,0,0,.28);
+    }
+    .resume-header { display:flex; justify-content:space-between; align-items:flex-start; gap:15px; padding-bottom:10px; border-bottom:2px solid #a52d33; }
+    h1 { margin:0 0 3px; color:#17191b; font-family:Inter,Arial,sans-serif; font-size:29px; line-height:1.08; font-weight:800; letter-spacing:.02em; }
+    .resume-role { margin:3px 0 4px; color:#a52d33; font-weight:700; font-size:12px; line-height:1.25; }
+    .resume-tagline { margin:0; color:#4f5559; font-size:10.5px; line-height:1.3; }
+    .resume-contact { margin-top:7px; display:flex; flex-wrap:wrap; gap:2px 10px; color:#444a4e; font-size:9px; line-height:1.4; }
+    .resume-contact a, .resume-sheet a { color:#34393d; text-decoration:underline; text-decoration-color:#b8b8b8; text-underline-offset:2px; }
+    .resume-contact a:hover, .resume-sheet a:hover { color:#a52d33; }
+    .resume-badge { display:block; width:57px; height:auto; max-width:none; object-fit:contain; }
+    .resume-section { margin-top:10px; break-inside:avoid; }
+    .resume-section h2 { margin:0 0 5px; padding-bottom:3px; color:#191b1d; border-bottom:1px solid #c9c9c9; font:700 10.5px/1.2 Inter,Arial,sans-serif; letter-spacing:.09em; text-transform:uppercase; }
+    .resume-section p { margin:2px 0 4px; color:#303538; font-size:10px; line-height:1.32; }
+    .resume-entry { margin:5px 0 7px; break-inside:avoid; }
+    .resume-entry-head { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:1px 8px; margin-bottom:2px; }
+    .resume-entry-title { color:#17191b; font-size:10.2px; line-height:1.25; font-weight:700; }
+    .resume-entry-meta { color:#666b70; font-size:9px; line-height:1.25; font-weight:400; }
+    .resume-section ul { margin:2px 0 0; padding-left:14px; }
+    .resume-section li { margin:1.5px 0; color:#303538; font-size:9.5px; line-height:1.28; }
+    .skills-line { margin:2px 0 !important; }
+    .skills-line strong { color:#1d2022; }
+    .resume-footer { margin-top:8px; padding-top:5px; border-top:1px solid #ddd; color:#777; font-size:8.5px; line-height:1.2; }
+
+    @media print {
+      @page { size: A4 portrait; margin: 0; }
+      html, body { width:210mm; height:297mm; min-height:0; margin:0; background:#fff !important; }
+      .resume-topbar { display:none !important; }
+      .resume-viewport { display:block; width:210mm; height:297mm; padding:0; margin:0; overflow:hidden; }
+      .resume-stage { width:210mm !important; height:297mm !important; }
+      .resume-sheet { width:210mm; height:297mm; margin:0; padding:8mm 10mm 7mm; transform:none !important; box-shadow:none; overflow:hidden; }
+      .resume-section { margin-top:2.6mm; }
+      .resume-entry { margin:1.3mm 0 1.7mm; }
+      a { color:inherit !important; text-decoration:none !important; }
+      .resume-footer { margin-top:2mm; padding-top:1.2mm; }
+    }
+  </style>
+</head>
+<body>
+  <header class="resume-topbar">
+    <a class="brand" href="index.html" aria-label="Back to portfolio home">UA</a>
+    <div class="resume-actions">
+      <a class="resume-action secondary" href="index.html">Portfolio</a>
+      <button class="resume-action" type="button" onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </header>
+
+  <div class="resume-viewport"><div class="resume-stage"><main class="resume-sheet">
+    <header class="resume-header">
+      <div>
+        <h1>Utsav Agarwal</h1>
+        <p class="resume-role">Game Programmer | Unity, VR, AI &amp; Multiplayer</p>
+        <p class="resume-tagline">Kanpur, India</p>
+        <div class="resume-contact">
+          <a href="mailto:utsavagarwal2002@gmail.com">utsavagarwal2002@gmail.com</a>
+          <a href="https://utsavagarwal28.github.io" target="_blank" rel="noopener">Portfolio</a>
+          <a href="https://github.com/utsavagarwal28" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.credly.com/badges/8d14fb76-37ea-4caa-a7da-df510a67772a" target="_blank" rel="noopener">Unity Credential</a>
+        </div>
+      </div>
+      <a href="https://www.credly.com/badges/8d14fb76-37ea-4caa-a7da-df510a67772a" target="_blank" rel="noopener" aria-label="View Unity Certified Associate Programmer credential">
+        <img class="resume-badge" src="assets/unity-badge.png" alt="Unity Certified Associate Programmer badge">
+      </a>
+    </header>
+
+    <section class="resume-section">
+      <h2>Professional Summary</h2>
+      <p>Game programmer specializing in Unity and C#, with hands-on experience in VR, gameplay systems, enemy AI and multiplayer networking with Photon Fusion. Builds location-based VR for shared physical spaces, state-machine enemy AI and modular, reusable systems. Enjoys turning ideas into playable games and solving the technical challenges that make them engaging and reliable.</p>
+    </section>
+
+    <section class="resume-section">
+      <h2>Technical Skills</h2>
+      <p class="skills-line"><strong>Engines &amp; Languages:</strong> Unity, C#, C++, Unreal Engine (Prototyping)</p>
+      <p class="skills-line"><strong>Gameplay &amp; AI:</strong> Gameplay Programming, AI Systems, Finite State Machines, Field-of-View / Perception Systems, Character Movement, Combat Logic, Animation Control</p>
+      <p class="skills-line"><strong>VR &amp; Multiplayer:</strong> VR Development, Photon Fusion, Multiplayer Systems, Shared-Space VR, Network Debugging</p>
+      <p class="skills-line"><strong>Architecture &amp; Tools:</strong> Modular Systems, Dependency Injection (VContainer), MessagePipe, UI Systems, Editor Tooling (Configurators), Git, Debugging &amp; Testing</p>
+    </section>
+
+    <section class="resume-section">
+      <h2>Professional Experience</h2>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title">Unity Game Developer · 2 Dude Studios</span><span class="resume-entry-meta">Apr 2026 – Present</span></div>
+        <ul>
+          <li>Developed location-based entertainment (LBE) VR experiences for shared physical spaces using Unity and C#.</li>
+          <li>Built Unity UI systems, including operator and host control panels, as well as arena setup and configuration tools.</li>
+          <li>Integrated Photon Fusion and developed multiplayer systems, including match flow, player management and spawning.</li>
+          <li>Developed modular enemy AI state machines for single-player and Photon Fusion multiplayer, with an enemy configurator tool, for an upcoming Unity asset pack.</li>
+          <li>Created reusable utilities and modular code; integrated, tested and debugged features across the project.</li>
+        </ul>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title">Unity Game Developer · Apex Dream Studio</span><span class="resume-entry-meta">Nov 2025 – Mar 2026</span></div>
+        <ul>
+          <li>Built UI systems for a large-scale VR project.</li>
+          <li>Implemented gameplay and rendering-related features in Unity.</li>
+          <li>Designed reusable architecture and scalable systems for long-term maintainability.</li>
+          <li>Developed core functionality for a voxel-based Unity project.</li>
+        </ul>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title">Unity Game Developer Intern · Anstric Games</span><span class="resume-entry-meta">Jun 2024</span></div>
+        <ul>
+          <li>Built a 2D fighting-game prototype, including character movement and combat logic.</li>
+          <li>Implemented animation control and gameplay features; integrated particle effects and sound.</li>
+        </ul>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title">Game Developer Intern · Alone Clone Studios</span><span class="resume-entry-meta">Dec 2023 – Feb 2024</span></div>
+        <ul>
+          <li>Built game prototypes in Unity and Unreal Engine, including a multiplayer FPS.</li>
+          <li>Implemented weapon rendering and cinematic capture.</li>
+          <li>Built endless-runner mechanics with procedural environments and collision-based interactions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2>Projects</h2>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title">LBE VR <span class="resume-entry-meta">| Company Project · 2 Dude Studios | Unity, C#, Photon Fusion, VR</span></span></div>
+        <ul>
+          <li>Contributed to a location-based multiplayer arena shooter in which teams battle opponents and AI-controlled enemies in a shared virtual space.</li>
+          <li>Developed the operator console, match management and arena configuration systems, along with networked enemy AI and combat.</li>
+        </ul>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title">Enemy AI <span class="resume-entry-meta">| Company Project · 2 Dude Studios | Unity, C#, State Machines, Photon Fusion</span></span></div>
+        <ul>
+          <li>Built modular state machines that share patrol, chase and attack behaviors across single-player and Photon Fusion multiplayer modes.</li>
+          <li>Implemented target detection using field-of-view, visibility and distance checks, driving suspicious, alerted and searching states.</li>
+          <li>Created an enemy configurator tool for building enemy types and customizing their settings. Demo: <a href="https://youtu.be/c7iCqUvTtb0" target="_blank" rel="noopener">youtu.be/c7iCqUvTtb0</a>.</li>
+        </ul>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title">Fight Arena <span class="resume-entry-meta">| Personal Project · Unity, C#, Animator</span></span></div>
+        <ul>
+          <li>Built a Tekken-inspired 3D fighting-game prototype with character movement, combat mechanics and animation control.</li>
+          <li>Implemented camera behavior and arena boundaries that keep both fighters framed, along with gameplay UI and visual feedback. Code: <a href="https://github.com/utsavagarwal28/FightArena" target="_blank" rel="noopener">Fight Arena repository</a>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2>Certification</h2>
+      <p>Unity Certified Associate: Programmer, Unity Technologies — <a href="https://www.credly.com/badges/8d14fb76-37ea-4caa-a7da-df510a67772a" target="_blank" rel="noopener">View credential</a>.</p>
+    </section>
+
+    <div class="resume-footer">Utsav Agarwal · Game Programmer · Unity, VR, AI &amp; Multiplayer</div>
+  </main></div></div>
+  <script>
+    (() => {
+      const pageWidth = 794;
+      const pageHeight = pageWidth * 297 / 210;
+      const sheet = document.querySelector('.resume-sheet');
+      const stage = document.querySelector('.resume-stage');
+      const viewport = document.querySelector('.resume-viewport');
+      const toolbar = document.querySelector('.resume-topbar');
+      function fitA4Sheet() {
+        if (window.matchMedia('print').matches) return;
+        // Keep the A4 page's layout and aspect ratio fixed; scale the whole page
+        // uniformly to available width. Let it scroll vertically instead of
+        // shrinking it to fit a device's viewport height.
+        const availableWidth = Math.max(1, document.documentElement.clientWidth - 24);
+        const scale = Math.min(availableWidth / pageWidth, 1.2);
+        sheet.style.transform = 'scale(' + scale + ')';
+        stage.style.width = (pageWidth * scale) + 'px';
+        stage.style.height = (pageHeight * scale) + 'px';
+        viewport.style.minHeight = (pageHeight * scale + 28) + 'px';
+      }
+      window.addEventListener('resize', fitA4Sheet, { passive: true });
+      window.addEventListener('orientationchange', fitA4Sheet, { passive: true });
+      window.addEventListener('beforeprint', () => {
+        sheet.style.transform = 'none';
+        stage.style.width = '210mm';
+        stage.style.height = '297mm';
+      });
+      window.addEventListener('afterprint', fitA4Sheet);
+      fitA4Sheet();
+    })();
+  </script>
+</body>
+</html>
