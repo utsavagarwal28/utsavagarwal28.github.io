@@ -29,8 +29,8 @@
     .resume-viewport { width:100%; padding:16px 0 28px; display:flex; justify-content:center; align-items:flex-start; overflow:hidden; }
     .resume-stage { position:relative; flex:0 0 auto; width:794px; height:1122.54px; }
     .resume-sheet {
-      position:absolute; top:0; left:0; width:794px; height:1123px;
-      transform-origin:top left; overflow:hidden; padding:32px 42px 27px;
+      position:absolute; top:0; left:0; width:794px; height:1122.54px;
+      aspect-ratio:210 / 297; transform-origin:top left; overflow:hidden; padding:32px 42px 27px;
       background:#fff; box-shadow:0 12px 50px rgba(0,0,0,.28);
     }
     .resume-header { display:flex; justify-content:space-between; align-items:flex-start; gap:15px; padding-bottom:10px; border-bottom:2px solid #a52d33; }
@@ -189,10 +189,11 @@
       const toolbar = document.querySelector('.resume-topbar');
       function fitA4Sheet() {
         if (window.matchMedia('print').matches) return;
+        // Keep the A4 page's layout and aspect ratio fixed; scale the whole page
+        // uniformly to available width. Let it scroll vertically instead of
+        // shrinking it to fit a device's viewport height.
         const availableWidth = Math.max(1, document.documentElement.clientWidth - 24);
-        const toolbarHeight = toolbar ? toolbar.getBoundingClientRect().height : 0;
-        const availableHeight = Math.max(1, window.innerHeight - toolbarHeight - 44);
-        const scale = Math.min(availableWidth / pageWidth, availableHeight / pageHeight, 1.2);
+        const scale = Math.min(availableWidth / pageWidth, 1.2);
         sheet.style.transform = 'scale(' + scale + ')';
         stage.style.width = (pageWidth * scale) + 'px';
         stage.style.height = (pageHeight * scale) + 'px';
