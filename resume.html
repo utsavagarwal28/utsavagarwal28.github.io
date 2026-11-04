@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101214">
+  <meta name="description" content="Resume of Utsav Agarwal — Game Programmer specialising in Unity, VR, AI and multiplayer systems.">
+  <title>Resume — Utsav Agarwal</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body { background: #101214; color: #17191b; font-family: Inter, Arial, sans-serif; }
+    .resume-topbar {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: .65rem clamp(1rem, 4vw, 3rem);
+      background: rgba(12,14,15,.97); border-bottom: 1px solid rgba(255,255,255,.12); color: #f5f1e8;
+    }
+    .resume-topbar a { color: #f5f1e8; text-decoration: none; }
+    .resume-topbar .brand { font-weight: 700; letter-spacing: .12em; }
+    .resume-actions { display:flex; gap:.6rem; align-items:center; }
+    .resume-action { border:1px solid #b53a3e; background:#b53a3e; color:#fff; padding:.6rem .85rem; border-radius:2px; font:600 .82rem Inter,Arial,sans-serif; cursor:pointer; }
+    .resume-action.secondary { background:transparent; border-color:rgba(255,255,255,.35); }
+
+    /* The resume itself is a fixed A4 canvas. The viewport changes only its uniform scale. */
+    .resume-viewport { width:100%; padding:16px 0 28px; display:flex; justify-content:center; align-items:flex-start; overflow:hidden; }
+    .resume-stage { position:relative; flex:0 0 auto; width:794px; height:1122.54px; }
+    .resume-sheet {
+      position:absolute; top:0; left:0; width:794px; height:1122.54px;
+      aspect-ratio:210 / 297; transform-origin:top left; overflow:hidden; padding:32px 42px 27px;
+      background:#fff; box-shadow:0 12px 50px rgba(0,0,0,.28);
+    }
+    .resume-header { position:relative; display:flex; justify-content:space-between; align-items:flex-start; gap:15px; padding-bottom:8px; border-bottom:2px solid #a52d33; }
+    .resume-header > a { position:absolute; top:0; right:0; bottom:8px; display:flex; align-items:stretch; }
+    h1 { margin:0 0 3px; color:#17191b; font-family:Inter,Arial,sans-serif; font-size:31px; line-height:1.08; font-weight:800; letter-spacing:.02em; }
+    .resume-role { margin:3px 0 4px; color:#a52d33; font-weight:700; font-size:14px; line-height:1.25; }
+    .resume-tagline { margin:0; color:#4f5559; font-size:12.5px; line-height:1.3; }
+    .resume-contact { margin-top:7px; display:flex; flex-direction:column; align-items:flex-start; gap:4px; color:#444a4e; font-size:11px; line-height:1.35; }
+    .resume-contact-row { display:flex; align-items:center; flex-wrap:nowrap; gap:7px; white-space:nowrap; }
+    .contact-item { display:inline-flex; align-items:center; gap:4px; color:#34393d !important; text-decoration:none !important; white-space:nowrap; }
+    .contact-item svg { display:block; width:13px; height:13px; flex:0 0 13px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+    .contact-item svg.phone-icon { color:#858585; stroke-width:1.8; }
+    .contact-item svg.email-icon { color:#33383c; stroke-width:1.7; }
+    .contact-item svg.brand-icon { fill:currentColor; stroke:none; }
+    .contact-item svg.linkedin-icon { color:#0A66C2; }
+    .contact-item svg.itch-icon { color:#FA5C5C; }
+    .contact-item svg.github-icon { color:#6e5494; }
+    .contact-item svg.portfolio-icon { color:#34393d; }
+    .contact-separator { color:#929292; }
+    .resume-contact a, .resume-sheet a { color:#34393d; text-decoration:underline; text-decoration-color:#b8b8b8; text-underline-offset:2px; }
+    .resume-contact a:hover, .resume-sheet a:hover { color:#a52d33; }
+    .project-name-link, .project-name-link:hover { text-decoration:none !important; text-decoration-line:none !important; }
+    .project-link-mark { display:inline-flex; margin-left:3px; line-height:1; text-decoration:none; vertical-align:-1px; }
+    .project-link-icon { display:block; width:12px; height:12px; overflow:visible; fill:none; stroke:currentColor; stroke-width:2.7; stroke-linecap:round; stroke-linejoin:round; }
+    .resume-badge { display:block; width:auto; height:100%; max-width:none; object-fit:contain; }
+    .resume-section { margin-top:8.5px; break-inside:avoid; }
+    .resume-section h2 { margin:0 0 5px; padding-bottom:3px; color:#191b1d; border-bottom:1px solid #c9c9c9; font:700 12.5px/1.2 Inter,Arial,sans-serif; letter-spacing:.09em; text-transform:uppercase; }
+    .resume-section p { margin:1px 0 3px; color:#303538; font-size:12px; line-height:1.32; }
+    .resume-entry { margin:4px 0 5px; break-inside:avoid; }
+    .resume-entry-head { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:1px 8px; margin-bottom:1px; }
+    .resume-entry-title { color:#17191b; font-size:12.2px; line-height:1.25; font-weight:700; }
+    .resume-entry-meta { color:#666b70; font-size:11px; line-height:1.25; font-weight:400; }
+    .resume-section ul { margin:1px 0 0; padding-left:14px; }
+    .resume-section li { margin:1.5px 0; color:#303538; font-size:11.5px; line-height:1.28; }
+    .skills-line { margin:2px 0 !important; }
+    .skills-line strong { color:#1d2022; }
+
+    @media print {
+      @page { size: A4 portrait; margin: 0; }
+      html, body { width:210mm; height:297mm; min-height:0; margin:0; background:#fff !important; }
+      .resume-topbar { display:none !important; }
+      .resume-viewport { display:block; width:210mm; height:297mm; padding:0; margin:0; overflow:hidden; }
+      .resume-stage { width:210mm !important; height:297mm !important; }
+      .resume-sheet { width:210mm; height:297mm; margin:0; padding:8mm 10mm 7mm; transform:none !important; box-shadow:none; overflow:hidden; }
+      .resume-section { margin-top:2.2mm; }
+      .resume-entry { margin:1mm 0 1.3mm; }
+      a { color:inherit !important; text-decoration:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="resume-topbar">
+    <a class="brand" href="index.html" aria-label="Back to portfolio home">UA</a>
+    <div class="resume-actions">
+      <a class="resume-action secondary" href="index.html">Portfolio</a>
+      <button class="resume-action" type="button" onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </header>
+
+  <div class="resume-viewport"><div class="resume-stage"><main class="resume-sheet">
+    <header class="resume-header">
+      <div>
+        <h1>Utsav Agarwal</h1>
+        <p class="resume-role">Game Programmer | Unity, VR, AI &amp; Multiplayer</p>
+        <p class="resume-tagline">Kanpur, India</p>
+        <div class="resume-contact">
+          <div class="resume-contact-row">
+            <a class="contact-item" href="tel:+919696408131"><svg class="phone-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.2 18.8a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.28 4.18 2 2 0 0 1 4.27 2h3a2 2 0 0 1 2 1.72c.12.96.35 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.25 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.35 1.84.58 2.8.7a2 2 0 0 1 2.04 2.04Z"/></svg><span>+91 9696408131</span></a>
+            <span class="contact-separator">|</span>
+            <a class="contact-item" href="mailto:utsavagarwal2002@gmail.com"><svg class="email-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6.5L20.5 7"/></svg><span>utsavagarwal2002@gmail.com</span></a>
+            <span class="contact-separator">|</span>
+            <a class="contact-item" href="https://www.linkedin.com/in/utsavagarwal28/" target="_blank" rel="noopener"><svg class="brand-icon linkedin-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="3"/><circle cx="6.5" cy="7" r="1.5" fill="#fff"/><path d="M5 10h3v9H5zm5 0h2.9v1.2c.65-.9 1.55-1.5 2.95-1.5 2.6 0 3.65 1.7 3.65 4.4V19h-3v-4.3c0-1.35-.4-2.15-1.55-2.15-1.2 0-1.95.85-1.95 2.15V19H10z" fill="#fff"/></svg><span>linkedin.com/in/utsavagarwal28/</span></a>
+          </div>
+          <div class="resume-contact-row">
+            <a class="contact-item" href="https://utsavagarwal28.github.io" target="_blank" rel="noopener"><svg class="portfolio-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span>utsavagarwal28.github.io</span></a>
+            <span class="contact-separator">|</span>
+            <a class="contact-item" href="https://utsavagarwal.itch.io" target="_blank" rel="noopener"><svg class="brand-icon itch-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.13 1.338C2.08 1.96.02 4.328 0 4.95v1.03c0 1.303 1.22 2.45 2.325 2.45 1.33 0 2.436-1.102 2.436-2.41 0 1.308 1.07 2.41 2.4 2.41 1.328 0 2.362-1.102 2.362-2.41 0 1.308 1.137 2.41 2.466 2.41h.024c1.33 0 2.466-1.102 2.466-2.41 0 1.308 1.034 2.41 2.363 2.41 1.33 0 2.4-1.102 2.4-2.41 0 1.308 1.106 2.41 2.435 2.41C22.78 8.43 24 7.282 24 5.98V4.95c-.02-.62-2.082-2.99-3.13-3.612-3.253-.114-5.508-.134-8.87-.133-3.362 0-7.945.053-8.87.133zm6.376 6.477a2.74 2.74 0 0 1-.468.602c-.5.49-1.19.795-1.947.795a2.786 2.786 0 0 1-1.95-.795c-.182-.178-.32-.37-.446-.59-.127.222-.303.412-.486.59a2.788 2.788 0 0 1-1.95.795c-.092 0-.187-.025-.264-.052-.107 1.113-.152 2.176-.168 2.95v.005l-.006 1.167c.02 2.334-.23 7.564 1.03 8.85 1.952.454 5.545.662 9.15.663 3.605 0 7.198-.21 9.15-.664 1.26-1.284 1.01-6.514 1.03-8.848l-.006-1.167v-.004c-.016-.775-.06-1.838-.168-2.95-.077.026-.172.052-.263.052a2.788 2.788 0 0 1-1.95-.795c-.184-.178-.36-.368-.486-.59-.127.22-.265.412-.447.59a2.786 2.786 0 0 1-1.95.794c-.76 0-1.446-.303-1.948-.793a2.74 2.74 0 0 1-.468-.602 2.738 2.738 0 0 1-.463.602 2.787 2.787 0 0 1-1.95.794h-.16a2.787 2.787 0 0 1-1.95-.793 2.738 2.738 0 0 1-.464-.602zm-2.004 2.59v.002c.795.002 1.5 0 2.373.953.687-.072 1.406-.108 2.125-.107.72 0 1.438.035 2.125.107.873-.953 1.578-.95 2.372-.953.376 0 1.876 0 2.92 2.934l1.123 4.028c.832 2.995-.266 3.068-1.636 3.07-2.03-.075-3.156-1.55-3.156-3.025-1.124.184-2.436.276-3.748.277-1.312 0-2.624-.093-3.748-.277 0 1.475-1.125 2.95-3.156 3.026-1.37-.004-2.468-.077-1.636-3.072l1.122-4.027c1.045-2.934 2.545-2.934 2.92-2.934zM12 12.714c-.002.002-2.14 1.964-2.523 2.662l1.4-.056v1.22c0 .056.56.033 1.123.007.562.026 1.124.05 1.124-.008v-1.22l1.4.055C14.138 14.677 12 12.713 12 12.713z"/></svg><span>utsavagarwal.itch.io</span></a>
+            <span class="contact-separator">|</span>
+            <a class="contact-item" href="https://github.com/utsavagarwal28" target="_blank" rel="noopener"><svg class="brand-icon github-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg><span>github.com/utsavagarwal28</span></a>
+          </div>
+        </div>
+      </div>
+      <a href="https://www.credly.com/badges/8d14fb76-37ea-4caa-a7da-df510a67772a" target="_blank" rel="noopener" aria-label="View Unity Certified Associate Programmer credential">
+        <img class="resume-badge" src="assets/unity-badge.png" alt="Unity Certified Associate Programmer badge">
+      </a>
+    </header>
+
+    <section class="resume-section">
+      <h2>Professional Summary</h2>
+      <p>Game programmer specializing in Unity and C#, with hands-on experience in VR, gameplay systems, enemy AI and multiplayer networking with Photon Fusion. Builds location-based VR for shared physical spaces, state-machine enemy AI and modular, reusable systems. Enjoys turning ideas into playable games and solving the technical challenges that make them engaging and reliable.</p>
+    </section>
+
+    <section class="resume-section">
+      <h2>Technical Skills</h2>
+      <p class="skills-line"><strong>Engines &amp; Languages:</strong> Unity, C#, C++, Unreal Engine (Prototyping)</p>
+      <p class="skills-line"><strong>Gameplay &amp; AI:</strong> Gameplay Programming, AI Systems, Finite State Machines, Field-of-View / Perception Systems, Character Movement, Combat Logic, Animation Control</p>
+      <p class="skills-line"><strong>VR &amp; Multiplayer:</strong> VR Development, Photon Fusion, Multiplayer Systems, Shared-Space VR, Network Debugging</p>
+      <p class="skills-line"><strong>Architecture &amp; Tools:</strong> Modular Systems, Dependency Injection (VContainer), MessagePipe, UI Systems, Editor Tooling (Configurators), Git, Debugging &amp; Testing</p>
+    </section>
+
+    <section class="resume-section">
+      <h2>Professional Experience</h2>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title">Unity Game Developer · 2 Dude Studios</span><span class="resume-entry-meta">Apr 2026 – Present</span></div>
+        <ul>
+          <li>Developed location-based entertainment (LBE) VR experiences for shared physical spaces using Unity and C#.</li>
+          <li>Built Unity UI systems, including operator and host control panels, as well as arena setup and configuration tools.</li>
+          <li>Integrated Photon Fusion and developed multiplayer systems, including match flow, player management and spawning.</li>
+          <li>Developed modular enemy AI state machines for single-player and Photon Fusion multiplayer, with an enemy configurator tool, for an upcoming Unity asset pack.</li>
+          <li>Created reusable utilities and modular code; integrated, tested and debugged features across the project.</li>
+        </ul>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title">Unity Game Developer · Apex Dream Studio</span><span class="resume-entry-meta">Nov 2025 – Mar 2026</span></div>
+        <ul>
+          <li>Built UI systems for a large-scale VR project.</li>
+          <li>Implemented gameplay and rendering-related features in Unity.</li>
+          <li>Designed reusable architecture and scalable systems for long-term maintainability.</li>
+          <li>Developed core functionality for a voxel-based Unity project.</li>
+        </ul>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title">Unity Game Developer Intern · Anstric Games</span><span class="resume-entry-meta">Jun 2024</span></div>
+        <ul>
+          <li>Built a 2D fighting-game prototype, including character movement and combat logic.</li>
+          <li>Implemented animation control and gameplay features; integrated particle effects and sound.</li>
+        </ul>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title">Game Developer Intern · Alone Clone Studios</span><span class="resume-entry-meta">Dec 2023 – Feb 2024</span></div>
+        <ul>
+          <li>Built game prototypes in Unity and Unreal Engine, including a multiplayer FPS.</li>
+          <li>Implemented weapon rendering and cinematic capture.</li>
+          <li>Built endless-runner mechanics with procedural environments and collision-based interactions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2>Projects</h2>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title"><a class="project-name-link" href="https://2dudestudios.com/industries/lbe" target="_blank" rel="noopener">LBE VR<span class="project-link-mark" aria-hidden="true"><svg class="project-link-icon" viewBox="0 0 24 24" focusable="false"><path d="M13 4h7v7"/><path d="M20 4 10 14"/><path d="M17 13v4a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3h4"/></svg></span></a> <span class="resume-entry-meta">| Company Project · 2 Dude Studios | Unity, C#, Photon Fusion, VR</span></span></div>
+        <ul>
+          <li>Contributed to a location-based multiplayer arena shooter in which teams battle opponents and AI-controlled enemies in a shared virtual space.</li>
+          <li>Developed the operator console, match management and arena configuration systems, along with networked enemy AI and combat.</li>
+        </ul>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title"><a class="project-name-link" href="https://lnkd.in/p/g2kbvtJx" target="_blank" rel="noopener">Enemy AI<span class="project-link-mark" aria-hidden="true"><svg class="project-link-icon" viewBox="0 0 24 24" focusable="false"><path d="M13 4h7v7"/><path d="M20 4 10 14"/><path d="M17 13v4a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3h4"/></svg></span></a> <span class="resume-entry-meta">| Company Project · 2 Dude Studios | Unity, C#, State Machines, Photon Fusion</span></span></div>
+        <ul>
+          <li>Built modular state machines that share patrol, chase and attack behaviors across single-player and Photon Fusion multiplayer modes.</li>
+          <li>Implemented target detection using field-of-view, visibility and distance checks, driving suspicious, alerted and searching states.</li>
+          <li>Created an enemy configurator tool for building enemy types and customizing their settings. Demo: <a href="https://youtu.be/c7iCqUvTtb0" target="_blank" rel="noopener">youtu.be/c7iCqUvTtb0</a>.</li>
+        </ul>
+      </div>
+      <div class="resume-entry">
+        <div class="resume-entry-head"><span class="resume-entry-title"><a class="project-name-link" href="https://github.com/utsavagarwal28/FightArena" target="_blank" rel="noopener">Fight Arena<span class="project-link-mark" aria-hidden="true"><svg class="project-link-icon" viewBox="0 0 24 24" focusable="false"><path d="M13 4h7v7"/><path d="M20 4 10 14"/><path d="M17 13v4a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3h4"/></svg></span></a> <span class="resume-entry-meta">| Personal Project | Unity, C#, Animator</span></span></div>
+        <ul>
+          <li>Built a Tekken-inspired 3D fighting-game prototype with character movement, combat mechanics and animation control.</li>
+          <li>Implemented camera behavior and arena boundaries that keep both fighters framed, along with gameplay UI and visual feedback.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2>Certification</h2>
+      <p>Unity Certified Associate: Programmer, Unity Technologies — <a href="https://www.credly.com/badges/8d14fb76-37ea-4caa-a7da-df510a67772a" target="_blank" rel="noopener">View credential</a>.</p>
+    </section>
+
+  </main></div></div>
+  <script>
+    (() => {
+      const pageWidth = 794;
+      const pageHeight = pageWidth * 297 / 210;
+      const sheet = document.querySelector('.resume-sheet');
+      const stage = document.querySelector('.resume-stage');
+      const viewport = document.querySelector('.resume-viewport');
+      const toolbar = document.querySelector('.resume-topbar');
+      function fitA4Sheet() {
+        if (window.matchMedia('print').matches) return;
+        // Keep the A4 page's layout and aspect ratio fixed; scale the whole page
+        // uniformly to available width. Let it scroll vertically instead of
+        // shrinking it to fit a device's viewport height.
+        const availableWidth = Math.max(1, document.documentElement.clientWidth - 24);
+        const scale = Math.min(availableWidth / pageWidth, 1.2);
+        sheet.style.transform = 'scale(' + scale + ')';
+        stage.style.width = (pageWidth * scale) + 'px';
+        stage.style.height = (pageHeight * scale) + 'px';
+        viewport.style.minHeight = (pageHeight * scale + 28) + 'px';
+      }
+      window.addEventListener('resize', fitA4Sheet, { passive: true });
+      window.addEventListener('orientationchange', fitA4Sheet, { passive: true });
+      window.addEventListener('beforeprint', () => {
+        sheet.style.transform = 'none';
+        stage.style.width = '210mm';
+        stage.style.height = '297mm';
+      });
+      window.addEventListener('afterprint', fitA4Sheet);
+      fitA4Sheet();
+    })();
+  </script>
+</body>
+</html>
