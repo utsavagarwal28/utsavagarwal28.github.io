@@ -42,7 +42,8 @@
     .resume-contact a, .resume-sheet a { color:#34393d; text-decoration:underline; text-decoration-color:#b8b8b8; text-underline-offset:2px; }
     .resume-contact a:hover, .resume-sheet a:hover { color:#a52d33; }
     .project-name-link, .project-name-link:hover { text-decoration:none !important; text-decoration-line:none !important; }
-    .project-link-mark { display:inline-block; margin-left:3px; font-size:.82em; line-height:1; text-decoration:none; vertical-align:super; }
+    .project-link-mark { display:inline-flex; margin-left:3px; line-height:1; text-decoration:none; vertical-align:-1px; }
+    .project-link-icon { display:block; width:12px; height:12px; overflow:visible; fill:none; stroke:currentColor; stroke-width:2.7; stroke-linecap:round; stroke-linejoin:round; }
     .resume-badge { display:block; width:auto; height:100%; max-width:none; object-fit:contain; }
     .resume-section { margin-top:8.5px; break-inside:avoid; }
     .resume-section h2 { margin:0 0 5px; padding-bottom:3px; color:#191b1d; border-bottom:1px solid #c9c9c9; font:700 12.5px/1.2 Inter,Arial,sans-serif; letter-spacing:.09em; text-transform:uppercase; }
@@ -149,14 +150,14 @@
     <section class="resume-section">
       <h2>Projects</h2>
       <div class="resume-entry">
-        <div class="resume-entry-head"><span class="resume-entry-title"><a class="project-name-link" href="https://2dudestudios.com/industries/lbe" target="_blank" rel="noopener">LBE VR<span class="project-link-mark" aria-hidden="true">↗</span></a> <span class="resume-entry-meta">| Company Project · 2 Dude Studios | Unity, C#, Photon Fusion, VR</span></span></div>
+        <div class="resume-entry-head"><span class="resume-entry-title"><a class="project-name-link" href="https://2dudestudios.com/industries/lbe" target="_blank" rel="noopener">LBE VR<span class="project-link-mark" aria-hidden="true"><svg class="project-link-icon" viewBox="0 0 24 24" focusable="false"><path d="M13 4h7v7"/><path d="M20 4 10 14"/><path d="M17 13v4a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3h4"/></svg></span></a> <span class="resume-entry-meta">| Company Project · 2 Dude Studios | Unity, C#, Photon Fusion, VR</span></span></div>
         <ul>
           <li>Contributed to a location-based multiplayer arena shooter in which teams battle opponents and AI-controlled enemies in a shared virtual space.</li>
           <li>Developed the operator console, match management and arena configuration systems, along with networked enemy AI and combat.</li>
         </ul>
       </div>
       <div class="resume-entry">
-        <div class="resume-entry-head"><span class="resume-entry-title"><a class="project-name-link" href="https://lnkd.in/p/g2kbvtJx" target="_blank" rel="noopener">Enemy AI<span class="project-link-mark" aria-hidden="true">↗</span></a> <span class="resume-entry-meta">| Company Project · 2 Dude Studios | Unity, C#, State Machines, Photon Fusion</span></span></div>
+        <div class="resume-entry-head"><span class="resume-entry-title"><a class="project-name-link" href="https://lnkd.in/p/g2kbvtJx" target="_blank" rel="noopener">Enemy AI<span class="project-link-mark" aria-hidden="true"><svg class="project-link-icon" viewBox="0 0 24 24" focusable="false"><path d="M13 4h7v7"/><path d="M20 4 10 14"/><path d="M17 13v4a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3h4"/></svg></span></a> <span class="resume-entry-meta">| Company Project · 2 Dude Studios | Unity, C#, State Machines, Photon Fusion</span></span></div>
         <ul>
           <li>Built modular state machines that share patrol, chase and attack behaviors across single-player and Photon Fusion multiplayer modes.</li>
           <li>Implemented target detection using field-of-view, visibility and distance checks, driving suspicious, alerted and searching states.</li>
@@ -164,7 +165,7 @@
         </ul>
       </div>
       <div class="resume-entry">
-        <div class="resume-entry-head"><span class="resume-entry-title"><a class="project-name-link" href="https://github.com/utsavagarwal28/FightArena" target="_blank" rel="noopener">Fight Arena<span class="project-link-mark" aria-hidden="true">↗</span></a> <span class="resume-entry-meta">| Personal Project | Unity, C#, Animator</span></span></div>
+        <div class="resume-entry-head"><span class="resume-entry-title"><a class="project-name-link" href="https://github.com/utsavagarwal28/FightArena" target="_blank" rel="noopener">Fight Arena<span class="project-link-mark" aria-hidden="true"><svg class="project-link-icon" viewBox="0 0 24 24" focusable="false"><path d="M13 4h7v7"/><path d="M20 4 10 14"/><path d="M17 13v4a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3h4"/></svg></span></a> <span class="resume-entry-meta">| Personal Project | Unity, C#, Animator</span></span></div>
         <ul>
           <li>Built a Tekken-inspired 3D fighting-game prototype with character movement, combat mechanics and animation control.</li>
           <li>Implemented camera behavior and arena boundaries that keep both fighters framed, along with gameplay UI and visual feedback.</li>
