@@ -140,20 +140,10 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
 
     if (project.videoId) {
       var playButton = card.querySelector(".featured-play");
-      playButton.addEventListener("click", function () {
-        if (card.querySelector("iframe")) return;
-        var media = card.querySelector(".featured-media");
-        var iframe = document.createElement("iframe");
-        iframe.className = "featured-video-frame";
-        iframe.title = project.videoTitle || (project.title + " video");
-        iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(project.videoId) + "?autoplay=1&playsinline=1&rel=0&modestbranding=1";
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-        iframe.allowFullscreen = true;
-        iframe.referrerPolicy = "strict-origin-when-cross-origin";
-        iframe.loading = "eager";
-        media.appendChild(iframe);
-        media.classList.add("is-playing");
-        playButton.remove();
+      playButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        requestProjectVideo(card, project, "manual");
       });
     }
     return card;
@@ -162,6 +152,354 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
   track.replaceChildren();
   projects.forEach(function (project) { track.appendChild(renderCard(project)); });
   var cards = Array.prototype.slice.call(track.querySelectorAll(".featured-card"));
+
+  /*
+   * Featured-card video controller.
+   * - Desktop: a 2-second hover or an explicit card click starts playback.
+   * - Touch/mobile: the centred card in the horizontal track controls playback.
+   * - Only one player may play at a time.
+   * - A user pause suppresses future automatic starts until an explicit play action.
+   */
+  var projectById = {};
+  projects.forEach(function (project) { projectById[project.id] = project; });
+
+  var videoStates = {};
+  var activeVideoState = null;
+  var youtubeApiRequested = false;
+  var youtubeApiCallbacks = [];
+  var mobileQuery = window.matchMedia("(max-width:760px)");
+  var hoverQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+  var mobileFocusCard = null;
+  var mobileFocusFrame = 0;
+
+  function getVideoState(project, card) {
+    var state = videoStates[project.id];
+    if (!state) {
+      state = videoStates[project.id] = {
+        project: project,
+        card: card,
+        player: null,
+        host: null,
+        ready: false,
+        pending: false,
+        wantsPlay: false,
+        lastStartMode: "auto",
+        manuallyPaused: false,
+        ignoreProgrammaticPause: false,
+        ignorePauseTimer: 0,
+        readyTimer: 0
+      };
+    }
+    state.card = card || state.card;
+    return state;
+  }
+
+  function ensureYouTubeApi(callback) {
+    if (window.YT && window.YT.Player) {
+      callback(true);
+      return;
+    }
+
+    youtubeApiCallbacks.push(callback);
+    if (youtubeApiRequested) return;
+    youtubeApiRequested = true;
+
+    var previousReady = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function () {
+      if (typeof previousReady === "function") {
+        try { previousReady(); } catch (error) { /* Keep featured playback independent. */ }
+      }
+      var callbacks = youtubeApiCallbacks.slice();
+      youtubeApiCallbacks.length = 0;
+      callbacks.forEach(function (waiter) { waiter(true); });
+    };
+
+    var api = document.createElement("script");
+    api.src = "https://www.youtube.com/iframe_api";
+    api.async = true;
+    api.onerror = function () {
+      youtubeApiRequested = false;
+      var callbacks = youtubeApiCallbacks.slice();
+      youtubeApiCallbacks.length = 0;
+      callbacks.forEach(function (waiter) { waiter(false); });
+    };
+    document.head.appendChild(api);
+  }
+
+  function clearPlayerHost(state) {
+    if (state.readyTimer) {
+      window.clearTimeout(state.readyTimer);
+      state.readyTimer = 0;
+    }
+    if (state.host && state.host.parentNode) {
+      state.host.parentNode.removeChild(state.host);
+    }
+    state.host = null;
+    state.player = null;
+    state.ready = false;
+    state.pending = false;
+    if (state.card) {
+      var media = state.card.querySelector(".featured-media");
+      if (media) media.classList.remove("is-playing");
+    }
+    if (activeVideoState === state) activeVideoState = null;
+  }
+
+  function pauseProgrammatically(state) {
+    if (!state) return;
+    state.wantsPlay = false;
+
+    if (!state.player || !state.ready || !window.YT || !window.YT.PlayerState) return;
+
+    var currentState;
+    try { currentState = state.player.getPlayerState(); } catch (error) { return; }
+
+    if (currentState === window.YT.PlayerState.PLAYING ||
+        currentState === window.YT.PlayerState.BUFFERING) {
+      state.ignoreProgrammaticPause = true;
+      if (state.ignorePauseTimer) window.clearTimeout(state.ignorePauseTimer);
+      state.ignorePauseTimer = window.setTimeout(function () {
+        state.ignoreProgrammaticPause = false;
+        state.ignorePauseTimer = 0;
+      }, 3000);
+      try { state.player.pauseVideo(); } catch (error) { /* Player may be unloading. */ }
+    } else if (activeVideoState === state) {
+      activeVideoState = null;
+    }
+  }
+
+  function pauseOtherVideos(exceptState) {
+    Object.keys(videoStates).forEach(function (id) {
+      var state = videoStates[id];
+      if (state !== exceptState) pauseProgrammatically(state);
+    });
+  }
+
+  function applyPlaybackIntent(state) {
+    if (!state || !state.player || !state.ready) return;
+    if (!state.wantsPlay || state.manuallyPaused) {
+      pauseProgrammatically(state);
+      return;
+    }
+
+    try {
+      if (state.lastStartMode === "manual") state.player.unMute();
+      else state.player.mute();
+      state.player.playVideo();
+    } catch (error) {
+      /* Leave the poster/button fallback available if the player cannot start. */
+    }
+  }
+
+  function createYouTubePlayer(state) {
+    var card = state.card;
+    var project = state.project;
+    var media = card && card.querySelector(".featured-media");
+    if (!media) {
+      state.pending = false;
+      return;
+    }
+
+    var host = document.createElement("div");
+    host.className = "featured-player-host";
+    var playerNode = document.createElement("div");
+    playerNode.id = "featured-player-" + project.id;
+    host.appendChild(playerNode);
+    media.appendChild(host);
+    state.host = host;
+    state.pending = true;
+
+    try {
+      state.player = new window.YT.Player(playerNode.id, {
+        width: 640,
+        height: 360,
+        videoId: project.videoId,
+        playerVars: {
+          autoplay: 0,
+          controls: 1,
+          playsinline: 1,
+          rel: 0,
+          modestbranding: 1,
+          origin: window.location.origin
+        },
+        events: {
+          onReady: function (event) {
+            state.player = event.target;
+            state.ready = true;
+            state.pending = false;
+            if (state.readyTimer) {
+              window.clearTimeout(state.readyTimer);
+              state.readyTimer = 0;
+            }
+
+            if (!state.wantsPlay || state.manuallyPaused) {
+              try { state.player.destroy(); } catch (error) { /* Ignore teardown errors. */ }
+              clearPlayerHost(state);
+              return;
+            }
+
+            media.classList.add("is-playing");
+            applyPlaybackIntent(state);
+          },
+          onStateChange: function (event) {
+            if (!window.YT || !window.YT.PlayerState) return;
+
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              state.manuallyPaused = false;
+              state.wantsPlay = true;
+              activeVideoState = state;
+              pauseOtherVideos(state);
+            } else if (event.data === window.YT.PlayerState.PAUSED) {
+              if (state.ignoreProgrammaticPause) {
+                state.ignoreProgrammaticPause = false;
+                if (state.ignorePauseTimer) {
+                  window.clearTimeout(state.ignorePauseTimer);
+                  state.ignorePauseTimer = 0;
+                }
+                if (activeVideoState === state) activeVideoState = null;
+                return;
+              }
+              state.manuallyPaused = true;
+              state.wantsPlay = false;
+              if (activeVideoState === state) activeVideoState = null;
+            } else if (event.data === window.YT.PlayerState.ENDED) {
+              state.wantsPlay = false;
+              if (activeVideoState === state) activeVideoState = null;
+            }
+          },
+          onError: function () {
+            clearPlayerHost(state);
+          }
+        }
+      });
+
+      state.readyTimer = window.setTimeout(function () {
+        if (!state.ready) clearPlayerHost(state);
+      }, 12000);
+    } catch (error) {
+      clearPlayerHost(state);
+    }
+  }
+
+  function requestProjectVideo(card, project, mode) {
+    if (!project || !project.videoId) return;
+    var state = getVideoState(project, card);
+
+    if (mode !== "manual" && state.manuallyPaused) {
+      pauseOtherVideos(state);
+      return;
+    }
+
+    if (mode === "manual") state.manuallyPaused = false;
+    state.lastStartMode = mode;
+    state.wantsPlay = true;
+    pauseOtherVideos(state);
+
+    if (state.player && state.ready) {
+      applyPlaybackIntent(state);
+      return;
+    }
+    if (state.pending) return;
+
+    state.pending = true;
+    ensureYouTubeApi(function (loaded) {
+      state.pending = false;
+      if (!loaded || !state.wantsPlay || state.manuallyPaused) return;
+      if (state.player && state.ready) {
+        applyPlaybackIntent(state);
+        return;
+      }
+      if (!state.player) createYouTubePlayer(state);
+    });
+  }
+
+  cards.forEach(function (card) {
+    var project = projectById[card.dataset.projectId];
+    if (!project || !project.videoId) return;
+
+    card.addEventListener("click", function (event) {
+      if (event.target.closest("a")) return;
+      if (event.target.closest("iframe")) return;
+      requestProjectVideo(card, project, "manual");
+    });
+
+    card.addEventListener("mouseenter", function () {
+      if (!hoverQuery.matches) return;
+      if (card._videoHoverTimer) window.clearTimeout(card._videoHoverTimer);
+      card._videoHoverTimer = window.setTimeout(function () {
+        requestProjectVideo(card, project, "auto");
+      }, 2000);
+    });
+
+    card.addEventListener("mouseleave", function () {
+      if (card._videoHoverTimer) {
+        window.clearTimeout(card._videoHoverTimer);
+        card._videoHoverTimer = 0;
+      }
+    });
+  });
+
+  function setMobileFocus(card) {
+    if (mobileFocusCard === card) return;
+    mobileFocusCard = card;
+
+    if (!card) {
+      pauseOtherVideos(null);
+      return;
+    }
+
+    var project = projectById[card.dataset.projectId];
+    if (!project || !project.videoId) {
+      pauseOtherVideos(null);
+      return;
+    }
+
+    var state = getVideoState(project, card);
+    pauseOtherVideos(state);
+    if (!state.manuallyPaused) requestProjectVideo(card, project, "auto");
+  }
+
+  function updateMobileFocus() {
+    if (!mobileQuery.matches) {
+      if (mobileFocusCard) setMobileFocus(null);
+      return;
+    }
+
+    var trackRect = track.getBoundingClientRect();
+    if (document.hidden || trackRect.bottom <= 0 || trackRect.top >= window.innerHeight) {
+      setMobileFocus(null);
+      return;
+    }
+
+    var trackCenter = trackRect.left + trackRect.width / 2;
+    var bestCard = null;
+    var bestDistance = Infinity;
+
+    cards.forEach(function (card) {
+      var rect = card.getBoundingClientRect();
+      var visibleWidth = Math.max(0, Math.min(rect.right, trackRect.right) - Math.max(rect.left, trackRect.left));
+      var visibleRatio = rect.width ? visibleWidth / rect.width : 0;
+      if (visibleRatio < 0.5) return;
+
+      var distance = Math.abs((rect.left + rect.right) / 2 - trackCenter);
+      if (distance < bestDistance) {
+        bestDistance = distance;
+        bestCard = card;
+      }
+    });
+
+    setMobileFocus(bestCard);
+  }
+
+  function scheduleMobileFocusUpdate() {
+    if (mobileFocusFrame) return;
+    mobileFocusFrame = window.requestAnimationFrame(function () {
+      mobileFocusFrame = 0;
+      updateMobileFocus();
+    });
+  }
+
+
   var pageStops = [0], activePage = 0, scrollFrame = 0, resizeFrame = 0, suppressClickUntil = 0, drag = null;
   var desktopQuery = window.matchMedia("(min-width: 1024px)");
   var reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -219,13 +557,14 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
     activePage=keepCurrent?Math.min(oldPage,pageStops.length-1):0;
     track.scrollLeft=pageStops[activePage]||0;
     updateControls();
+    scheduleMobileFocusUpdate();
   }
 
   prevButton.addEventListener("click",function(){goToPage(activePage-1);});
   nextButton.addEventListener("click",function(){goToPage(activePage+1);});
   track.addEventListener("scroll",function(){
     if(scrollFrame)return;
-    scrollFrame=window.requestAnimationFrame(function(){scrollFrame=0;updateControls();});
+    scrollFrame=window.requestAnimationFrame(function(){scrollFrame=0;updateControls();scheduleMobileFocusUpdate();});
   },{passive:true});
   track.addEventListener("keydown",function(event){
     if(event.target.closest("a,button"))return;
@@ -263,6 +602,13 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
   }
   window.addEventListener("resize",handleResize,{passive:true});
   window.addEventListener("orientationchange",handleResize,{passive:true});
+  window.addEventListener("scroll",scheduleMobileFocusUpdate,{passive:true});
+  document.addEventListener("visibilitychange",function(){
+    if(document.hidden) pauseOtherVideos(null);
+    else scheduleMobileFocusUpdate();
+  });
+  if(mobileQuery.addEventListener)mobileQuery.addEventListener("change",scheduleMobileFocusUpdate);
+  else if(mobileQuery.addListener)mobileQuery.addListener(scheduleMobileFocusUpdate);
   if(window.ResizeObserver){var observer=new ResizeObserver(handleResize);observer.observe(track);}
   if(desktopQuery.addEventListener)desktopQuery.addEventListener("change",handleResize);
   else if(desktopQuery.addListener)desktopQuery.addListener(handleResize);
