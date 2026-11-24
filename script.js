@@ -93,6 +93,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
       description:"Reusable FSM enemy AI for single-player and Photon Fusion 2 multiplayer.",
       contribution:"Shared patrol, chase and attack behaviours, target detection, and an enemy configurator.",
       tags:["Unity","C#","Photon Fusion 2"], image:"assets/enemy-ai.webp", alt:"Enemy AI concept artwork", imageNote:"Concept artwork",
+      videoId:"c7iCqUvTtb0", videoTitle:"Enemy AI gameplay video",
       detailsUrl:"projects.html#enemy-ai",
       externalUrl:"https://assetstore.unity.com/packages/tools/behavior-ai/enemy-ai-for-photon-fusion-2-networked-fsm-413184",
       externalLabel:"Unity Asset Store" },
@@ -106,6 +107,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
       description:"A Tekken-inspired 3D fighter prototype built around responsive combat.",
       contribution:"Character movement, animation, camera control, and arena boundaries.",
       tags:["Unity","C#","Gameplay"], image:"assets/fight-arena.webp", alt:"Fight Arena reference artwork", imageNote:"Reference artwork",
+      videoId:"J4aup5Nu9pI", videoTitle:"Fight Arena gameplay video",
       detailsUrl:"projects.html#fight-arena",
       externalUrl:"https://github.com/utsavagarwal28/FightArena", externalLabel:"GitHub repository" }
   ];
@@ -115,7 +117,11 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
     card.className = "featured-card";
     card.dataset.projectId = project.id;
     card.innerHTML =
-      '<div class="featured-media"><img src="' + project.image + '" alt="' + project.alt + '" loading="lazy" decoding="async"><span class="featured-media-note">' + project.imageNote + '</span></div>' +
+      '<div class="featured-media' + (project.videoId ? ' has-video' : '') + '">' +
+        '<img src="' + project.image + '" alt="' + project.alt + '" loading="lazy" decoding="async">' +
+        '<span class="featured-media-note">' + (project.videoId ? 'Playable video' : project.imageNote) + '</span>' +
+        (project.videoId ? '<button class="featured-play" type="button" aria-label="Play ' + project.title + ' video" title="Play video"><span aria-hidden="true">▶</span></button>' : '') +
+      '</div>' +
       '<div class="featured-card-body">' +
         '<div class="featured-card-meta"><span class="featured-card-type">' + project.type + '</span><span class="featured-card-org">' + project.organization + '</span></div>' +
         '<h3>' + project.title + '</h3>' +
@@ -131,6 +137,25 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
       image.src = "assets/muted-landscape.webp";
       image.alt = "Atmospheric portfolio landscape";
     });
+
+    if (project.videoId) {
+      var playButton = card.querySelector(".featured-play");
+      playButton.addEventListener("click", function () {
+        if (card.querySelector("iframe")) return;
+        var media = card.querySelector(".featured-media");
+        var iframe = document.createElement("iframe");
+        iframe.className = "featured-video-frame";
+        iframe.title = project.videoTitle || (project.title + " video");
+        iframe.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(project.videoId) + "?autoplay=1&playsinline=1&rel=0&modestbranding=1";
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        iframe.loading = "eager";
+        media.appendChild(iframe);
+        media.classList.add("is-playing");
+        playButton.remove();
+      });
+    }
     return card;
   }
 
