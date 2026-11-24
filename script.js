@@ -503,16 +503,30 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
 
   function collectPageStops() {
     if (desktopQuery.matches || !cards.length) return [0];
+
     var maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
-    var trackLeft = track.getBoundingClientRect().left;
-    var positions = [0];
-    cards.slice(1).forEach(function (card) {
-      var position = Math.round(card.getBoundingClientRect().left - trackLeft + track.scrollLeft);
-      if (position > 1 && position <= maxScroll + 1) positions.push(Math.min(position, Math.round(maxScroll)));
+    var trackRect = track.getBoundingClientRect();
+    var trackLeft = trackRect.left;
+    var positions = [];
+
+    cards.forEach(function (card) {
+      var cardRect = card.getBoundingClientRect();
+      var cardLeft = cardRect.left - trackLeft + track.scrollLeft;
+      var position = mobileQuery.matches
+        ? cardLeft + cardRect.width / 2 - track.clientWidth / 2
+        : cardLeft;
+
+      position = Math.max(0, Math.min(Math.round(position), Math.round(maxScroll)));
+      positions.push(position);
     });
-    if (maxScroll > 1) positions.push(Math.round(maxScroll));
+
+    /* Tablet keeps its two-card, start-aligned layout and trailing scroll stop. */
+    if (!mobileQuery.matches && maxScroll > 1) positions.push(Math.round(maxScroll));
+
     positions.sort(function (a,b) { return a-b; });
-    return positions.filter(function (value,index) { return index===0 || value-positions[index-1]>2; });
+    return positions.filter(function (value,index) {
+      return index===0 || value-positions[index-1]>2;
+    });
   }
 
   function nearestPage() {
