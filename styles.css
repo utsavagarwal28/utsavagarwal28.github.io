@@ -458,9 +458,9 @@ h1{font-size:clamp(44px,7vw,92px)}h2{font-size:clamp(34px,4.4vw,60px);line-heigh
  .featured-heading h2{font-size:clamp(30px,8vw,40px);max-width:14ch}
  .featured-intro{font-size:12px;max-width:42ch}
  .featured-all{margin-top:22px;font-size:11px}
- .featured-track{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;padding:0 15cqi 5px 7.5cqi;scroll-snap-type:x mandatory;scroll-snap-stop:always;scroll-behavior:smooth;overscroll-behavior-x:contain;scrollbar-width:none}
+ .featured-track{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;padding:0 7.5cqi 5px;scroll-snap-type:x mandatory;scroll-snap-stop:always;scroll-behavior:smooth;overscroll-behavior-x:contain;scrollbar-width:none}
  .featured-track::-webkit-scrollbar{display:none}
- .featured-card{flex:0 0 85cqi;scroll-snap-align:start;scroll-snap-stop:always}
+ .featured-card{flex:0 0 85cqi;scroll-snap-align:center;scroll-snap-stop:always}
  .featured-card-body{padding:13px;gap:7px}
  .featured-card h3{font-size:26px}
  .featured-card-description{font-size:12px}
