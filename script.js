@@ -144,11 +144,11 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
   function collectPageStops() {
     if (desktopQuery.matches || !cards.length) return [0];
     var maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
-    var firstLeft = cards[0].getBoundingClientRect().left;
+    var trackLeft = track.getBoundingClientRect().left;
     var positions = [0];
     cards.slice(1).forEach(function (card) {
-      var position = Math.round(card.getBoundingClientRect().left - firstLeft);
-      if (position > 1 && position < maxScroll - 1) positions.push(position);
+      var position = Math.round(card.getBoundingClientRect().left - trackLeft + track.scrollLeft);
+      if (position > 1 && position <= maxScroll + 1) positions.push(Math.min(position, Math.round(maxScroll)));
     });
     if (maxScroll > 1) positions.push(Math.round(maxScroll));
     positions.sort(function (a,b) { return a-b; });
