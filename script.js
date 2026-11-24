@@ -385,10 +385,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
     if (!project || !project.videoId) return;
     var state = getVideoState(project, card);
 
-    if (mode !== "manual" && state.manuallyPaused) {
-      pauseOtherVideos(state);
-      return;
-    }
+    if (mode !== "manual" && state.manuallyPaused) return;
 
     if (mode === "manual") state.manuallyPaused = false;
     state.lastStartMode = mode;
