@@ -104,7 +104,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
       externalLabel:"Unity Asset Store",
       secondaryUrl:"https://2dudestudios.com/",
       secondaryLabel:"2 Dude Studios" },
-    { id:"lbe-vr", type:"CLIENT PROJECT (Visuals not shared due to client ownership)", organization:"2 Dude Studios", title:"LBE VR",
+    { id:"lbe-vr", type:"CLIENT PROJECT", typeNote:"(Visuals not shared due to client ownership)", organization:"2 Dude Studios", title:"LBE VR",
       description:"Contributing to a location-based entertainment (LBE) multiplayer arena project, focusing on operator tools, arena configuration, networked gameplay, and enemy AI.",
       points:[
         "Operator console and match management",
@@ -147,7 +147,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
       '</div>' +
       '<div class="featured-card-body">' +
         '<div class="featured-card-top">' +
-          '<div class="featured-card-meta"><span class="featured-card-type">' + project.type + '</span><span class="featured-card-org">' + project.organization + '</span></div>' +
+          '<div class="featured-card-meta"><span class="featured-card-type">' + project.type + (project.typeNote ? '<span class="featured-card-type-note">' + project.typeNote + '</span>' : '') + '</span><span class="featured-card-org">' + project.organization + '</span></div>' +
           '<h3>' + project.title + '</h3>' +
           '<p class="featured-card-description">' + project.description + '</p>' +
         '</div>' +
