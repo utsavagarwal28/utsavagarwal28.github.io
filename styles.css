@@ -842,3 +842,125 @@ body.single-page{overflow-x:hidden;background:
 @media(prefers-reduced-motion:reduce){
   .featured-detail-scroll{scroll-behavior:auto}
 }
+
+
+
+/* Experience companies are expandable rows; details appear only on selection. */
+.experience-card{
+  display:block;
+  padding:0;
+  overflow:hidden;
+  transition:border-color .22s ease,box-shadow .22s ease,background .22s ease;
+}
+.experience-card:has(.experience-toggle[aria-expanded="true"]){
+  border-color:rgba(213,164,92,.62);
+  box-shadow:0 18px 48px rgba(0,0,0,.26);
+}
+.experience-card-parchment:has(.experience-toggle[aria-expanded="true"]){
+  border-color:rgba(145,60,53,.42);
+  box-shadow:0 18px 42px rgba(57,38,20,.12);
+}
+.experience-toggle{
+  width:100%;
+  display:grid;
+  grid-template-columns:76px minmax(0,1fr) 38px;
+  align-items:center;
+  gap:22px;
+  padding:clamp(20px,3vw,30px);
+  border:0;
+  background:transparent;
+  color:inherit;
+  text-align:left;
+  cursor:pointer;
+  font:inherit;
+}
+.experience-toggle:focus-visible{
+  outline:2px solid var(--gd);
+  outline-offset:-5px;
+}
+.experience-toggle-copy{display:flex;min-width:0;flex-direction:column;gap:4px}
+.experience-trigger-company{
+  color:#d7ad6a;
+  font:700 10px/1.4 var(--sans);
+  letter-spacing:.17em;
+  text-transform:uppercase;
+}
+.experience-card-parchment .experience-trigger-company{color:#8e3731}
+.experience-trigger-role{
+  color:var(--tx);
+  font:700 clamp(25px,2.8vw,36px)/1.08 var(--serif);
+}
+.experience-card-parchment .experience-trigger-role{color:#2a2118}
+.experience-trigger-summary{
+  margin-top:4px;
+  color:#c6c0b5;
+  font:400 12px/1.6 var(--sans);
+}
+.experience-card-parchment .experience-trigger-summary{color:#594937}
+.experience-toggle-icon{
+  display:grid;
+  place-items:center;
+  width:36px;
+  height:36px;
+  border:1px solid rgba(213,164,92,.48);
+  border-radius:50%;
+  color:#e0b76f;
+  font:400 23px/1 var(--sans);
+  transition:transform .22s ease,background .22s ease,color .22s ease;
+}
+.experience-card-parchment .experience-toggle-icon{
+  border-color:rgba(145,60,53,.38);
+  color:#873631;
+}
+.experience-toggle[aria-expanded="true"] .experience-toggle-icon{
+  background:rgba(213,164,92,.13);
+  transform:rotate(180deg);
+}
+.experience-panel{
+  border-top:1px solid rgba(213,164,92,.2);
+  padding:0 clamp(20px,3vw,30px) clamp(22px,3vw,32px) calc(clamp(20px,3vw,30px) + 98px);
+  animation:experience-open .28s ease both;
+}
+.experience-card-parchment .experience-panel{border-top-color:rgba(75,53,31,.18)}
+.experience-panel[hidden]{display:none}
+.experience-panel-label{
+  margin:0 0 8px;
+  color:#d7ad6a;
+  font-size:9px!important;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.experience-card-parchment .experience-panel-label{color:#8e3731}
+.experience-content ul{margin-top:8px}
+.experience-content>p:not(.experience-panel-label){margin-top:8px}
+@keyframes experience-open{
+  from{opacity:0;transform:translateY(-5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(max-width:1023px){
+  .experience-toggle{grid-template-columns:62px minmax(0,1fr) 34px;gap:16px;padding:20px}
+  .experience-toggle .experience-logo{width:60px;height:60px}
+  .experience-trigger-role{font-size:clamp(24px,3.2vw,32px)}
+  .experience-panel{padding:0 20px 24px 98px}
+}
+@media(max-width:760px){
+  .experience-toggle{grid-template-columns:56px minmax(0,1fr) 30px;gap:13px;padding:17px}
+  .experience-toggle .experience-logo{width:54px;height:54px;padding:7px}
+  .experience-trigger-company{font-size:9px}
+  .experience-trigger-role{font-size:25px}
+  .experience-trigger-summary{font-size:10px;line-height:1.5}
+  .experience-toggle-icon{width:30px;height:30px;font-size:20px}
+  .experience-panel{padding:0 17px 22px}
+  .experience-content ul{font-size:11px}
+}
+@media(max-width:380px){
+  .experience-toggle{grid-template-columns:46px minmax(0,1fr) 28px;gap:10px;padding:14px}
+  .experience-toggle .experience-logo{width:46px;height:46px;padding:5px}
+  .experience-trigger-role{font-size:22px}
+  .experience-panel{padding:0 14px 18px}
+}
+@media(prefers-reduced-motion:reduce){
+  .experience-card,.experience-toggle-icon{transition:none}
+  .experience-panel{animation:none}
+}
