@@ -1,10 +1,10 @@
 document.addEventListener("click",function(e){
 var b=e.target.closest(".burger");
 if(b){var o=document.getElementById("links").classList.toggle("open");b.setAttribute("aria-expanded",o);return}
-var l=e.target.closest(".links a");if(l)document.getElementById("links").classList.remove("open");
+var l=e.target.closest(".links a");if(l){document.getElementById("links").classList.remove("open");var navButton=document.querySelector(".burger");if(navButton)navButton.setAttribute("aria-expanded","false");}
 var m=e.target.closest(".more");
 if(m){var d=m.closest(".pane").querySelector(".det"),on=d.classList.toggle("on");m.setAttribute("aria-expanded",on);m.textContent=on?"Show less":"Read more"}});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")document.getElementById("links").classList.remove("open")});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.getElementById("links").classList.remove("open");var navButton=document.querySelector(".burger");if(navButton)navButton.setAttribute("aria-expanded","false");}});
 
 /* Project YouTube embeds: keep bundled artwork visible as a fallback. */
 (function () {
@@ -92,24 +92,53 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
     { id:"enemy-ai", type:"Published asset", organization:"2 Dude Studios", title:"Enemy AI",
       description:"Reusable FSM enemy AI for single-player and Photon Fusion 2 multiplayer.",
       contribution:"Shared patrol, chase and attack behaviours, target detection, and an enemy configurator.",
-      tags:["Unity","C#","Photon Fusion 2"], image:"assets/enemy-ai.webp", alt:"Enemy AI concept artwork", imageNote:"Concept artwork",
+      detailNarrative:"The asset pack provides modular enemy AI systems for both single-player and Photon Fusion-based multiplayer games. It includes reusable patrol, chase, and attack behaviours, plus an enemy configurator for creating different enemy types and customizing their configurations.",
+      points:[
+        "Modular state machines for single-player and multiplayer AI",
+        "Target detection using field of view, visibility, and distance checks",
+        "Reusable patrol, chase, and attack behaviours shared across both modes",
+        "Enemy configurator tool for creating enemy types and customizing their configurations"
+      ],
+      tags:["Unity","C#","State Machines","Photon Fusion 2","Enemy AI"],
+      image:"assets/enemy-ai.webp", alt:"Enemy AI concept artwork", imageNote:"Concept artwork",
       videoId:"c7iCqUvTtb0", videoTitle:"Enemy AI gameplay video",
-      detailsUrl:"projects.html#enemy-ai",
       externalUrl:"https://assetstore.unity.com/packages/tools/behavior-ai/enemy-ai-for-photon-fusion-2-networked-fsm-413184",
-      externalLabel:"Unity Asset Store" },
+      externalLabel:"Unity Asset Store",
+      secondaryUrl:"https://2dudestudios.com/",
+      secondaryLabel:"2 Dude Studios" },
     { id:"lbe-vr", type:"Company project", organization:"2 Dude Studios", title:"LBE VR",
       description:"A shared-space multiplayer VR arena for team combat against players and AI.",
       contribution:"Operator UI, match management, arena setup, and networked combat.",
-      tags:["Unity","Photon Fusion","VR"], image:"assets/lbe-vr.webp", alt:"LBE VR illustrative artwork", imageNote:"Illustrative concept art",
-      detailsUrl:"projects.html#lbe-vr",
-      externalUrl:"https://2dudestudios.com/industries/lbe", externalLabel:"Studio project" },
+      detailNarrative:"A location-based multiplayer arena shooter where players compete in a shared virtual environment, battling opponents and AI-controlled enemies. The experience combines team-based combat, weapon-based gameplay, and real-time multiplayer interactions in an immersive arena.",
+      points:[
+        "Operator console and match management",
+        "Arena setup and configuration systems",
+        "Multiplayer integration using Photon Fusion",
+        "Networked enemy AI and combat systems"
+      ],
+      tags:["Unity","C#","Photon Fusion","VR","AI"],
+      image:"assets/lbe-vr.webp", alt:"LBE VR illustrative artwork", imageNote:"Illustrative concept art",
+      externalUrl:"https://2dudestudios.com/industries/lbe",
+      externalLabel:"Studio project",
+      secondaryUrl:"https://2dudestudios.com/",
+      secondaryLabel:"2 Dude Studios" },
     { id:"fight-arena", type:"Personal project", organization:"Independent", title:"Fight Arena",
       description:"A Tekken-inspired 3D fighter prototype built around responsive combat.",
       contribution:"Character movement, animation, camera control, and arena boundaries.",
-      tags:["Unity","C#","Gameplay"], image:"assets/fight-arena.webp", alt:"Fight Arena reference artwork", imageNote:"Reference artwork",
+      detailNarrative:"A two-fighter arena prototype focused on player movement, combat logic, animation control, camera positioning, and keeping both characters framed within the arena boundaries.",
+      points:[
+        "Character movement and combat mechanics",
+        "Animation control",
+        "Camera behaviour and arena boundaries",
+        "Gameplay UI and visual feedback"
+      ],
+      tags:["Unity","C#","Animator","Gameplay"],
+      image:"assets/fight-arena.webp", alt:"Fight Arena reference artwork", imageNote:"Reference artwork",
       videoId:"J4aup5Nu9pI", videoTitle:"Fight Arena gameplay video",
-      detailsUrl:"projects.html#fight-arena",
-      externalUrl:"https://github.com/utsavagarwal28/FightArena", externalLabel:"GitHub repository" }
+      externalUrl:"https://github.com/utsavagarwal28/FightArena",
+      externalLabel:"GitHub repository",
+      secondaryUrl:"https://youtu.be/J4aup5Nu9pI",
+      secondaryLabel:"Watch gameplay" }
   ];
 
   function renderCard(project) {
@@ -123,12 +152,24 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
         (project.videoId ? '<button class="featured-play" type="button" aria-label="Play ' + project.title + ' video" title="Play video"><span aria-hidden="true">▶</span></button>' : '') +
       '</div>' +
       '<div class="featured-card-body">' +
-        '<div class="featured-card-meta"><span class="featured-card-type">' + project.type + '</span><span class="featured-card-org">' + project.organization + '</span></div>' +
-        '<h3>' + project.title + '</h3>' +
-        '<p class="featured-card-description">' + project.description + '</p>' +
-        '<p class="featured-contribution"><b>My contribution</b>' + project.contribution + '</p>' +
-        '<div class="featured-card-tags">' + project.tags.map(function (tag) { return '<span>' + tag + '</span>'; }).join("") + '</div>' +
-        '<div class="featured-card-actions"><a class="featured-card-details" href="' + project.detailsUrl + '">Project details <span aria-hidden="true">→</span></a><a class="featured-card-external" href="' + project.externalUrl + '" target="_blank" rel="noopener noreferrer">' + project.externalLabel + ' <span aria-hidden="true">↗</span></a></div>' +
+        '<div class="featured-card-top">' +
+          '<div class="featured-card-meta"><span class="featured-card-type">' + project.type + '</span><span class="featured-card-org">' + project.organization + '</span></div>' +
+          '<h3>' + project.title + '</h3>' +
+          '<p class="featured-card-description">' + project.description + '</p>' +
+        '</div>' +
+        '<div class="featured-detail-scroll" tabindex="0" aria-label="' + project.title + ' project details">' +
+          '<p class="featured-contribution"><b>My contribution</b>' + project.contribution + '</p>' +
+          '<p class="featured-detail-narrative">' + project.detailNarrative + '</p>' +
+          '<h4 class="featured-pointers-title">Key work &amp; systems</h4>' +
+          '<ul class="featured-detail-list">' + project.points.map(function (point) { return '<li>' + point + '</li>'; }).join("") + '</ul>' +
+        '</div>' +
+        '<div class="featured-card-footer">' +
+          '<div class="featured-card-tags">' + project.tags.map(function (tag) { return '<span>' + tag + '</span>'; }).join("") + '</div>' +
+          '<div class="featured-card-actions">' +
+            '<a class="featured-card-details" href="' + project.externalUrl + '" target="_blank" rel="noopener noreferrer">' + project.externalLabel + ' <span aria-hidden="true">↗</span></a>' +
+            '<a class="featured-card-external" href="' + project.secondaryUrl + '" target="_blank" rel="noopener noreferrer">' + project.secondaryLabel + ' <span aria-hidden="true">↗</span></a>' +
+          '</div>' +
+        '</div>' +
       '</div>';
     var image = card.querySelector("img");
     image.addEventListener("error", function () {
@@ -148,7 +189,6 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
     }
     return card;
   }
-
   track.replaceChildren();
   projects.forEach(function (project) { track.appendChild(renderCard(project)); });
   var cards = Array.prototype.slice.call(track.querySelectorAll(".featured-card"));
@@ -603,6 +643,31 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
   track.addEventListener("pointerup",finishDrag);
   track.addEventListener("pointercancel",finishDrag);
   track.addEventListener("lostpointercapture",finishDrag);
+
+  /*
+   * Let a horizontal gesture that starts over a project's independently
+   * scrollable description move the surrounding project carousel. Vertical
+   * gestures remain native so the description can scroll and hand off to the
+   * main page at its top/bottom edges.
+   */
+  var detailPanes = Array.prototype.slice.call(track.querySelectorAll(".featured-detail-scroll"));
+  detailPanes.forEach(function (detailPane) {
+    var detailGesture = null;
+
+    detailPane.addEventListener("wheel",function(event){
+      if(track.scrollWidth <= track.clientWidth + 1) return;
+
+      var horizontalDelta = event.deltaX;
+      if(event.shiftKey && Math.abs(horizontalDelta) < 1) horizontalDelta = event.deltaY;
+      if(Math.abs(horizontalDelta) < 1) return;
+      if(!event.shiftKey && Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+
+      event.preventDefault();
+      track.scrollBy({left:horizontalDelta,behavior:"auto"});
+    },{passive:false});
+
+  });
+
   track.addEventListener("click",function(event){
     if(Date.now()<suppressClickUntil){event.preventDefault();event.stopPropagation();}
   },true);
@@ -625,4 +690,64 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
   else if(desktopQuery.addListener)desktopQuery.addListener(handleResize);
   rebuildPagination(false);
   window.requestAnimationFrame(function(){rebuildPagination(true);});
+})();/* Single-page atmosphere: scroll progress, section navigation and gentle reveals. */
+(function () {
+  var progressBar = document.getElementById("scroll-progress-bar");
+  var footerYear = document.getElementById("footer-year");
+  if (footerYear) footerYear.textContent = String(new Date().getFullYear());
+
+  var scrollContainer = document.getElementById("main-content");
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.links a[href^="#"]'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll("#main-content > section[data-nav-section]"));
+
+  function updateScrollProgress() {
+    if (!progressBar) return;
+    var scrollArea = scrollContainer || document.documentElement;
+    var scrollable = Math.max(1, scrollArea.scrollHeight - scrollArea.clientHeight);
+    var position = scrollContainer ? scrollContainer.scrollTop : window.scrollY;
+    var progress = Math.min(1, Math.max(0, position / scrollable));
+    progressBar.style.transform = "scaleX(" + progress + ")";
+  }
+  if (scrollContainer) scrollContainer.addEventListener("scroll", updateScrollProgress, { passive: true });
+  window.addEventListener("scroll", updateScrollProgress, { passive: true });
+  window.addEventListener("resize", updateScrollProgress, { passive: true });
+  updateScrollProgress();
+
+  function setActiveNavigation() {
+    var current = sections[0];
+    var scrollRect = scrollContainer ? scrollContainer.getBoundingClientRect() : { top: 0, height: window.innerHeight };
+    var activationLine = scrollRect.top + Math.max(70, Math.min(140, scrollRect.height * 0.22));
+
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= activationLine) current = section;
+    });
+
+    navLinks.forEach(function (link) {
+      var active = current && link.getAttribute("href") === "#" + current.id;
+      if (active) link.classList.add("on");
+      else link.classList.remove("on");
+    });
+  }
+  if (scrollContainer) scrollContainer.addEventListener("scroll", setActiveNavigation, { passive: true });
+  window.addEventListener("scroll", setActiveNavigation, { passive: true });
+  window.addEventListener("resize", setActiveNavigation, { passive: true });
+  setActiveNavigation();
+
+
+  var revealItems = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    Array.prototype.forEach.call(revealItems, function (item) { item.classList.add("is-visible"); });
+    return;
+  }
+
+  document.documentElement.classList.add("has-reveal");
+  var revealObserver = new IntersectionObserver(function (entries, observer) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { root: scrollContainer || null, threshold: 0.12, rootMargin: "0px 0px -42px 0px" });
+
+  Array.prototype.forEach.call(revealItems, function (item) { revealObserver.observe(item); });
 })();
