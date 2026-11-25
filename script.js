@@ -668,6 +668,44 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
 })();
 
 
+
+
+/* Experience accordion: one company opens at a time. */
+(function () {
+  var accordion = document.querySelector("[data-experience-accordion]");
+  if (!accordion) return;
+
+  accordion.addEventListener("click", function (event) {
+    var trigger = event.target.closest(".experience-toggle");
+    if (!trigger || !accordion.contains(trigger)) return;
+
+    var panelId = trigger.getAttribute("aria-controls");
+    var panel = panelId && document.getElementById(panelId);
+    if (!panel) return;
+
+    var willOpen = trigger.getAttribute("aria-expanded") !== "true";
+
+    Array.prototype.forEach.call(accordion.querySelectorAll(".experience-toggle"), function (other) {
+      var otherPanelId = other.getAttribute("aria-controls");
+      var otherPanel = otherPanelId && document.getElementById(otherPanelId);
+      if (other === trigger) return;
+
+      other.setAttribute("aria-expanded", "false");
+      other.setAttribute("aria-label", "Show details for " + (other.querySelector(".experience-trigger-company")?.textContent || "company"));
+      var otherIcon = other.querySelector(".experience-toggle-icon");
+      if (otherIcon) otherIcon.textContent = "+";
+      if (otherPanel) otherPanel.hidden = true;
+    });
+
+    trigger.setAttribute("aria-expanded", willOpen ? "true" : "false");
+    var companyName = trigger.querySelector(".experience-trigger-company");
+    trigger.setAttribute("aria-label", (willOpen ? "Hide details for " : "Show details for ") + (companyName ? companyName.textContent : "company"));
+    var icon = trigger.querySelector(".experience-toggle-icon");
+    if (icon) icon.textContent = willOpen ? "−" : "+";
+    panel.hidden = !willOpen;
+  });
+})();
+
 /* Single-page atmosphere: scroll progress, section navigation and gentle reveals. */
 (function () {
   var progressBar = document.getElementById("scroll-progress-bar");
