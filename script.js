@@ -92,24 +92,53 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
     { id:"enemy-ai", type:"Published asset", organization:"2 Dude Studios", title:"Enemy AI",
       description:"Reusable FSM enemy AI for single-player and Photon Fusion 2 multiplayer.",
       contribution:"Shared patrol, chase and attack behaviours, target detection, and an enemy configurator.",
-      tags:["Unity","C#","Photon Fusion 2"], image:"assets/enemy-ai.webp", alt:"Enemy AI concept artwork", imageNote:"Concept artwork",
+      detailNarrative:"The asset pack provides modular enemy AI systems for both single-player and Photon Fusion-based multiplayer games. It includes reusable patrol, chase, and attack behaviours, plus an enemy configurator for creating different enemy types and customizing their configurations.",
+      points:[
+        "Modular state machines for single-player and multiplayer AI",
+        "Target detection using field of view, visibility, and distance checks",
+        "Reusable patrol, chase, and attack behaviours shared across both modes",
+        "Enemy configurator tool for creating enemy types and customizing their configurations"
+      ],
+      tags:["Unity","C#","State Machines","Photon Fusion 2","Enemy AI"],
+      image:"assets/enemy-ai.webp", alt:"Enemy AI concept artwork", imageNote:"Concept artwork",
       videoId:"c7iCqUvTtb0", videoTitle:"Enemy AI gameplay video",
-      detailsUrl:"#project-enemy-ai",
       externalUrl:"https://assetstore.unity.com/packages/tools/behavior-ai/enemy-ai-for-photon-fusion-2-networked-fsm-413184",
-      externalLabel:"Unity Asset Store" },
+      externalLabel:"Unity Asset Store",
+      secondaryUrl:"https://2dudestudios.com/",
+      secondaryLabel:"2 Dude Studios" },
     { id:"lbe-vr", type:"Company project", organization:"2 Dude Studios", title:"LBE VR",
       description:"A shared-space multiplayer VR arena for team combat against players and AI.",
       contribution:"Operator UI, match management, arena setup, and networked combat.",
-      tags:["Unity","Photon Fusion","VR"], image:"assets/lbe-vr.webp", alt:"LBE VR illustrative artwork", imageNote:"Illustrative concept art",
-      detailsUrl:"#project-lbe-vr",
-      externalUrl:"https://2dudestudios.com/industries/lbe", externalLabel:"Studio project" },
+      detailNarrative:"A location-based multiplayer arena shooter where players compete in a shared virtual environment, battling opponents and AI-controlled enemies. The experience combines team-based combat, weapon-based gameplay, and real-time multiplayer interactions in an immersive arena.",
+      points:[
+        "Operator console and match management",
+        "Arena setup and configuration systems",
+        "Multiplayer integration using Photon Fusion",
+        "Networked enemy AI and combat systems"
+      ],
+      tags:["Unity","C#","Photon Fusion","VR","AI"],
+      image:"assets/lbe-vr.webp", alt:"LBE VR illustrative artwork", imageNote:"Illustrative concept art",
+      externalUrl:"https://2dudestudios.com/industries/lbe",
+      externalLabel:"Studio project",
+      secondaryUrl:"https://2dudestudios.com/",
+      secondaryLabel:"2 Dude Studios" },
     { id:"fight-arena", type:"Personal project", organization:"Independent", title:"Fight Arena",
       description:"A Tekken-inspired 3D fighter prototype built around responsive combat.",
       contribution:"Character movement, animation, camera control, and arena boundaries.",
-      tags:["Unity","C#","Gameplay"], image:"assets/fight-arena.webp", alt:"Fight Arena reference artwork", imageNote:"Reference artwork",
+      detailNarrative:"A two-fighter arena prototype focused on player movement, combat logic, animation control, camera positioning, and keeping both characters framed within the arena boundaries.",
+      points:[
+        "Character movement and combat mechanics",
+        "Animation control",
+        "Camera behaviour and arena boundaries",
+        "Gameplay UI and visual feedback"
+      ],
+      tags:["Unity","C#","Animator","Gameplay"],
+      image:"assets/fight-arena.webp", alt:"Fight Arena reference artwork", imageNote:"Reference artwork",
       videoId:"J4aup5Nu9pI", videoTitle:"Fight Arena gameplay video",
-      detailsUrl:"#project-fight-arena",
-      externalUrl:"https://github.com/utsavagarwal28/FightArena", externalLabel:"GitHub repository" }
+      externalUrl:"https://github.com/utsavagarwal28/FightArena",
+      externalLabel:"GitHub repository",
+      secondaryUrl:"https://youtu.be/J4aup5Nu9pI",
+      secondaryLabel:"Watch gameplay" }
   ];
 
   function renderCard(project) {
@@ -123,12 +152,24 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
         (project.videoId ? '<button class="featured-play" type="button" aria-label="Play ' + project.title + ' video" title="Play video"><span aria-hidden="true">▶</span></button>' : '') +
       '</div>' +
       '<div class="featured-card-body">' +
-        '<div class="featured-card-meta"><span class="featured-card-type">' + project.type + '</span><span class="featured-card-org">' + project.organization + '</span></div>' +
-        '<h3>' + project.title + '</h3>' +
-        '<p class="featured-card-description">' + project.description + '</p>' +
-        '<p class="featured-contribution"><b>My contribution</b>' + project.contribution + '</p>' +
-        '<div class="featured-card-tags">' + project.tags.map(function (tag) { return '<span>' + tag + '</span>'; }).join("") + '</div>' +
-        '<div class="featured-card-actions"><a class="featured-card-details" href="' + project.detailsUrl + '">Project details <span aria-hidden="true">→</span></a><a class="featured-card-external" href="' + project.externalUrl + '" target="_blank" rel="noopener noreferrer">' + project.externalLabel + ' <span aria-hidden="true">↗</span></a></div>' +
+        '<div class="featured-card-top">' +
+          '<div class="featured-card-meta"><span class="featured-card-type">' + project.type + '</span><span class="featured-card-org">' + project.organization + '</span></div>' +
+          '<h3>' + project.title + '</h3>' +
+          '<p class="featured-card-description">' + project.description + '</p>' +
+        '</div>' +
+        '<div class="featured-detail-scroll" tabindex="0" aria-label="' + project.title + ' project details">' +
+          '<p class="featured-contribution"><b>My contribution</b>' + project.contribution + '</p>' +
+          '<p class="featured-detail-narrative">' + project.detailNarrative + '</p>' +
+          '<h4 class="featured-pointers-title">Key work &amp; systems</h4>' +
+          '<ul class="featured-detail-list">' + project.points.map(function (point) { return '<li>' + point + '</li>'; }).join("") + '</ul>' +
+        '</div>' +
+        '<div class="featured-card-footer">' +
+          '<div class="featured-card-tags">' + project.tags.map(function (tag) { return '<span>' + tag + '</span>'; }).join("") + '</div>' +
+          '<div class="featured-card-actions">' +
+            '<a class="featured-card-details" href="' + project.externalUrl + '" target="_blank" rel="noopener noreferrer">' + project.externalLabel + ' <span aria-hidden="true">↗</span></a>' +
+            '<a class="featured-card-external" href="' + project.secondaryUrl + '" target="_blank" rel="noopener noreferrer">' + project.secondaryLabel + ' <span aria-hidden="true">↗</span></a>' +
+          '</div>' +
+        '</div>' +
       '</div>';
     var image = card.querySelector("img");
     image.addEventListener("error", function () {
@@ -148,7 +189,6 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
     }
     return card;
   }
-
   track.replaceChildren();
   projects.forEach(function (project) { track.appendChild(renderCard(project)); });
   var cards = Array.prototype.slice.call(track.querySelectorAll(".featured-card"));
