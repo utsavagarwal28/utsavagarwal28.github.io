@@ -90,13 +90,11 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
 
   var projects = [
     { id:"enemy-ai", type:"Published asset", organization:"2 Dude Studios", title:"Enemy AI",
-      description:"Reusable FSM enemy AI for single-player and Photon Fusion 2 multiplayer.",
-      contribution:"Shared patrol, chase and attack behaviours, target detection, and an enemy configurator.",
-      detailNarrative:"The asset pack provides modular enemy AI systems for both single-player and Photon Fusion-based multiplayer games. It includes reusable patrol, chase, and attack behaviours, plus an enemy configurator for creating different enemy types and customizing their configurations.",
+      description:"Developing standalone and Photon Fusion-based multiplayer state machine systems to create modular enemy behaviors, enabling enemies to patrol, detect targets, chase players, and engage in combat.",
       points:[
         "Modular state machines for single-player and multiplayer AI",
         "Target detection using field of view, visibility, and distance checks",
-        "Reusable patrol, chase, and attack behaviours shared across both modes",
+        "Reusable patrol, chase, and attack behaviors shared across both modes",
         "Enemy configurator tool for creating enemy types and customizing their configurations"
       ],
       tags:["Unity","C#","State Machines","Photon Fusion 2","Enemy AI"],
@@ -107,9 +105,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
       secondaryUrl:"https://2dudestudios.com/",
       secondaryLabel:"2 Dude Studios" },
     { id:"lbe-vr", type:"Company project", organization:"2 Dude Studios", title:"LBE VR",
-      description:"A shared-space multiplayer VR arena for team combat against players and AI.",
-      contribution:"Operator UI, match management, arena setup, and networked combat.",
-      detailNarrative:"A location-based multiplayer arena shooter where players compete in a shared virtual environment, battling opponents and AI-controlled enemies. The experience combines team-based combat, weapon-based gameplay, and real-time multiplayer interactions in an immersive arena.",
+      description:"Contributing to a location-based entertainment (LBE) multiplayer arena project, focusing on operator tools, arena configuration, networked gameplay, and enemy AI.",
       points:[
         "Operator console and match management",
         "Arena setup and configuration systems",
@@ -123,13 +119,11 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
       secondaryUrl:"https://2dudestudios.com/",
       secondaryLabel:"2 Dude Studios" },
     { id:"fight-arena", type:"Personal project", organization:"Independent", title:"Fight Arena",
-      description:"A Tekken-inspired 3D fighter prototype built around responsive combat.",
-      contribution:"Character movement, animation, camera control, and arena boundaries.",
-      detailNarrative:"A two-fighter arena prototype focused on player movement, combat logic, animation control, camera positioning, and keeping both characters framed within the arena boundaries.",
+      description:"A Tekken-inspired 3D fighting-game prototype focused on movement, combat logic, animation, camera behavior, and arena boundaries.",
       points:[
         "Character movement and combat mechanics",
         "Animation control",
-        "Camera behaviour and arena boundaries",
+        "Camera behavior and arena boundaries",
         "Gameplay UI and visual feedback"
       ],
       tags:["Unity","C#","Animator","Gameplay"],
@@ -157,10 +151,8 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
           '<h3>' + project.title + '</h3>' +
           '<p class="featured-card-description">' + project.description + '</p>' +
         '</div>' +
-        '<div class="featured-detail-scroll" tabindex="0" aria-label="' + project.title + ' project details">' +
-          '<p class="featured-contribution"><b>My contribution</b>' + project.contribution + '</p>' +
-          '<p class="featured-detail-narrative">' + project.detailNarrative + '</p>' +
-          '<h4 class="featured-pointers-title">Key work &amp; systems</h4>' +
+        '<div class="featured-detail-scroll" tabindex="0" aria-label="' + project.title + ' contributions">' +
+          '<h4 class="featured-pointers-title">My Contributions</h4>' +
           '<ul class="featured-detail-list">' + project.points.map(function (point) { return '<li>' + point + '</li>'; }).join("") + '</ul>' +
         '</div>' +
         '<div class="featured-card-footer">' +
