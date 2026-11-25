@@ -666,57 +666,6 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
       track.scrollBy({left:horizontalDelta,behavior:"auto"});
     },{passive:false});
 
-    detailPane.addEventListener("pointerdown",function(event){
-      if((event.pointerType !== "touch" && event.pointerType !== "pen") ||
-          track.scrollWidth <= track.clientWidth + 1) return;
-
-      detailGesture = {
-        pointerId:event.pointerId,
-        startX:event.clientX,
-        startY:event.clientY,
-        startScroll:track.scrollLeft,
-        axis:null
-      };
-      try { detailPane.setPointerCapture(event.pointerId); } catch(error) {}
-    });
-
-    detailPane.addEventListener("pointermove",function(event){
-      if(!detailGesture || event.pointerId !== detailGesture.pointerId) return;
-
-      var deltaX = event.clientX - detailGesture.startX;
-      var deltaY = event.clientY - detailGesture.startY;
-
-      if(!detailGesture.axis){
-        if(Math.max(Math.abs(deltaX),Math.abs(deltaY)) < 8) return;
-        detailGesture.axis = Math.abs(deltaX) > Math.abs(deltaY) * 1.15 ? "horizontal" : "vertical";
-        if(detailGesture.axis === "vertical"){
-          detailGesture = null;
-          try { detailPane.releasePointerCapture(event.pointerId); } catch(error) {}
-          return;
-        }
-      }
-
-      if(detailGesture.axis === "horizontal"){
-        if(event.cancelable) event.preventDefault();
-        track.classList.add("is-dragging");
-        track.scrollLeft = detailGesture.startScroll - deltaX;
-      }
-    });
-
-    function finishDetailGesture(event){
-      if(!detailGesture || (event && event.pointerId !== detailGesture.pointerId)) return;
-      var wasHorizontal = detailGesture.axis === "horizontal";
-      detailGesture = null;
-      if(wasHorizontal){
-        track.classList.remove("is-dragging");
-        suppressClickUntil = Date.now() + 250;
-        goToPage(nearestPage());
-      }
-    }
-
-    detailPane.addEventListener("pointerup",finishDetailGesture);
-    detailPane.addEventListener("pointercancel",finishDetailGesture);
-    detailPane.addEventListener("lostpointercapture",finishDetailGesture);
   });
 
   track.addEventListener("click",function(event){
