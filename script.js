@@ -1,10 +1,10 @@
 document.addEventListener("click",function(e){
 var b=e.target.closest(".burger");
 if(b){var o=document.getElementById("links").classList.toggle("open");b.setAttribute("aria-expanded",o);return}
-var l=e.target.closest(".links a");if(l)document.getElementById("links").classList.remove("open");
+var l=e.target.closest(".links a");if(l){document.getElementById("links").classList.remove("open");var navButton=document.querySelector(".burger");if(navButton)navButton.setAttribute("aria-expanded","false");}
 var m=e.target.closest(".more");
 if(m){var d=m.closest(".pane").querySelector(".det"),on=d.classList.toggle("on");m.setAttribute("aria-expanded",on);m.textContent=on?"Show less":"Read more"}});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")document.getElementById("links").classList.remove("open")});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.getElementById("links").classList.remove("open");var navButton=document.querySelector(".burger");if(navButton)navButton.setAttribute("aria-expanded","false");}});
 
 /* Project YouTube embeds: keep bundled artwork visible as a fallback. */
 (function () {
@@ -94,21 +94,21 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
       contribution:"Shared patrol, chase and attack behaviours, target detection, and an enemy configurator.",
       tags:["Unity","C#","Photon Fusion 2"], image:"assets/enemy-ai.webp", alt:"Enemy AI concept artwork", imageNote:"Concept artwork",
       videoId:"c7iCqUvTtb0", videoTitle:"Enemy AI gameplay video",
-      detailsUrl:"projects.html#enemy-ai",
+      detailsUrl:"#project-enemy-ai",
       externalUrl:"https://assetstore.unity.com/packages/tools/behavior-ai/enemy-ai-for-photon-fusion-2-networked-fsm-413184",
       externalLabel:"Unity Asset Store" },
     { id:"lbe-vr", type:"Company project", organization:"2 Dude Studios", title:"LBE VR",
       description:"A shared-space multiplayer VR arena for team combat against players and AI.",
       contribution:"Operator UI, match management, arena setup, and networked combat.",
       tags:["Unity","Photon Fusion","VR"], image:"assets/lbe-vr.webp", alt:"LBE VR illustrative artwork", imageNote:"Illustrative concept art",
-      detailsUrl:"projects.html#lbe-vr",
+      detailsUrl:"#project-lbe-vr",
       externalUrl:"https://2dudestudios.com/industries/lbe", externalLabel:"Studio project" },
     { id:"fight-arena", type:"Personal project", organization:"Independent", title:"Fight Arena",
       description:"A Tekken-inspired 3D fighter prototype built around responsive combat.",
       contribution:"Character movement, animation, camera control, and arena boundaries.",
       tags:["Unity","C#","Gameplay"], image:"assets/fight-arena.webp", alt:"Fight Arena reference artwork", imageNote:"Reference artwork",
       videoId:"J4aup5Nu9pI", videoTitle:"Fight Arena gameplay video",
-      detailsUrl:"projects.html#fight-arena",
+      detailsUrl:"#project-fight-arena",
       externalUrl:"https://github.com/utsavagarwal28/FightArena", externalLabel:"GitHub repository" }
   ];
 
@@ -625,4 +625,59 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape")document.get
   else if(desktopQuery.addListener)desktopQuery.addListener(handleResize);
   rebuildPagination(false);
   window.requestAnimationFrame(function(){rebuildPagination(true);});
+})();
+
+
+/* Single-page atmosphere: scroll progress, section navigation and gentle reveals. */
+(function () {
+  var progressBar = document.getElementById("scroll-progress-bar");
+  var footerYear = document.getElementById("footer-year");
+  if (footerYear) footerYear.textContent = String(new Date().getFullYear());
+
+  function updateScrollProgress() {
+    if (!progressBar) return;
+    var root = document.documentElement;
+    var scrollable = Math.max(1, root.scrollHeight - window.innerHeight);
+    var progress = Math.min(1, Math.max(0, window.scrollY / scrollable));
+    progressBar.style.transform = "scaleX(" + progress + ")";
+  }
+  window.addEventListener("scroll", updateScrollProgress, { passive: true });
+  window.addEventListener("resize", updateScrollProgress, { passive: true });
+  updateScrollProgress();
+
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.links a[href^="#"]'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll("[data-nav-section]"));
+
+  function setActiveNavigation() {
+    var current = sections[0];
+    var activationLine = Math.max(100, window.innerHeight * 0.38);
+    sections.forEach(function (section) {
+      if (section.getBoundingClientRect().top <= activationLine) current = section;
+    });
+    navLinks.forEach(function (link) {
+      var active = current && link.getAttribute("href") === "#" + current.id;
+      if (active) link.classList.add("on");
+      else link.classList.remove("on");
+    });
+  }
+  window.addEventListener("scroll", setActiveNavigation, { passive: true });
+  window.addEventListener("resize", setActiveNavigation, { passive: true });
+  setActiveNavigation();
+
+  var revealItems = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    Array.prototype.forEach.call(revealItems, function (item) { item.classList.add("is-visible"); });
+    return;
+  }
+
+  document.documentElement.classList.add("has-reveal");
+  var revealObserver = new IntersectionObserver(function (entries, observer) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -42px 0px" });
+
+  Array.prototype.forEach.call(revealItems, function (item) { revealObserver.observe(item); });
 })();
