@@ -1361,3 +1361,22 @@ body.single-page{
 #main-content.view > .journey-section{
   scroll-snap-stop:normal;
 }
+
+
+/* Keep the Projects title aligned to the first visible project card.
+   Desktop/tablet cards start at the grid/track edge; on phones the carousel
+   deliberately insets its first card by 7.5vw, so the title shares that inset. */
+#main-content > .featured-work{
+  --featured-card-inset:0px;
+}
+#main-content .featured-heading{
+  padding-inline:var(--featured-card-inset);
+}
+@media(max-width:760px){
+  #main-content > .featured-work{
+    --featured-card-inset:7.5vw;
+  }
+  #main-content .featured-track{
+    padding-inline:var(--featured-card-inset);
+  }
+}
