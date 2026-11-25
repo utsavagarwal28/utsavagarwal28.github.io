@@ -665,7 +665,56 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
   else if(desktopQuery.addListener)desktopQuery.addListener(handleResize);
   rebuildPagination(false);
   window.requestAnimationFrame(function(){rebuildPagination(true);});
-})();/* Single-page atmosphere: scroll progress, section navigation and gentle reveals. */
+})();/* Career map: select one company milestone to reveal its experience. */
+(function () {
+  var map = document.querySelector(".career-map");
+  var detailArea = document.querySelector(".career-detail-area");
+  if (!map || !detailArea) return;
+
+  var emptyPanel = document.getElementById("career-detail-empty");
+  var stops = Array.prototype.slice.call(map.querySelectorAll("[data-career-stop]"));
+  var panels = Array.prototype.slice.call(detailArea.querySelectorAll(".career-detail-panel"));
+
+  function selectCareerStop(stop) {
+    var wasSelected = stop.getAttribute("aria-expanded") === "true";
+    var nextId = wasSelected ? null : stop.getAttribute("aria-controls");
+
+    stops.forEach(function (item) {
+      var selected = item === stop && !wasSelected;
+      item.classList.toggle("is-selected", selected);
+      item.setAttribute("aria-expanded", selected ? "true" : "false");
+      item.setAttribute("aria-pressed", selected ? "true" : "false");
+    });
+
+    panels.forEach(function (panel) {
+      panel.hidden = !nextId || panel.id !== nextId;
+    });
+    if (emptyPanel) emptyPanel.hidden = Boolean(nextId);
+    map.classList.toggle("has-selection", Boolean(nextId));
+
+    if (nextId) {
+      var panel = document.getElementById(nextId);
+      if (panel) panel.setAttribute("tabindex", "-1");
+    }
+  }
+
+  map.addEventListener("click", function (event) {
+    var stop = event.target.closest("[data-career-stop]");
+    if (!stop || !map.contains(stop)) return;
+    selectCareerStop(stop);
+  });
+
+  stops.forEach(function (stop) {
+    stop.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        selectCareerStop(stop);
+      }
+    });
+  });
+})();
+
+/* Single-page atmosphere: scroll progress, section navigation and gentle reveals. */
 (function () {
   var progressBar = document.getElementById("scroll-progress-bar");
   var footerYear = document.getElementById("footer-year");
