@@ -104,7 +104,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
       externalLabel:"Unity Asset Store",
       secondaryUrl:"https://2dudestudios.com/",
       secondaryLabel:"2 Dude Studios" },
-    { id:"lbe-vr", type:"Company project", organization:"2 Dude Studios", title:"LBE VR",
+    { id:"lbe-vr", type:"CLIENT PROJECT (Visuals not shared due to client ownership)", organization:"2 Dude Studios", title:"LBE VR",
       description:"Contributing to a location-based entertainment (LBE) multiplayer arena project, focusing on operator tools, arena configuration, networked gameplay, and enemy AI.",
       points:[
         "Operator console and match management",
