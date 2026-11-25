@@ -1228,3 +1228,58 @@ body.single-page{overflow-x:hidden;background:
   .career-destination.is-current:not(.is-selected) .career-destination-marker:after{animation:none}
   .career-experience-panel{animation:none}
 }
+
+
+
+/* Final fit pass: keep the whole career chapter visible, with no clipped panel copy. */
+.career-screen{overflow:visible}
+.career-screen-inner{grid-template-rows:auto auto auto}
+.career-experience-card{min-height:min-content}
+.career-destination-route-desktop .career-route-track,
+.career-destination-route-desktop .career-route-progress{
+  d:path("M 150 70 C 250 12 350 12 450 70 S 650 128 750 70 S 950 12 1050 70");
+}
+@media(max-width:760px){
+  .career-screen-inner{grid-template-rows:auto auto auto}
+  .career-destinations{
+    min-height:178px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-rows:repeat(2,minmax(76px,auto));
+    padding:7px 0 3px;
+  }
+  .career-destination-route-mobile .career-route-track,
+  .career-destination-route-mobile .career-route-progress{
+    d:path("M 90 37 C 145 10 215 10 270 37 S 215 84 90 112 S 215 132 270 112");
+  }
+  .career-destination{min-height:76px;padding:6px 4px;gap:3px}
+  .career-destination-name{
+    font-size:clamp(13px,3.6vw,17px);
+    line-height:1.05;
+    overflow-wrap:normal;
+    white-space:normal;
+  }
+  .career-destination-date{font-size:6px;letter-spacing:.05em}
+  .career-destination-marker{width:13px;height:13px;margin-top:2px}
+}
+@media(max-width:390px){
+  .career-screen{padding-left:12px;padding-right:12px}
+  .career-screen-heading>p{max-width:20ch;font-size:8px}
+  .career-experience-card{padding:12px}
+  .career-company-logo{width:38px;height:38px}
+  .career-current-mark,.career-period-mark{display:none}
+  .career-experience-responsibilities ul{font-size:8px;column-gap:12px}
+  .career-destination-name{font-size:12px}
+  .career-destination-date{font-size:5.5px}
+}
+@media(max-height:740px) and (max-width:760px){
+  .career-screen{padding-top:14px;padding-bottom:14px}
+  .career-screen-heading h2{font-size:30px}
+  .career-screen-heading>p{font-size:8px}
+  .career-experience-card{padding:10px}
+  .career-experience-content{gap:7px;margin-top:8px}
+  .career-experience-overview>p:last-child{font-size:8px;line-height:1.42}
+  .career-experience-responsibilities ul{font-size:7.5px;line-height:1.35}
+  .career-experience-footer{margin-top:7px;padding-top:6px}
+  .career-destinations{min-height:160px}
+  .career-destination{min-height:70px}
+}
