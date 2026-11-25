@@ -698,7 +698,13 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
 
   var scrollContainer = document.getElementById("main-content");
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.links a[href^="#"]'));
-  var sections = Array.prototype.slice.call(document.querySelectorAll("#main-content > section[data-nav-section]"));
+  function getNavigationSections() {
+    var wideLayout = window.matchMedia && window.matchMedia("(min-width: 1024px)").matches;
+    var selector = "#main-content > section[data-nav-section], #main-content > .as > #about[data-nav-section]";
+    if (!wideLayout) selector += ", #main-content > .as > #skills[data-nav-section]";
+    return Array.prototype.slice.call(document.querySelectorAll(selector));
+  }
+  var sections = getNavigationSections();
 
   function updateScrollProgress() {
     if (!progressBar) return;
@@ -714,6 +720,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
   updateScrollProgress();
 
   function setActiveNavigation() {
+    sections = getNavigationSections();
     var current = sections[0];
     var scrollRect = scrollContainer ? scrollContainer.getBoundingClientRect() : { top: 0, height: window.innerHeight };
     var activationLine = scrollRect.top + Math.max(70, Math.min(140, scrollRect.height * 0.22));
