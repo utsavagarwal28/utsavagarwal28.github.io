@@ -1512,3 +1512,20 @@ body.single-page{
   font-size:13.5px;
   line-height:1.45;
 }
+
+
+/* About and Skills are snap targets inside the responsive .as wrapper.
+   Clear the legacy document-flow offset so their leading edges align with
+   the fixed scrollport used by the single-page layout. */
+#main-content .as > #about,
+#main-content .as > #skills{
+  scroll-margin:0;
+}
+
+/* Skills may need its own scroll area on narrow phones, but reaching either
+   edge must chain the gesture to the main page so Experience remains reachable. */
+@media(max-width:1023px){
+  #main-content .as > #skills{
+    overscroll-behavior-y:auto;
+  }
+}
