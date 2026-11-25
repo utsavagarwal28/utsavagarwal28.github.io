@@ -1529,3 +1529,21 @@ body.single-page{
     overscroll-behavior-y:auto;
   }
 }
+
+
+/* About copy anchor on smaller screens: keep the heading at a stable top edge
+   so it remains above the lower artwork as the paragraph wraps. The copy can
+   naturally extend over the image only when its height requires it. */
+@media(max-width:1023px){
+  #main-content .as > #about{
+    align-items:flex-start;
+    padding-top:clamp(28px,5vh,52px);
+  }
+  #main-content .as > #about > div{
+    width:100%;
+    align-self:flex-start;
+  }
+  #main-content .as > #about .eyebrow{
+    margin-top:0;
+  }
+}
