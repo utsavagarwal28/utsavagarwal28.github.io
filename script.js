@@ -704,14 +704,6 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
     selectCareerStop(stop);
   });
 
-  stops.forEach(function (stop) {
-    stop.addEventListener("keydown", function (event) {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        selectCareerStop(stop);
-      }
-    });
-  });
 })();
 
 /* Single-page atmosphere: scroll progress, section navigation and gentle reveals. */
