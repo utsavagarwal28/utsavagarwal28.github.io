@@ -924,3 +924,51 @@ body.single-page{
 @media(prefers-reduced-motion:reduce){
   #main-content.view{scroll-behavior:auto}
 }
+
+
+/* Section snapping correction: use the actual fixed scrollport height and allow
+   nested project copy to hand vertical scrolling back to the page at its edges. */
+#main-content.view{
+  scroll-snap-type:y mandatory;
+  scroll-snap-points-y:repeat(100%);
+  scroll-padding-top:0;
+  scroll-padding-bottom:0;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+}
+#main-content > section{
+  min-height:calc(100vh - var(--nav) - env(safe-area-inset-top,0px));
+  min-height:calc(100svh - var(--nav) - env(safe-area-inset-top,0px));
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+}
+#main-content > .portfolio-hero{
+  min-height:calc(100vh - var(--nav) - env(safe-area-inset-top,0px))!important;
+  min-height:calc(100svh - var(--nav) - env(safe-area-inset-top,0px))!important;
+}
+#main-content > .contact-section{
+  min-height:max(calc(100svh - var(--nav) - env(safe-area-inset-top,0px)),620px)!important;
+}
+#main-content .featured-detail-scroll{
+  overscroll-behavior-x:contain;
+  overscroll-behavior-y:auto;
+  touch-action:pan-y;
+}
+@media(max-width:760px){
+  #main-content.view{
+    scroll-snap-type:y mandatory;
+    scroll-snap-stop:always;
+    scroll-padding:0;
+  }
+  #main-content > section{
+    min-height:calc(100vh - var(--nav) - env(safe-area-inset-top,0px));
+    min-height:calc(100svh - var(--nav) - env(safe-area-inset-top,0px));
+  }
+  #main-content .featured-detail-scroll{
+    overscroll-behavior-y:auto;
+    touch-action:pan-y;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #main-content.view{scroll-behavior:auto}
+}
