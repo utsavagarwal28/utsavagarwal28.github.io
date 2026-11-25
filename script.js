@@ -665,50 +665,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
   else if(desktopQuery.addListener)desktopQuery.addListener(handleResize);
   rebuildPagination(false);
   window.requestAnimationFrame(function(){rebuildPagination(true);});
-})();/* Career destinations: update the experience card above the route. */
-(function () {
-  var section = document.querySelector(".career-screen");
-  if (!section) return;
-
-  var destinations = Array.prototype.slice.call(section.querySelectorAll("[data-career-destination]"));
-  var panels = Array.prototype.slice.call(section.querySelectorAll("[data-career-panel]"));
-  if (!destinations.length || !panels.length) return;
-
-  function selectDestination(key, moveFocus) {
-    var selectedPanel = null;
-
-    destinations.forEach(function (destination) {
-      var selected = destination.getAttribute("data-career-destination") === key;
-      destination.classList.toggle("is-selected", selected);
-      destination.setAttribute("aria-pressed", selected ? "true" : "false");
-    });
-
-    panels.forEach(function (panel) {
-      var selected = panel.getAttribute("data-career-panel") === key;
-      panel.hidden = !selected;
-      if (selected) selectedPanel = panel;
-    });
-
-    if (selectedPanel && moveFocus) {
-      var title = selectedPanel.querySelector("h3");
-      if (title) {
-        title.setAttribute("tabindex", "-1");
-        title.focus({ preventScroll: true });
-      }
-    }
-  }
-
-  section.addEventListener("click", function (event) {
-    var destination = event.target.closest("[data-career-destination]");
-    if (!destination || !section.contains(destination)) return;
-    selectDestination(destination.getAttribute("data-career-destination"), false);
-  });
-
-  /* 2 Dude Studios is the default selection: the latest role. */
-  selectDestination("dude", false);
-})();
-
-/* Single-page atmosphere: scroll progress, section navigation and gentle reveals. */
+})();/* Single-page atmosphere: scroll progress, section navigation and gentle reveals. */
 (function () {
   var progressBar = document.getElementById("scroll-progress-bar");
   var footerYear = document.getElementById("footer-year");
