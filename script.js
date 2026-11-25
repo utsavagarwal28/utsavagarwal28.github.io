@@ -643,6 +643,31 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
   track.addEventListener("pointerup",finishDrag);
   track.addEventListener("pointercancel",finishDrag);
   track.addEventListener("lostpointercapture",finishDrag);
+
+  /*
+   * Let a horizontal gesture that starts over a project's independently
+   * scrollable description move the surrounding project carousel. Vertical
+   * gestures remain native so the description can scroll and hand off to the
+   * main page at its top/bottom edges.
+   */
+  var detailPanes = Array.prototype.slice.call(track.querySelectorAll(".featured-detail-scroll"));
+  detailPanes.forEach(function (detailPane) {
+    var detailGesture = null;
+
+    detailPane.addEventListener("wheel",function(event){
+      if(track.scrollWidth <= track.clientWidth + 1) return;
+
+      var horizontalDelta = event.deltaX;
+      if(event.shiftKey && Math.abs(horizontalDelta) < 1) horizontalDelta = event.deltaY;
+      if(Math.abs(horizontalDelta) < 1) return;
+      if(!event.shiftKey && Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+
+      event.preventDefault();
+      track.scrollBy({left:horizontalDelta,behavior:"auto"});
+    },{passive:false});
+
+  });
+
   track.addEventListener("click",function(event){
     if(Date.now()<suppressClickUntil){event.preventDefault();event.stopPropagation();}
   },true);
@@ -671,35 +696,43 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
   var footerYear = document.getElementById("footer-year");
   if (footerYear) footerYear.textContent = String(new Date().getFullYear());
 
+  var scrollContainer = document.getElementById("main-content");
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.links a[href^="#"]'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll("#main-content > section[data-nav-section]"));
+
   function updateScrollProgress() {
     if (!progressBar) return;
-    var root = document.documentElement;
-    var scrollable = Math.max(1, root.scrollHeight - window.innerHeight);
-    var progress = Math.min(1, Math.max(0, window.scrollY / scrollable));
+    var scrollArea = scrollContainer || document.documentElement;
+    var scrollable = Math.max(1, scrollArea.scrollHeight - scrollArea.clientHeight);
+    var position = scrollContainer ? scrollContainer.scrollTop : window.scrollY;
+    var progress = Math.min(1, Math.max(0, position / scrollable));
     progressBar.style.transform = "scaleX(" + progress + ")";
   }
+  if (scrollContainer) scrollContainer.addEventListener("scroll", updateScrollProgress, { passive: true });
   window.addEventListener("scroll", updateScrollProgress, { passive: true });
   window.addEventListener("resize", updateScrollProgress, { passive: true });
   updateScrollProgress();
 
-  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.links a[href^="#"]'));
-  var sections = Array.prototype.slice.call(document.querySelectorAll("[data-nav-section]"));
-
   function setActiveNavigation() {
     var current = sections[0];
-    var activationLine = Math.max(100, window.innerHeight * 0.38);
+    var scrollRect = scrollContainer ? scrollContainer.getBoundingClientRect() : { top: 0, height: window.innerHeight };
+    var activationLine = scrollRect.top + Math.max(70, Math.min(140, scrollRect.height * 0.22));
+
     sections.forEach(function (section) {
       if (section.getBoundingClientRect().top <= activationLine) current = section;
     });
+
     navLinks.forEach(function (link) {
       var active = current && link.getAttribute("href") === "#" + current.id;
       if (active) link.classList.add("on");
       else link.classList.remove("on");
     });
   }
+  if (scrollContainer) scrollContainer.addEventListener("scroll", setActiveNavigation, { passive: true });
   window.addEventListener("scroll", setActiveNavigation, { passive: true });
   window.addEventListener("resize", setActiveNavigation, { passive: true });
   setActiveNavigation();
+
 
   var revealItems = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window)) {
@@ -714,7 +747,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
       entry.target.classList.add("is-visible");
       observer.unobserve(entry.target);
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -42px 0px" });
+  }, { root: scrollContainer || null, threshold: 0.12, rootMargin: "0px 0px -42px 0px" });
 
   Array.prototype.forEach.call(revealItems, function (item) { revealObserver.observe(item); });
 })();
