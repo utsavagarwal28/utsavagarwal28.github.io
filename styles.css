@@ -1412,3 +1412,171 @@ body.single-page{
     padding-inline:clamp(24px,4vw,42px);
   }
 }
+
+/* About + Skills follow the responsive composition from main:
+   - >=1024px: one side-by-side, full-viewport snap stop.
+   - <1024px: two separate, full-viewport snap stops. */
+#main-content > .as{
+  width:100%;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+}
+
+/* Main's original About artwork and Skills tile grid. */
+#main-content .as > #about{
+  display:flex;
+  align-items:center;
+  padding:var(--pad) var(--pad) 40%;
+  background:var(--pa);
+  color:#1a1410;
+}
+#main-content .as > #about .bg{
+  top:auto;
+  height:52%;
+  object-position:50% 70%;
+  -webkit-mask-image:linear-gradient(transparent,#000 35%);
+  mask-image:linear-gradient(transparent,#000 35%);
+}
+#main-content .as > #about .eyebrow{color:#5a4a38}
+#main-content .as > #about p{
+  max-width:52ch;
+  margin-top:18px;
+  font-size:clamp(15px,1.25vw,17px);
+  color:#33281d;
+  position:relative;
+}
+#main-content .as > #about > div{position:relative;z-index:1}
+
+#main-content .as > #skills{
+  display:flex;
+  align-items:center;
+  padding:var(--pad);
+  border-left:1px solid var(--bd);
+  background:var(--sf);
+}
+#main-content .as > #skills > div{width:100%}
+
+@media(min-width:1024px){
+  #main-content > .as{
+    display:grid;
+    grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+    grid-template-rows:minmax(0,1fr);
+    height:var(--section-viewport-height);
+    min-height:var(--section-viewport-height);
+    max-height:var(--section-viewport-height);
+    overflow:hidden;
+  }
+  #main-content .as > #about,
+  #main-content .as > #skills{
+    box-sizing:border-box;
+    width:100%;
+    height:100%;
+    min-height:100%;
+    max-height:100%;
+    scroll-snap-align:none;
+    scroll-snap-stop:normal;
+    overflow:hidden;
+  }
+}
+
+@media(max-width:1023px){
+  /* display:contents makes both child sections independent snap targets. */
+  #main-content > .as{display:contents}
+  #main-content .as > #about{
+    width:100%;
+    height:var(--section-viewport-height);
+    min-height:var(--section-viewport-height);
+    max-height:var(--section-viewport-height);
+    padding-bottom:45%;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+  }
+  #main-content .as > #skills{
+    box-sizing:border-box;
+    width:100%;
+    height:var(--section-viewport-height);
+    min-height:var(--section-viewport-height);
+    max-height:var(--section-viewport-height);
+    padding:var(--pad);
+    border-left:0;
+    overflow-x:hidden;
+    overflow-y:auto;
+    overscroll-behavior-y:contain;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+  }
+}
+
+/* Keep the short project description at the desktop reading size on every device. */
+#main-content .featured-card-top .featured-card-description{
+  font-size:13.5px;
+  line-height:1.45;
+}
+
+
+/* About and Skills are snap targets inside the responsive .as wrapper.
+   Clear the legacy document-flow offset so their leading edges align with
+   the fixed scrollport used by the single-page layout. */
+#main-content .as > #about,
+#main-content .as > #skills{
+  scroll-margin:0;
+}
+
+/* Skills may need its own scroll area on narrow phones, but reaching either
+   edge must chain the gesture to the main page so Experience remains reachable. */
+@media(max-width:1023px){
+  #main-content .as > #skills{
+    overscroll-behavior-y:auto;
+  }
+}
+
+
+/* About copy anchor on smaller screens: keep the heading at a stable top edge
+   so it remains above the lower artwork as the paragraph wraps. The copy can
+   naturally extend over the image only when its height requires it. */
+@media(max-width:1023px){
+  #main-content .as > #about{
+    align-items:flex-start;
+    padding-top:clamp(28px,5vh,52px);
+  }
+  #main-content .as > #about > div{
+    width:100%;
+    align-self:flex-start;
+  }
+  #main-content .as > #about .eyebrow{
+    margin-top:0;
+  }
+}
+
+
+/* Final About copy positioning by viewport:
+   Keep the mobile composition as-is, tighten the tablet top inset, and pin
+   desktop copy to the upper part of its panel instead of vertical centering. */
+@media(min-width:761px) and (max-width:1023px){
+  #main-content .as > #about{
+    align-items:flex-start;
+    padding-top:clamp(20px,3vh,30px);
+  }
+  #main-content .as > #about > div{
+    align-self:flex-start;
+  }
+}
+
+@media(min-width:1024px){
+  #main-content .as > #about{
+    align-items:flex-start;
+    padding-top:clamp(32px,5vh,64px);
+  }
+  #main-content .as > #about > div{
+    align-self:flex-start;
+  }
+}
+
+
+/* Mobile About copy: add breathing room at the right edge. */
+@media(max-width:760px){
+  #main-content .as > #about > div{
+    box-sizing:border-box;
+    padding-right:clamp(14px,3vw,22px);
+  }
+}

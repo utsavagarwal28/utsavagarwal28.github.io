@@ -16,10 +16,10 @@
     <a class="logo" href="#hero" aria-label="Utsav Agarwal — Home">UA</a>
     <button class="burger" aria-label="Open navigation" aria-expanded="false" aria-controls="links">&#9776;</button>
     <div class="links" id="links">
-      <a href="#about">About</a>
       <a href="#featured-work">Projects</a>
-      <a href="#journey">Journey</a>
+      <a href="#about">About</a>
       <a href="#skills">Skills</a>
+      <a href="#journey">Experience</a>
       <a href="#contact">Contact</a>
       <a class="btn nav-resume" href="resume.pdf" target="_blank" rel="noopener">Resume <span aria-hidden="true">↗</span></a>
     </div>
@@ -40,23 +40,7 @@
           <div><b>Unity</b><span>Certified Associate Programmer</span></div>
         </a>
       </div>
-      <a class="hero-scroll-cue" href="#about" aria-label="Scroll to about section"><span>SCROLL TO EXPLORE</span><i></i></a>
-    </section>
-
-    <!-- ABOUT: a quiet, parchment-like pause between the cinematic hero and project showcase. -->
-    <section class="lore-section portfolio-section" id="about" data-nav-section>
-      <div class="lore-visual reveal">
-        <img src="assets/wanderer.webp" alt="A rider on horseback looks over a misty river valley" loading="lazy">
-        <span class="image-caption">THE CRAFT BEHIND THE WORLDS</span>
-        <span class="visual-index">01 <i></i> PERSPECTIVE</span>
-      </div>
-      <div class="lore-copy reveal">
-        <p class="eyebrow">About me</p>
-        <h2>A game developer who loves building interactive worlds.</h2>
-        <div class="ornament-divider" aria-hidden="true"><span></span><i></i><span></span></div>
-        <p>I’m a full-time game programmer, skilled in the Unity engine, with experience in VR, AI, modular asset building and multiplayer systems. I enjoy turning ideas into playable experiences and solving technical challenges that make games more engaging and reliable.</p>
-        <a class="text-link" href="#journey">Explore my journey <span aria-hidden="true">↗</span></a>
-      </div>
+      <a class="hero-scroll-cue" href="#featured-work" aria-label="Scroll to projects section"><span>SCROLL TO EXPLORE</span><i></i></a>
     </section>
 
     <!-- PROJECTS: preserve the current data-driven project cards and video controls. -->
@@ -84,6 +68,37 @@
         </div>
       </div>
     </section>
+
+    <div class="as">
+      <!-- ABOUT: restored to the image-backed layout from the latest main commit. -->
+    <section class="snap" id="about" data-nav-section>
+      <img class="bg" src="assets/wanderer.webp" alt="A rider on horseback looks over a misty river valley">
+      <div>
+        <p class="eyebrow">About me</p>
+        <h2>A game developer who loves building interactive worlds.</h2>
+        <p>I’m a full-time game programmer, skilled in the Unity engine, with experience in VR, AI, modular asset building and multiplayer systems. I enjoy turning ideas into playable experiences and solving technical challenges that make games more engaging and reliable.</p>
+      </div>
+    </section>
+
+      <!-- SKILLS: restored to the 10-item skills grid from the latest main commit. -->
+    <section class="snap" id="skills" data-nav-section>
+      <div>
+        <p class="eyebrow">Skills &amp; tools</p>
+        <div class="grid">
+          <div class="sk"><i>U</i>Unity</div>
+          <div class="sk"><i>C#</i>C#</div>
+          <div class="sk"><i>G</i>Gameplay Programming</div>
+          <div class="sk"><i>AI</i>AI Systems</div>
+          <div class="sk"><i>VR</i>VR Development</div>
+          <div class="sk"><i>Pf</i>Photon Fusion</div>
+          <div class="sk"><i>M</i>Multiplayer</div>
+          <div class="sk"><i>An</i>Animation</div>
+          <div class="sk"><i>UI</i>UI Systems</div>
+          <div class="sk"><i>Gt</i>Git</div>
+        </div>
+      </div>
+    </section>
+    </div>
 
     <!-- EXPERIENCE: the complete work history is now part of the same scroll. -->
     <section class="journey-section portfolio-section" id="journey" aria-labelledby="journey-title" data-nav-section>
@@ -185,38 +200,6 @@
             </div>
           </article>
         </div>
-      </div>
-    </section>
-
-    <!-- SKILLS: existing skills retained and presented as an illustrated toolkit. -->
-    <section class="skills-section portfolio-section" id="skills" aria-labelledby="skills-title" data-nav-section>
-      <div class="skills-shell">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Skills &amp; tools</p>
-          <h2 id="skills-title">The tools behind the craft.</h2>
-          <p>A practical toolkit for building gameplay, intelligent behaviours and connected experiences.</p>
-        </div>
-        <div class="skill-groups">
-          <article class="skill-group reveal">
-            <span class="skill-index">01</span>
-            <h3>Gameplay craft</h3>
-            <p>Building the moment-to-moment experience.</p>
-            <div class="skill-chips"><span>Unity</span><span>C#</span><span>Gameplay Programming</span><span>Animation</span><span>UI Systems</span></div>
-          </article>
-          <article class="skill-group reveal">
-            <span class="skill-index">02</span>
-            <h3>World systems</h3>
-            <p>Making worlds react, connect and play together.</p>
-            <div class="skill-chips"><span>AI Systems</span><span>Photon Fusion</span><span>Multiplayer</span><span>VR Development</span><span>Modular Systems</span></div>
-          </article>
-          <article class="skill-group reveal">
-            <span class="skill-index">03</span>
-            <h3>Tools &amp; platforms</h3>
-            <p>Supporting the pipeline around the experience.</p>
-            <div class="skill-chips"><span>Git</span><span>PlayFab</span><span>Firebase</span><span>PostgreSQL</span><span>FastAPI</span><span>Unreal Engine</span></div>
-          </article>
-        </div>
-        <div class="skill-footnote"><i></i><span>Curiosity keeps the toolkit growing.</span><i></i></div>
       </div>
     </section>
 
