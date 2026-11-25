@@ -1348,3 +1348,16 @@ body.single-page{
 @media(prefers-reduced-motion:reduce){
   #main-content > section{scroll-behavior:auto}
 }
+
+
+/* Final snap-target override: the legacy single-page styles above disable
+   snapping on .snap and .portfolio-section. These higher-specificity rules
+   restore every top-level section as a target inside the fixed scrollport. */
+#main-content.view > section{
+  scroll-margin:0;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+}
+#main-content.view > .journey-section{
+  scroll-snap-stop:normal;
+}
