@@ -1380,3 +1380,18 @@ body.single-page{
     padding-inline:var(--featured-card-inset);
   }
 }
+
+
+/* Projects interaction polish: bring the cards closer to the heading and let
+   nested detail scrolling cooperate with the page and horizontal carousel. */
+#main-content .featured-inner{
+  gap:clamp(3px,.65vh,7px);
+}
+#main-content .featured-detail-scroll{
+  overscroll-behavior-x:contain;
+  overscroll-behavior-y:auto;
+  touch-action:pan-y;
+}
+@media(max-width:760px){
+  #main-content .featured-inner{gap:4px}
+}
