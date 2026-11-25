@@ -1586,10 +1586,6 @@ body.single-page{
 .featured-card-type-note{
   display:inline-block;
   margin-left:5px;
-  color:var(--mu);
-  font-size:.78em;
-  font-weight:400;
-  letter-spacing:.015em;
-  opacity:.78;
+  color:#e6c68c;
   text-transform:none;
 }
