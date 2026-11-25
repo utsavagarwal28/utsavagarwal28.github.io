@@ -842,3 +842,85 @@ body.single-page{overflow-x:hidden;background:
 @media(prefers-reduced-motion:reduce){
   .featured-detail-scroll{scroll-behavior:auto}
 }
+
+
+
+/* ==========================================================
+   FULL-PAGE SECTION SNAP
+   Each top-level portfolio section is a deliberate scroll stop.
+   Long sections can still be scrolled through without clipping.
+   ========================================================== */
+html{
+  scroll-snap-type:none;
+  scroll-behavior:auto;
+  overflow:hidden;
+}
+body.single-page{
+  height:100%;
+  min-height:100%;
+  overflow:hidden;
+  overscroll-behavior:none;
+}
+#main-content.view{
+  position:fixed;
+  inset:calc(var(--nav) + env(safe-area-inset-top,0px)) 0 0;
+  display:block;
+  width:100%;
+  height:auto;
+  min-height:0;
+  margin:0;
+  overflow-x:hidden;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;
+  scroll-behavior:smooth;
+  scroll-snap-type:y mandatory;
+  scroll-snap-align:none;
+  scroll-padding-block:0;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(213,164,92,.42) rgba(245,240,231,.04);
+}
+#main-content.view::-webkit-scrollbar{width:6px}
+#main-content.view::-webkit-scrollbar-track{background:rgba(245,240,231,.035)}
+#main-content.view::-webkit-scrollbar-thumb{background:rgba(213,164,92,.45);border-radius:8px}
+#main-content:focus{outline:none}
+#main-content:focus-visible{outline:2px solid rgba(213,164,92,.35);outline-offset:-3px}
+#main-content > section{
+  position:relative;
+  min-height:100%;
+  height:auto;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+  scroll-margin:0;
+}
+#main-content > .portfolio-hero,
+#main-content > .lore-section,
+#main-content > .featured-work,
+#main-content > .journey-section,
+#main-content > .skills-section{
+  min-height:100%!important;
+}
+#main-content > .contact-section{
+  min-height:max(100%,620px)!important;
+}
+/* The project carousel remains an independent horizontal snap area. */
+#main-content .featured-track{
+  scroll-snap-type:x mandatory;
+  overscroll-behavior-x:contain;
+}
+#main-content .featured-card{
+  scroll-snap-stop:always;
+}
+/* Keep section transitions reliable on touch devices too. */
+@media(max-width:760px){
+  #main-content.view{
+    scroll-snap-type:y mandatory;
+    overscroll-behavior-y:contain;
+    scrollbar-width:none;
+  }
+  #main-content.view::-webkit-scrollbar{display:none}
+  #main-content > section{scroll-snap-stop:always}
+}
+@media(prefers-reduced-motion:reduce){
+  #main-content.view{scroll-behavior:auto}
+}
