@@ -671,35 +671,41 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
   var footerYear = document.getElementById("footer-year");
   if (footerYear) footerYear.textContent = String(new Date().getFullYear());
 
+  var scrollContainer = document.getElementById("main-content");
+
   function updateScrollProgress() {
     if (!progressBar) return;
-    var root = document.documentElement;
-    var scrollable = Math.max(1, root.scrollHeight - window.innerHeight);
-    var progress = Math.min(1, Math.max(0, window.scrollY / scrollable));
+    var scrollArea = scrollContainer || document.documentElement;
+    var scrollable = Math.max(1, scrollArea.scrollHeight - scrollArea.clientHeight);
+    var position = scrollContainer ? scrollContainer.scrollTop : window.scrollY;
+    var progress = Math.min(1, Math.max(0, position / scrollable));
     progressBar.style.transform = "scaleX(" + progress + ")";
   }
+  if (scrollContainer) scrollContainer.addEventListener("scroll", updateScrollProgress, { passive: true });
   window.addEventListener("scroll", updateScrollProgress, { passive: true });
   window.addEventListener("resize", updateScrollProgress, { passive: true });
   updateScrollProgress();
 
-  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.links a[href^="#"]'));
-  var sections = Array.prototype.slice.call(document.querySelectorAll("[data-nav-section]"));
-
   function setActiveNavigation() {
     var current = sections[0];
-    var activationLine = Math.max(100, window.innerHeight * 0.38);
+    var scrollRect = scrollContainer ? scrollContainer.getBoundingClientRect() : { top: 0, height: window.innerHeight };
+    var activationLine = scrollRect.top + Math.max(70, Math.min(140, scrollRect.height * 0.22));
+
     sections.forEach(function (section) {
       if (section.getBoundingClientRect().top <= activationLine) current = section;
     });
+
     navLinks.forEach(function (link) {
       var active = current && link.getAttribute("href") === "#" + current.id;
       if (active) link.classList.add("on");
       else link.classList.remove("on");
     });
   }
+  if (scrollContainer) scrollContainer.addEventListener("scroll", setActiveNavigation, { passive: true });
   window.addEventListener("scroll", setActiveNavigation, { passive: true });
   window.addEventListener("resize", setActiveNavigation, { passive: true });
   setActiveNavigation();
+
 
   var revealItems = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window)) {
