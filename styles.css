@@ -1412,3 +1412,51 @@ body.single-page{
     padding-inline:clamp(24px,4vw,42px);
   }
 }
+
+/* Restore the About and Skills visual treatment from main at
+   a088faddf8fc95b66b5852c70fcf4e934a555f0a.
+   They remain separate, vertically ordered sections on this homepage. */
+#main-content > #about{
+  display:flex;
+  align-items:center;
+  padding:var(--pad) var(--pad) 40%;
+  background:var(--pa);
+  color:#1a1410;
+}
+#main-content > #about .bg{
+  top:auto;
+  height:52%;
+  object-position:50% 70%;
+  -webkit-mask-image:linear-gradient(transparent,#000 35%);
+  mask-image:linear-gradient(transparent,#000 35%);
+}
+#main-content > #about .eyebrow{color:#5a4a38}
+#main-content > #about p{
+  max-width:52ch;
+  margin-top:18px;
+  font-size:clamp(15px,1.25vw,17px);
+  color:#33281d;
+  position:relative;
+}
+#main-content > #about > div{position:relative;z-index:1}
+
+#main-content > #skills{
+  display:flex;
+  align-items:center;
+  padding:var(--pad);
+  border-left:1px solid var(--bd);
+  background:var(--sf);
+  height:auto;
+  min-height:var(--section-viewport-height);
+  max-height:none;
+  overflow:visible;
+  scroll-snap-align:start;
+  scroll-snap-stop:always;
+}
+#main-content > #skills > div{width:100%}
+
+@media(max-width:1023px){
+  #main-content > #about{padding-bottom:45%}
+  #main-content > #skills{border-left:0}
+}
+
