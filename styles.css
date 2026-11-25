@@ -1395,3 +1395,20 @@ body.single-page{
 @media(max-width:760px){
   #main-content .featured-inner{gap:4px}
 }
+
+
+/* Let touch horizontal pans started over project copy use the carousel's
+   native momentum instead of a direct, finger-locked scroll handler. */
+#main-content .featured-detail-scroll{
+  touch-action:pan-x pan-y;
+  overscroll-behavior-x:auto;
+  overscroll-behavior-y:auto;
+}
+
+/* The viewport-fit rule removes the old tablet section gutters; restore a
+   consistent outer margin around both the grid and its aligned heading. */
+@media(min-width:761px) and (max-width:1023px){
+  #main-content > .featured-work{
+    padding-inline:clamp(24px,4vw,42px);
+  }
+}
