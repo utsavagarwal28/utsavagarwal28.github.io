@@ -1580,3 +1580,16 @@ body.single-page{
     padding-right:clamp(14px,3vw,22px);
   }
 }
+
+
+/* Keep client ownership context visually secondary to the project label. */
+.featured-card-type-note{
+  display:inline-block;
+  margin-left:5px;
+  color:var(--mu);
+  font-size:.78em;
+  font-weight:400;
+  letter-spacing:.015em;
+  opacity:.78;
+  text-transform:none;
+}
