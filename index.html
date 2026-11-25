@@ -86,7 +86,7 @@
       </div>
     </section>
 
-    <!-- EXPERIENCE: the complete work history is now part of the same scroll. -->
+    <!-- EXPERIENCE: expand a company to read the work and tools used there. -->
     <section class="journey-section portfolio-section" id="journey" aria-labelledby="journey-title" data-nav-section>
       <div class="journey-backdrop" aria-hidden="true"></div>
       <div class="journey-inner">
@@ -95,25 +95,34 @@
           <h2 id="journey-title">My Journey</h2>
           <p>From small prototypes to immersive experiences. Each step has helped me grow as a developer, learn new technologies and work on more complex projects.</p>
         </div>
-        <div class="experience-list">
+        <div class="experience-list" data-experience-accordion>
           <article class="experience-entry reveal">
             <div class="experience-date"><span>NOW</span><b>April 2026 – Present</b></div>
             <div class="experience-card">
-              <div class="experience-logo logo-dark"><img src="assets/2-dude-studios.png" alt="2 Dude Studios logo" loading="lazy"></div>
-              <div class="experience-content">
-                <p class="experience-company">2 Dude Studios</p>
-                <h3>Unity Game Developer</h3>
-                <ul>
-                  <li>Building location-based entertainment (LBE) VR experiences for shared physical spaces</li>
-                  <li>Integrating Photon Fusion for multiplayer functionality</li>
-                  <li>Integrating Pixel Crushers' Dialogue System</li>
-                  <li>Working with PostgreSQL databases and FastAPI</li>
-                  <li>Developing modular utilities, debugging, and testing</li>
-                </ul>
-                <div class="tags"><span>Unity</span><span>VR</span><span>Photon Fusion</span><span>Multiplayer</span><span>Asset Building</span><span>Modular Systems</span><span>PostgreSQL</span><span>Dialogue System</span></div>
-                <div class="experience-links">
-                  <a href="https://2dudestudios.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
-                  <a href="https://www.linkedin.com/company/2-dude-studios/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              <button class="experience-toggle" type="button" aria-expanded="false" aria-controls="experience-details-2dude" aria-label="Show details for 2 Dude Studios">
+                <span class="experience-logo logo-dark"><img src="assets/2-dude-studios.png" alt="" loading="lazy"></span>
+                <span class="experience-toggle-copy">
+                  <span class="experience-trigger-company">2 Dude Studios</span>
+                  <span class="experience-trigger-role">Unity Game Developer</span>
+                  <span class="experience-trigger-summary">LBE VR experiences, multiplayer systems and modular gameplay utilities.</span>
+                </span>
+                <span class="experience-toggle-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="experience-panel" id="experience-details-2dude" hidden>
+                <div class="experience-content">
+                  <p class="experience-panel-label">Work &amp; responsibilities</p>
+                  <ul>
+                    <li>Building location-based entertainment (LBE) VR experiences for shared physical spaces</li>
+                    <li>Integrating Photon Fusion for multiplayer functionality</li>
+                    <li>Integrating Pixel Crushers' Dialogue System</li>
+                    <li>Working with PostgreSQL databases and FastAPI</li>
+                    <li>Developing modular utilities, debugging, and testing</li>
+                  </ul>
+                  <div class="tags"><span>Unity</span><span>VR</span><span>Photon Fusion</span><span>Multiplayer</span><span>Asset Building</span><span>Modular Systems</span><span>PostgreSQL</span><span>Dialogue System</span></div>
+                  <div class="experience-links">
+                    <a href="https://2dudestudios.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
+                    <a href="https://www.linkedin.com/company/2-dude-studios/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -122,20 +131,29 @@
           <article class="experience-entry reveal">
             <div class="experience-date"><span>2025—26</span><b>November 2025 – March 2026</b></div>
             <div class="experience-card experience-card-parchment">
-              <div class="experience-logo"><img src="assets/apex-dream-studio.webp" alt="Apex Dream Studio logo" loading="lazy"></div>
-              <div class="experience-content">
-                <p class="experience-company">Apex Dream Studio</p>
-                <h3>Unity Game Developer</h3>
-                <ul>
-                  <li>Implemented gameplay mechanics, interactive features, and rendering-related functionality across multiple Unity projects.</li>
-                  <li>Developed UI features for a large-scale VR project built on a modular and scalable architecture, while also contributing to user experience improvements, reusable systems, and core functionality for a voxel-based project.</li>
-                  <li>Implemented a leaderboard using PlayFab, integrated Firebase sign-in, and worked with PlayFab Events.</li>
-                  <li>Collaborated with design and development teams to ensure gameplay, visuals, and UI aligned with the studio's quality standards.</li>
-                </ul>
-                <div class="tags"><span>Unity</span><span>C#</span><span>VR</span><span>UI Systems</span><span>Gameplay Programming</span><span>Modular Systems</span><span>PlayFab</span><span>Firebase</span></div>
-                <div class="experience-links">
-                  <a href="https://apexdreamstudio.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
-                  <a href="https://www.linkedin.com/company/apexdreamstudio/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              <button class="experience-toggle" type="button" aria-expanded="false" aria-controls="experience-details-apex" aria-label="Show details for Apex Dream Studio">
+                <span class="experience-logo"><img src="assets/apex-dream-studio.webp" alt="" loading="lazy"></span>
+                <span class="experience-toggle-copy">
+                  <span class="experience-trigger-company">Apex Dream Studio</span>
+                  <span class="experience-trigger-role">Unity Game Developer</span>
+                  <span class="experience-trigger-summary">Gameplay features, VR UI, modular systems and platform integrations.</span>
+                </span>
+                <span class="experience-toggle-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="experience-panel" id="experience-details-apex" hidden>
+                <div class="experience-content">
+                  <p class="experience-panel-label">Work &amp; responsibilities</p>
+                  <ul>
+                    <li>Implemented gameplay mechanics, interactive features, and rendering-related functionality across multiple Unity projects.</li>
+                    <li>Developed UI features for a large-scale VR project built on a modular and scalable architecture, while also contributing to user experience improvements, reusable systems, and core functionality for a voxel-based project.</li>
+                    <li>Implemented a leaderboard using PlayFab, integrated Firebase sign-in, and worked with PlayFab Events.</li>
+                    <li>Collaborated with design and development teams to ensure gameplay, visuals, and UI aligned with the studio's quality standards.</li>
+                  </ul>
+                  <div class="tags"><span>Unity</span><span>C#</span><span>VR</span><span>UI Systems</span><span>Gameplay Programming</span><span>Modular Systems</span><span>PlayFab</span><span>Firebase</span></div>
+                  <div class="experience-links">
+                    <a href="https://apexdreamstudio.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
+                    <a href="https://www.linkedin.com/company/apexdreamstudio/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -144,20 +162,29 @@
           <article class="experience-entry reveal">
             <div class="experience-date"><span>2024</span><b>June 2024</b></div>
             <div class="experience-card">
-              <div class="experience-logo"><img src="assets/anstric-games.webp" alt="Anstric Games logo" loading="lazy"></div>
-              <div class="experience-content">
-                <p class="experience-company">Anstric Games</p>
-                <h3>Unity Game Developer Intern</h3>
-                <ul>
-                  <li>Implemented character movement, combat logic, and core gameplay mechanics for a 2D fighting-game prototype in Unity.</li>
-                  <li>Worked on animation control and gameplay implementation to support character actions and combat interactions.</li>
-                  <li>Integrated particle effects and sound to improve gameplay feedback.</li>
-                  <li>Applied Unity development, C# programming, game design, and problem-solving skills across assigned game development tasks and projects.</li>
-                </ul>
-                <div class="tags"><span>Unity</span><span>C#</span><span>2D</span><span>Animation</span></div>
-                <div class="experience-links">
-                  <a href="https://anstric.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
-                  <a href="https://www.linkedin.com/company/anstric/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              <button class="experience-toggle" type="button" aria-expanded="false" aria-controls="experience-details-anstric" aria-label="Show details for Anstric Games">
+                <span class="experience-logo"><img src="assets/anstric-games.webp" alt="" loading="lazy"></span>
+                <span class="experience-toggle-copy">
+                  <span class="experience-trigger-company">Anstric Games</span>
+                  <span class="experience-trigger-role">Unity Game Developer Intern</span>
+                  <span class="experience-trigger-summary">2D fighting-game mechanics, animation and gameplay feedback.</span>
+                </span>
+                <span class="experience-toggle-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="experience-panel" id="experience-details-anstric" hidden>
+                <div class="experience-content">
+                  <p class="experience-panel-label">Work &amp; responsibilities</p>
+                  <ul>
+                    <li>Implemented character movement, combat logic, and core gameplay mechanics for a 2D fighting-game prototype in Unity.</li>
+                    <li>Worked on animation control and gameplay implementation to support character actions and combat interactions.</li>
+                    <li>Integrated particle effects and sound to improve gameplay feedback.</li>
+                    <li>Applied Unity development, C# programming, game design, and problem-solving skills across assigned game development tasks and projects.</li>
+                  </ul>
+                  <div class="tags"><span>Unity</span><span>C#</span><span>2D</span><span>Animation</span></div>
+                  <div class="experience-links">
+                    <a href="https://anstric.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
+                    <a href="https://www.linkedin.com/company/anstric/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -166,21 +193,30 @@
           <article class="experience-entry reveal">
             <div class="experience-date"><span>2023—24</span><b>December 2023 – February 2024</b></div>
             <div class="experience-card experience-card-parchment">
-              <div class="experience-logo"><img src="assets/alone-clone-studios.webp" alt="Alone Clone Studios logo" loading="lazy"></div>
-              <div class="experience-content">
-                <p class="experience-company">Alone Clone Studios</p>
-                <h3>Game Developer Intern</h3>
-                <p>Unity and Unreal Engine prototypes in a game development internship.</p>
-                <ul>
-                  <li>Multiplayer FPS prototype work</li>
-                  <li>Weapon rendering and cinematic capture</li>
-                  <li>Endless-runner mechanics with procedural environments</li>
-                  <li>Collision-based interactions</li>
-                </ul>
-                <div class="tags"><span>Unity</span><span>Unreal Engine</span><span>Multiplayer</span><span>Prototyping</span></div>
-                <div class="experience-links">
-                  <a href="https://aloneclone.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
-                  <a href="https://www.linkedin.com/company/aloneclone/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+              <button class="experience-toggle" type="button" aria-expanded="false" aria-controls="experience-details-alone" aria-label="Show details for Alone Clone Studios">
+                <span class="experience-logo"><img src="assets/alone-clone-studios.webp" alt="" loading="lazy"></span>
+                <span class="experience-toggle-copy">
+                  <span class="experience-trigger-company">Alone Clone Studios</span>
+                  <span class="experience-trigger-role">Game Developer Intern</span>
+                  <span class="experience-trigger-summary">Unity and Unreal Engine prototypes during a game development internship.</span>
+                </span>
+                <span class="experience-toggle-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="experience-panel" id="experience-details-alone" hidden>
+                <div class="experience-content">
+                  <p class="experience-panel-label">Work &amp; responsibilities</p>
+                  <p>Unity and Unreal Engine prototypes in a game development internship.</p>
+                  <ul>
+                    <li>Multiplayer FPS prototype work</li>
+                    <li>Weapon rendering and cinematic capture</li>
+                    <li>Endless-runner mechanics with procedural environments</li>
+                    <li>Collision-based interactions</li>
+                  </ul>
+                  <div class="tags"><span>Unity</span><span>Unreal Engine</span><span>Multiplayer</span><span>Prototyping</span></div>
+                  <div class="experience-links">
+                    <a href="https://aloneclone.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
+                    <a href="https://www.linkedin.com/company/aloneclone/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                  </div>
                 </div>
               </div>
             </div>
