@@ -1457,6 +1457,5 @@ body.single-page{
 
 @media(max-width:1023px){
   #main-content > #about{padding-bottom:45%}
-  #main-content > #skills{border-left:0}
 }
 
