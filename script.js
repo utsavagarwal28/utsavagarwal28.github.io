@@ -672,6 +672,8 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
   if (footerYear) footerYear.textContent = String(new Date().getFullYear());
 
   var scrollContainer = document.getElementById("main-content");
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.links a[href^="#"]'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll("#main-content > section[data-nav-section]"));
 
   function updateScrollProgress() {
     if (!progressBar) return;
@@ -720,7 +722,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
       entry.target.classList.add("is-visible");
       observer.unobserve(entry.target);
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -42px 0px" });
+  }, { root: scrollContainer || null, threshold: 0.12, rootMargin: "0px 0px -42px 0px" });
 
   Array.prototype.forEach.call(revealItems, function (item) { revealObserver.observe(item); });
 })();
