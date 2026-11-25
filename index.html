@@ -86,104 +86,120 @@
       </div>
     </section>
 
-    <!-- EXPERIENCE: the complete work history is now part of the same scroll. -->
+    <!-- EXPERIENCE: an interactive, world-map-inspired career journey. -->
     <section class="journey-section portfolio-section" id="journey" aria-labelledby="journey-title" data-nav-section>
       <div class="journey-backdrop" aria-hidden="true"></div>
-      <div class="journey-inner">
-        <div class="journey-heading reveal">
-          <p class="eyebrow">Work experience</p>
-          <h2 id="journey-title">My Journey</h2>
-          <p>From small prototypes to immersive experiences. Each step has helped me grow as a developer, learn new technologies and work on more complex projects.</p>
+      <div class="journey-inner career-journey-inner">
+        <div class="journey-heading career-journey-heading reveal">
+          <div>
+            <p class="eyebrow">Work experience · 2023 — Present</p>
+            <h2 id="journey-title">A path through worlds.</h2>
+          </div>
+          <p>Every stop marks a new chapter: new teams, new tools, and new worlds brought to life. Choose a place along the route to explore the work.</p>
         </div>
-        <div class="experience-list">
-          <article class="experience-entry reveal">
-            <div class="experience-date"><span>NOW</span><b>April 2026 – Present</b></div>
-            <div class="experience-card">
-              <div class="experience-logo logo-dark"><img src="assets/2-dude-studios.png" alt="2 Dude Studios logo" loading="lazy"></div>
-              <div class="experience-content">
-                <p class="experience-company">2 Dude Studios</p>
-                <h3>Unity Game Developer</h3>
-                <ul>
-                  <li>Building location-based entertainment (LBE) VR experiences for shared physical spaces</li>
-                  <li>Integrating Photon Fusion for multiplayer functionality</li>
-                  <li>Integrating Pixel Crushers' Dialogue System</li>
-                  <li>Working with PostgreSQL databases and FastAPI</li>
-                  <li>Developing modular utilities, debugging, and testing</li>
-                </ul>
-                <div class="tags"><span>Unity</span><span>VR</span><span>Photon Fusion</span><span>Multiplayer</span><span>Asset Building</span><span>Modular Systems</span><span>PostgreSQL</span><span>Dialogue System</span></div>
-                <div class="experience-links">
-                  <a href="https://2dudestudios.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
-                  <a href="https://www.linkedin.com/company/2-dude-studios/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-                </div>
-              </div>
+
+        <div class="career-map reveal" role="group" aria-label="Career journey map. Select a company to view experience details.">
+          <img class="career-map-art" src="assets/hero.webp" alt="" aria-hidden="true" loading="lazy">
+          <div class="career-map-shade" aria-hidden="true"></div>
+          <div class="career-map-topline" aria-hidden="true">
+            <span>FIELD NOTES <i></i> CAREER JOURNEY</span>
+            <span>FOUR CHAPTERS</span>
+          </div>
+
+          <svg class="career-route career-route-desktop" viewBox="0 0 1200 520" preserveAspectRatio="none" aria-hidden="true">
+            <path class="career-route-shadow" d="M 150 380 C 260 380 320 220 390 222 S 590 390 690 352 S 890 180 1015 190 S 1100 240 1138 155"/>
+            <path class="career-route-line" d="M 150 380 C 260 380 320 220 390 222 S 590 390 690 352 S 890 180 1015 190 S 1100 240 1138 155"/>
+            <path class="career-route-glint" d="M 150 380 C 260 380 320 220 390 222 S 590 390 690 352 S 890 180 1015 190 S 1100 240 1138 155"/>
+          </svg>
+          <svg class="career-route career-route-mobile" viewBox="0 0 400 800" preserveAspectRatio="none" aria-hidden="true">
+            <path class="career-route-shadow" d="M 70 110 C 175 110 270 235 310 290 S 215 420 105 500 S 215 675 305 700"/>
+            <path class="career-route-line" d="M 70 110 C 175 110 270 235 310 290 S 215 420 105 500 S 215 675 305 700"/>
+            <path class="career-route-glint" d="M 70 110 C 175 110 270 235 310 290 S 215 420 105 500 S 215 675 305 700"/>
+          </svg>
+
+          <span class="career-map-compass" aria-hidden="true"><span>N</span><i>✧</i></span>
+          <span class="career-map-legend" aria-hidden="true"><i></i> SELECT A MILESTONE</span>
+
+          <button class="career-stop career-stop-alone" type="button" data-career-stop="alone" aria-controls="career-detail-alone" aria-expanded="false" aria-pressed="false">
+            <span class="career-stop-marker"><i></i></span>
+            <span class="career-stop-label"><strong>Alone Clone Studios</strong><small>Dec 2023 — Feb 2024</small></span>
+          </button>
+
+          <button class="career-stop career-stop-anstric" type="button" data-career-stop="anstric" aria-controls="career-detail-anstric" aria-expanded="false" aria-pressed="false">
+            <span class="career-stop-marker"><i></i></span>
+            <span class="career-stop-label"><strong>Anstric Games</strong><small>June 2024</small></span>
+          </button>
+
+          <button class="career-stop career-stop-apex" type="button" data-career-stop="apex" aria-controls="career-detail-apex" aria-expanded="false" aria-pressed="false">
+            <span class="career-stop-marker"><i></i></span>
+            <span class="career-stop-label"><strong>Apex Dream Studio</strong><small>Nov 2025 — Mar 2026</small></span>
+          </button>
+
+          <button class="career-stop career-stop-dude is-current" type="button" data-career-stop="dude" aria-controls="career-detail-dude" aria-expanded="false" aria-pressed="false">
+            <span class="career-stop-marker"><i></i></span>
+            <span class="career-stop-label"><strong>2 Dude Studios</strong><small>Apr 2026 — Present</small><em>Current chapter</em></span>
+          </button>
+
+          <span class="career-map-endpoint" aria-hidden="true">THE JOURNEY CONTINUES</span>
+        </div>
+
+        <div class="career-detail-area" aria-live="polite">
+          <div class="career-detail-empty" id="career-detail-empty">
+            <span class="career-detail-empty-icon" aria-hidden="true">✧</span>
+            <div><b>Your next stop awaits.</b><p>Select a company marker on the map to reveal the role, responsibilities and tools from that chapter.</p></div>
+            <span class="career-detail-hint">CHOOSE A LOCATION ↑</span>
+          </div>
+
+          <article class="career-detail-panel" id="career-detail-alone" hidden>
+            <div class="career-detail-heading">
+              <div class="career-detail-brand"><img src="assets/alone-clone-studios.webp" alt="Alone Clone Studios logo" loading="lazy"></div>
+              <div><p class="career-detail-kicker">01 / FIRST STEPS · DEC 2023 — FEB 2024</p><h3>Alone Clone Studios</h3><p class="career-detail-role">Game Developer Intern</p></div>
+              <span class="career-detail-stamp">EARLY CHAPTER</span>
             </div>
+            <div class="career-detail-columns">
+              <div><p class="career-detail-label">The work</p><p>Worked on Unity and Unreal Engine prototypes during a game development internship, contributing to multiplayer, weapon presentation and procedural gameplay experiments.</p></div>
+              <div><p class="career-detail-label">Responsibilities</p><ul><li>Multiplayer FPS prototype work</li><li>Weapon rendering and cinematic capture</li><li>Endless-runner mechanics with procedural environments</li><li>Collision-based interactions</li></ul></div>
+            </div>
+            <div class="career-detail-footer"><div class="tags"><span>Unity</span><span>Unreal Engine</span><span>Multiplayer</span><span>Prototyping</span></div><div class="career-detail-links"><a href="https://aloneclone.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a><a href="https://www.linkedin.com/company/aloneclone/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div>
           </article>
 
-          <article class="experience-entry reveal">
-            <div class="experience-date"><span>2025—26</span><b>November 2025 – March 2026</b></div>
-            <div class="experience-card experience-card-parchment">
-              <div class="experience-logo"><img src="assets/apex-dream-studio.webp" alt="Apex Dream Studio logo" loading="lazy"></div>
-              <div class="experience-content">
-                <p class="experience-company">Apex Dream Studio</p>
-                <h3>Unity Game Developer</h3>
-                <ul>
-                  <li>Implemented gameplay mechanics, interactive features, and rendering-related functionality across multiple Unity projects.</li>
-                  <li>Developed UI features for a large-scale VR project built on a modular and scalable architecture, while also contributing to user experience improvements, reusable systems, and core functionality for a voxel-based project.</li>
-                  <li>Implemented a leaderboard using PlayFab, integrated Firebase sign-in, and worked with PlayFab Events.</li>
-                  <li>Collaborated with design and development teams to ensure gameplay, visuals, and UI aligned with the studio's quality standards.</li>
-                </ul>
-                <div class="tags"><span>Unity</span><span>C#</span><span>VR</span><span>UI Systems</span><span>Gameplay Programming</span><span>Modular Systems</span><span>PlayFab</span><span>Firebase</span></div>
-                <div class="experience-links">
-                  <a href="https://apexdreamstudio.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
-                  <a href="https://www.linkedin.com/company/apexdreamstudio/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-                </div>
-              </div>
+          <article class="career-detail-panel" id="career-detail-anstric" hidden>
+            <div class="career-detail-heading">
+              <div class="career-detail-brand"><img src="assets/anstric-games.webp" alt="Anstric Games logo" loading="lazy"></div>
+              <div><p class="career-detail-kicker">02 / COMBAT FOUNDATIONS · JUNE 2024</p><h3>Anstric Games</h3><p class="career-detail-role">Unity Game Developer Intern</p></div>
+              <span class="career-detail-stamp">GAMEPLAY &amp; ANIMATION</span>
             </div>
+            <div class="career-detail-columns">
+              <div><p class="career-detail-label">The work</p><p>Contributed to a 2D fighting-game prototype in Unity, focusing on character movement, combat logic and the implementation details that make actions feel responsive.</p></div>
+              <div><p class="career-detail-label">Responsibilities</p><ul><li>Implemented character movement, combat logic and core gameplay mechanics</li><li>Worked on animation control for character actions and combat interactions</li><li>Integrated particle effects and sound to improve gameplay feedback</li><li>Applied Unity development, C# programming, game design and problem-solving skills</li></ul></div>
+            </div>
+            <div class="career-detail-footer"><div class="tags"><span>Unity</span><span>C#</span><span>2D</span><span>Animation</span></div><div class="career-detail-links"><a href="https://anstric.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a><a href="https://www.linkedin.com/company/anstric/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div>
           </article>
 
-          <article class="experience-entry reveal">
-            <div class="experience-date"><span>2024</span><b>June 2024</b></div>
-            <div class="experience-card">
-              <div class="experience-logo"><img src="assets/anstric-games.webp" alt="Anstric Games logo" loading="lazy"></div>
-              <div class="experience-content">
-                <p class="experience-company">Anstric Games</p>
-                <h3>Unity Game Developer Intern</h3>
-                <ul>
-                  <li>Implemented character movement, combat logic, and core gameplay mechanics for a 2D fighting-game prototype in Unity.</li>
-                  <li>Worked on animation control and gameplay implementation to support character actions and combat interactions.</li>
-                  <li>Integrated particle effects and sound to improve gameplay feedback.</li>
-                  <li>Applied Unity development, C# programming, game design, and problem-solving skills across assigned game development tasks and projects.</li>
-                </ul>
-                <div class="tags"><span>Unity</span><span>C#</span><span>2D</span><span>Animation</span></div>
-                <div class="experience-links">
-                  <a href="https://anstric.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
-                  <a href="https://www.linkedin.com/company/anstric/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-                </div>
-              </div>
+          <article class="career-detail-panel" id="career-detail-apex" hidden>
+            <div class="career-detail-heading">
+              <div class="career-detail-brand"><img src="assets/apex-dream-studio.webp" alt="Apex Dream Studio logo" loading="lazy"></div>
+              <div><p class="career-detail-kicker">03 / EXPANDING SYSTEMS · NOV 2025 — MAR 2026</p><h3>Apex Dream Studio</h3><p class="career-detail-role">Unity Game Developer</p></div>
+              <span class="career-detail-stamp">VR &amp; PLATFORM SYSTEMS</span>
             </div>
+            <div class="career-detail-columns">
+              <div><p class="career-detail-label">The work</p><p>Implemented gameplay mechanics, interactive features and rendering-related functionality across multiple Unity projects. Contributed to a large-scale VR project and a voxel-based project, with an emphasis on reusable systems and user experience.</p></div>
+              <div><p class="career-detail-label">Responsibilities</p><ul><li>Developed UI features for a large-scale VR project built on a modular and scalable architecture</li><li>Contributed to UX improvements, reusable systems and core functionality for a voxel-based project</li><li>Implemented a leaderboard using PlayFab, integrated Firebase sign-in and worked with PlayFab Events</li><li>Collaborated with design and development teams to align gameplay, visuals and UI with studio quality standards</li></ul></div>
+            </div>
+            <div class="career-detail-footer"><div class="tags"><span>Unity</span><span>C#</span><span>VR</span><span>UI Systems</span><span>Gameplay Programming</span><span>Modular Systems</span><span>PlayFab</span><span>Firebase</span></div><div class="career-detail-links"><a href="https://apexdreamstudio.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a><a href="https://www.linkedin.com/company/apexdreamstudio/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div>
           </article>
 
-          <article class="experience-entry reveal">
-            <div class="experience-date"><span>2023—24</span><b>December 2023 – February 2024</b></div>
-            <div class="experience-card experience-card-parchment">
-              <div class="experience-logo"><img src="assets/alone-clone-studios.webp" alt="Alone Clone Studios logo" loading="lazy"></div>
-              <div class="experience-content">
-                <p class="experience-company">Alone Clone Studios</p>
-                <h3>Game Developer Intern</h3>
-                <p>Unity and Unreal Engine prototypes in a game development internship.</p>
-                <ul>
-                  <li>Multiplayer FPS prototype work</li>
-                  <li>Weapon rendering and cinematic capture</li>
-                  <li>Endless-runner mechanics with procedural environments</li>
-                  <li>Collision-based interactions</li>
-                </ul>
-                <div class="tags"><span>Unity</span><span>Unreal Engine</span><span>Multiplayer</span><span>Prototyping</span></div>
-                <div class="experience-links">
-                  <a href="https://aloneclone.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
-                  <a href="https://www.linkedin.com/company/aloneclone/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-                </div>
-              </div>
+          <article class="career-detail-panel" id="career-detail-dude" hidden>
+            <div class="career-detail-heading">
+              <div class="career-detail-brand career-detail-brand-dark"><img src="assets/2-dude-studios.png" alt="2 Dude Studios logo" loading="lazy"></div>
+              <div><p class="career-detail-kicker">04 / CURRENT CHAPTER · APR 2026 — PRESENT</p><h3>2 Dude Studios</h3><p class="career-detail-role">Unity Game Developer</p></div>
+              <span class="career-detail-stamp career-detail-stamp-current">CURRENT ROLE</span>
             </div>
+            <div class="career-detail-columns">
+              <div><p class="career-detail-label">The work</p><p>Building location-based entertainment (LBE) VR experiences for shared physical spaces, with a focus on multiplayer functionality, operator workflows and modular game systems.</p></div>
+              <div><p class="career-detail-label">Responsibilities</p><ul><li>Integrating Photon Fusion for multiplayer functionality</li><li>Integrating Pixel Crushers' Dialogue System</li><li>Working with PostgreSQL databases and FastAPI</li><li>Developing modular utilities, debugging and testing</li><li>Building shared-space VR experiences for location-based entertainment</li></ul></div>
+            </div>
+            <div class="career-detail-footer"><div class="tags"><span>Unity</span><span>VR</span><span>Photon Fusion</span><span>Multiplayer</span><span>Asset Building</span><span>Modular Systems</span><span>PostgreSQL</span><span>FastAPI</span><span>Dialogue System</span></div><div class="career-detail-links"><a href="https://2dudestudios.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a><a href="https://www.linkedin.com/company/2-dude-studios/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></div></div>
           </article>
         </div>
       </div>
