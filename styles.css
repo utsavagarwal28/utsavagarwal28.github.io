@@ -1571,3 +1571,12 @@ body.single-page{
     align-self:flex-start;
   }
 }
+
+
+/* Mobile About copy: add breathing room at the right edge. */
+@media(max-width:760px){
+  #main-content .as > #about > div{
+    box-sizing:border-box;
+    padding-right:clamp(14px,3vw,22px);
+  }
+}
