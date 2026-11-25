@@ -1509,6 +1509,6 @@ body.single-page{
 
 /* Keep the short project description at the desktop reading size on every device. */
 #main-content .featured-card-top .featured-card-description{
-  font-size:12.5px;
+  font-size:13.5px;
   line-height:1.45;
 }
