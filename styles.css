@@ -1547,3 +1547,27 @@ body.single-page{
     margin-top:0;
   }
 }
+
+
+/* Final About copy positioning by viewport:
+   Keep the mobile composition as-is, tighten the tablet top inset, and pin
+   desktop copy to the upper part of its panel instead of vertical centering. */
+@media(min-width:761px) and (max-width:1023px){
+  #main-content .as > #about{
+    align-items:flex-start;
+    padding-top:clamp(20px,3vh,30px);
+  }
+  #main-content .as > #about > div{
+    align-self:flex-start;
+  }
+}
+
+@media(min-width:1024px){
+  #main-content .as > #about{
+    align-items:flex-start;
+    padding-top:clamp(32px,5vh,64px);
+  }
+  #main-content .as > #about > div{
+    align-self:flex-start;
+  }
+}
