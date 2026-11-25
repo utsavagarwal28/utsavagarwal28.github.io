@@ -745,3 +745,37 @@ body.single-page{overflow-x:hidden;background:
  .lore-visual img,.project-note-visual img,.skill-group,.has-reveal .reveal{transition:none!important;transform:none!important}
  .has-reveal .reveal{opacity:1}
 }
+
+
+
+/* Resolve legacy homepage ID rules in favour of the single-page section compositions. */
+.single-page #about{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
+  align-items:center;
+  gap:clamp(26px,6vw,92px);
+  min-height:0;
+  padding:clamp(80px,10vw,150px) var(--pad);
+  background:linear-gradient(180deg,#e9d7b8,#d8c09b);
+  color:#211b15;
+}
+.single-page #skills{
+  min-height:0;
+  align-items:stretch;
+  padding:clamp(78px,10vw,140px) var(--pad);
+  border:0;
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(148,39,44,.15),transparent 48%),
+    linear-gradient(180deg,#e8d5b4,#d9c19b);
+}
+.journey-backdrop{z-index:0}
+.journey-inner{z-index:1}
+.contact-art{z-index:0}
+.contact-content,.site-footer{position:relative;z-index:1}
+@media(max-width:1023px){
+  .single-page #about{grid-template-columns:1fr 1fr;gap:28px;padding-top:76px;padding-bottom:76px}
+}
+@media(max-width:760px){
+  .single-page #about{grid-template-columns:1fr;padding:70px 20px;gap:33px}
+  .single-page #skills{padding:72px 18px}
+}
