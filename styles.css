@@ -1589,3 +1589,7 @@ body.single-page{
   color:#e6c68c;
   text-transform:none;
 }
+
+
+/* Temporary section visibility toggle: removing the class restores the section. */
+.is-temporarily-hidden{display:none!important;}
