@@ -692,7 +692,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.links a[href^="#"]'));
   function getNavigationSections() {
     var wideLayout = window.matchMedia && window.matchMedia("(min-width: 1024px)").matches;
-    var selector = "#main-content > section[data-nav-section], #main-content > .as > #about[data-nav-section]";
+    var selector = "#main-content > section[data-nav-section]:not(.is-temporarily-hidden), #main-content > .as > #about[data-nav-section]";
     if (!wideLayout) selector += ", #main-content > .as > #skills[data-nav-section]";
     return Array.prototype.slice.call(document.querySelectorAll(selector));
   }
