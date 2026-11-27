@@ -118,7 +118,7 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
       externalLabel:"Studio project",
       secondaryUrl:"https://2dudestudios.com/",
       secondaryLabel:"2 Dude Studios" },
-    { id:"fight-arena", type:"Personal project", organization:"Independent", title:"Fight Arena",
+    { id:"fight-arena", type:"Personal project", organization:"Prototype", title:"Fight Arena",
       description:"A Tekken-inspired 3D fighting-game prototype focused on movement, combat logic, animation, camera behavior, and arena boundaries.",
       points:[
         "Character movement and combat mechanics",
