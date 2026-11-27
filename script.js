@@ -131,8 +131,8 @@ document.addEventListener("keydown",function(e){if(e.key==="Escape"){document.ge
       videoId:"J4aup5Nu9pI", videoTitle:"Fight Arena gameplay video",
       externalUrl:"https://github.com/utsavagarwal28/FightArena",
       externalLabel:"GitHub repository",
-      secondaryUrl:"https://youtu.be/J4aup5Nu9pI",
-      secondaryLabel:"Watch gameplay" }
+      secondaryUrl:"https://utsavagarwal.itch.io/fight-arena",
+      secondaryLabel:"Download Project" }
   ];
 
   function renderCard(project) {
