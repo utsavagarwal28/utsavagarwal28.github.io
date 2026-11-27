@@ -1413,6 +1413,13 @@ body.single-page{
   }
 }
 
+/* Keep the Skills navbar link aligned with the responsive About + Skills layout.
+   It is hidden while both sections share one desktop snap stop, and visible
+   again when narrower layouts give each section its own page. */
+@media (min-width:1024px){
+  .site-nav .links a[href="#skills"]{display:none}
+}
+
 /* About + Skills follow the responsive composition from main:
    - >=1024px: one side-by-side, full-viewport snap stop.
    - <1024px: two separate, full-viewport snap stops. */
