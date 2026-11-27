@@ -1,31 +1,226 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Utsav Agarwal — Game Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="stylesheet" href="styles.css"></head><body>
-<nav><a class="logo" href="index.html" aria-label="Home">UA</a>
-<button class="burger" aria-label="Menu" aria-expanded="false">&#9776;</button>
-<div class="links" id="links"><a href="index.html#about">About</a><a href="projects.html">Projects</a><a href="experience.html">Experience</a><a href="#contact">Contact</a><a class="btn" href="resume.html" target="_blank" rel="noopener">Resume</a></div></nav>
-<main class="view on">
-<!-- HERO -->
-<section class="snap" id="hero"><img class="bg" src="assets/hero.webp" alt="A wandering warrior overlooks a misty valley of pagodas at sunset"><div class="heroin"><h1>Utsav Agarwal</h1><p class="sub">Gameplay Systems, AI, VR &amp; Multiplayer.</p><a class="btn full" href="projects.html">View My Work</a><a class="badge" href="https://www.credly.com/badges/8d14fb76-37ea-4caa-a7da-df510a67772a" target="_blank" rel="noopener"><img src="assets/unity-badge.png" alt="Unity Certified Associate Programmer badge"><div><b>Unity</b><span>Certified Associate Programmer</span></div></a></div></section>
-<!-- ABOUT + SKILLS -->
-<div class="as"><section class="snap" id="about"><img class="bg" src="assets/wanderer.webp" alt="A rider on horseback looks over a misty river valley"><div><p class="eyebrow">About me</p><h2>A game developer who loves building interactive worlds.</h2><p>I’m a full-time game programmer, skilled in the Unity engine, with experience in VR, AI, modular asset building and multiplayer systems. I enjoy turning ideas into playable experiences and solving technical challenges that make games more engaging and reliable.</p></div></section>
-<section class="snap" id="skills"><div><p class="eyebrow">Skills &amp; tools</p><div class="grid">
-<div class="sk"><i>U</i>Unity</div>
-<div class="sk"><i>C#</i>C#</div>
-<div class="sk"><i>G</i>Gameplay Programming</div>
-<div class="sk"><i>AI</i>AI Systems</div>
-<div class="sk"><i>VR</i>VR Development</div>
-<div class="sk"><i>Pf</i>Photon Fusion</div>
-<div class="sk"><i>M</i>Multiplayer</div>
-<div class="sk"><i>An</i>Animation</div>
-<div class="sk"><i>UI</i>UI Systems</div>
-<div class="sk"><i>Gt</i>Git</div>
-</div></div></section></div>
-<!-- CONTACT -->
-<section class="snap contact" id="contact"><div><p class="eyebrow" style="display:inline-block;text-align:left">Contact</p><h2>Let’s build something meaningful.</h2><p>Open to game development opportunities in gameplay systems, AI and VR. Send a message and I’ll reply soon.</p><a class="btn" href="mailto:utsavagarwal2002@gmail.com">Let’s Talk</a><a class="m" href="mailto:utsavagarwal2002@gmail.com">utsavagarwal2002@gmail.com</a></div></section>
-</main>
-<script src="script.js"></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080B0D">
+  <meta name="description" content="Utsav Agarwal — Game developer focused on gameplay systems, AI, VR and multiplayer experiences.">
+  <title>Utsav Agarwal — Game Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="single-page">
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a class="logo" href="#hero" aria-label="Utsav Agarwal — Home">UA</a>
+    <button class="burger" aria-label="Open navigation" aria-expanded="false" aria-controls="links">&#9776;</button>
+    <div class="links" id="links">
+      <a href="#featured-work">Projects</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#journey" class="is-temporarily-hidden">Experience</a>
+      <a href="#contact">Contact</a>
+      <a class="btn nav-resume" href="resume.html" target="_blank" rel="noopener">Resume <span aria-hidden="true">↗</span></a>
+    </div>
+  </nav>
+
+  <main class="view on" id="main-content" tabindex="0" role="region" aria-label="Portfolio sections">
+    <!-- HERO: retain the current portfolio identity and composition. -->
+    <section class="snap portfolio-hero" id="hero" data-nav-section>
+      <img class="bg hero-bg" src="assets/hero.webp" alt="A wandering warrior overlooks a misty valley of pagodas at sunset">
+      <div class="hero-side-note" aria-hidden="true"><span>GAMEPLAY</span><i></i><span>WORLDS</span></div>
+      <div class="heroin reveal">
+        <p class="eyebrow">Game developer · Unity</p>
+        <h1>Utsav Agarwal</h1>
+        <p class="sub">Gameplay Systems, AI, VR &amp; Multiplayer.</p>
+        <a class="btn full" href="#featured-work">View My Work <span aria-hidden="true">↓</span></a>
+        <a class="badge" href="https://www.credly.com/badges/8d14fb76-37ea-4caa-a7da-df510a67772a" target="_blank" rel="noopener">
+          <img src="assets/unity-badge.png" alt="Unity Certified Associate Programmer badge">
+          <div><b>Unity</b><span>Certified Associate Programmer</span></div>
+        </a>
+      </div>
+      <a class="hero-scroll-cue" href="#featured-work" aria-label="Scroll to projects section"><span>SCROLL TO EXPLORE</span><i></i></a>
+    </section>
+
+    <!-- PROJECTS: preserve the current data-driven project cards and video controls. -->
+    <section class="snap featured-work portfolio-section" id="featured-work" aria-labelledby="featured-title" data-nav-section>
+      <div class="featured-inner">
+        <div class="featured-heading reveal">
+          <div class="featured-heading-copy">
+            <h2 id="featured-title">Projects</h2>
+            <p class="featured-intro">A closer look at the gameplay, AI, VR and multiplayer systems I’ve helped build.</p>
+          </div>
+          <span class="section-side-label" aria-hidden="true">THE PORTFOLIO / PROJECT ARCHIVE</span>
+        </div>
+        <div class="featured-carousel reveal" data-featured-carousel>
+          <div class="featured-track" id="featured-track" tabindex="0" role="region" aria-label="Featured projects">
+            <div class="featured-fallback">Featured projects are loading. <a href="#featured-work">Explore projects</a>.</div>
+          </div>
+        </div>
+        <div class="featured-pagination">
+          <div class="featured-dots" id="featured-dots" aria-label="Choose project"></div>
+          <div class="featured-navigation">
+            <span class="featured-counter" id="featured-counter" aria-live="polite">01 / 01</span>
+            <button class="featured-arrow" id="featured-prev" type="button" aria-label="Previous projects" disabled><span aria-hidden="true">←</span></button>
+            <button class="featured-arrow" id="featured-next" type="button" aria-label="Next projects" disabled><span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="as">
+      <!-- ABOUT: restored to the image-backed layout from the latest main commit. -->
+    <section class="snap" id="about" data-nav-section>
+      <img class="bg" src="assets/wanderer.webp" alt="A rider on horseback looks over a misty river valley">
+      <div>
+        <p class="eyebrow">About me</p>
+        <h2>A game developer who loves building interactive worlds.</h2>
+        <p>I’m a full-time game programmer, skilled in the Unity engine, with experience in VR, AI, modular asset building and multiplayer systems. I enjoy turning ideas into playable experiences and solving technical challenges that make games more engaging and reliable.</p>
+      </div>
+    </section>
+
+      <!-- SKILLS: restored to the 10-item skills grid from the latest main commit. -->
+    <section class="snap" id="skills" data-nav-section>
+      <div>
+        <p class="eyebrow">Skills &amp; tools</p>
+        <div class="grid">
+          <div class="sk"><i>U</i>Unity</div>
+          <div class="sk"><i>C#</i>C#</div>
+          <div class="sk"><i>G</i>Gameplay Programming</div>
+          <div class="sk"><i>AI</i>AI Systems</div>
+          <div class="sk"><i>VR</i>VR Development</div>
+          <div class="sk"><i>Pf</i>Photon Fusion</div>
+          <div class="sk"><i>M</i>Multiplayer</div>
+          <div class="sk"><i>An</i>Animation</div>
+          <div class="sk"><i>UI</i>UI Systems</div>
+          <div class="sk"><i>Gt</i>Git</div>
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <!-- EXPERIENCE: the complete work history is now part of the same scroll. -->
+    <section class="journey-section portfolio-section is-temporarily-hidden" id="journey" aria-labelledby="journey-title" data-nav-section>
+      <div class="journey-backdrop" aria-hidden="true"></div>
+      <div class="journey-inner">
+        <div class="journey-heading reveal">
+          <p class="eyebrow">Work experience</p>
+          <h2 id="journey-title">My Journey</h2>
+          <p>From small prototypes to immersive experiences. Each step has helped me grow as a developer, learn new technologies and work on more complex projects.</p>
+        </div>
+        <div class="experience-list">
+          <article class="experience-entry reveal">
+            <div class="experience-date"><span>NOW</span><b>April 2026 – Present</b></div>
+            <div class="experience-card">
+              <div class="experience-logo logo-dark"><img src="assets/2-dude-studios.png" alt="2 Dude Studios logo" loading="lazy"></div>
+              <div class="experience-content">
+                <p class="experience-company">2 Dude Studios</p>
+                <h3>Unity Game Developer</h3>
+                <ul>
+                  <li>Building location-based entertainment (LBE) VR experiences for shared physical spaces</li>
+                  <li>Integrating Photon Fusion for multiplayer functionality</li>
+                  <li>Integrating Pixel Crushers' Dialogue System</li>
+                  <li>Working with PostgreSQL databases and FastAPI</li>
+                  <li>Developing modular utilities, debugging, and testing</li>
+                </ul>
+                <div class="tags"><span>Unity</span><span>VR</span><span>Photon Fusion</span><span>Multiplayer</span><span>Asset Building</span><span>Modular Systems</span><span>PostgreSQL</span><span>Dialogue System</span></div>
+                <div class="experience-links">
+                  <a href="https://2dudestudios.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
+                  <a href="https://www.linkedin.com/company/2-dude-studios/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-entry reveal">
+            <div class="experience-date"><span>2025—26</span><b>November 2025 – March 2026</b></div>
+            <div class="experience-card experience-card-parchment">
+              <div class="experience-logo"><img src="assets/apex-dream-studio.webp" alt="Apex Dream Studio logo" loading="lazy"></div>
+              <div class="experience-content">
+                <p class="experience-company">Apex Dream Studio</p>
+                <h3>Unity Game Developer</h3>
+                <ul>
+                  <li>Implemented gameplay mechanics, interactive features, and rendering-related functionality across multiple Unity projects.</li>
+                  <li>Developed UI features for a large-scale VR project built on a modular and scalable architecture, while also contributing to user experience improvements, reusable systems, and core functionality for a voxel-based project.</li>
+                  <li>Implemented a leaderboard using PlayFab, integrated Firebase sign-in, and worked with PlayFab Events.</li>
+                  <li>Collaborated with design and development teams to ensure gameplay, visuals, and UI aligned with the studio's quality standards.</li>
+                </ul>
+                <div class="tags"><span>Unity</span><span>C#</span><span>VR</span><span>UI Systems</span><span>Gameplay Programming</span><span>Modular Systems</span><span>PlayFab</span><span>Firebase</span></div>
+                <div class="experience-links">
+                  <a href="https://apexdreamstudio.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
+                  <a href="https://www.linkedin.com/company/apexdreamstudio/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-entry reveal">
+            <div class="experience-date"><span>2024</span><b>June 2024</b></div>
+            <div class="experience-card">
+              <div class="experience-logo"><img src="assets/anstric-games.webp" alt="Anstric Games logo" loading="lazy"></div>
+              <div class="experience-content">
+                <p class="experience-company">Anstric Games</p>
+                <h3>Unity Game Developer Intern</h3>
+                <ul>
+                  <li>Implemented character movement, combat logic, and core gameplay mechanics for a 2D fighting-game prototype in Unity.</li>
+                  <li>Worked on animation control and gameplay implementation to support character actions and combat interactions.</li>
+                  <li>Integrated particle effects and sound to improve gameplay feedback.</li>
+                  <li>Applied Unity development, C# programming, game design, and problem-solving skills across assigned game development tasks and projects.</li>
+                </ul>
+                <div class="tags"><span>Unity</span><span>C#</span><span>2D</span><span>Animation</span></div>
+                <div class="experience-links">
+                  <a href="https://anstric.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
+                  <a href="https://www.linkedin.com/company/anstric/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-entry reveal">
+            <div class="experience-date"><span>2023—24</span><b>December 2023 – February 2024</b></div>
+            <div class="experience-card experience-card-parchment">
+              <div class="experience-logo"><img src="assets/alone-clone-studios.webp" alt="Alone Clone Studios logo" loading="lazy"></div>
+              <div class="experience-content">
+                <p class="experience-company">Alone Clone Studios</p>
+                <h3>Game Developer Intern</h3>
+                <p>Unity and Unreal Engine prototypes in a game development internship.</p>
+                <ul>
+                  <li>Multiplayer FPS prototype work</li>
+                  <li>Weapon rendering and cinematic capture</li>
+                  <li>Endless-runner mechanics with procedural environments</li>
+                  <li>Collision-based interactions</li>
+                </ul>
+                <div class="tags"><span>Unity</span><span>Unreal Engine</span><span>Multiplayer</span><span>Prototyping</span></div>
+                <div class="experience-links">
+                  <a href="https://aloneclone.com/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
+                  <a href="https://www.linkedin.com/company/aloneclone/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT: a clear final call to action. -->
+    <section class="contact-section portfolio-section" id="contact" aria-labelledby="contact-title" data-nav-section>
+      <div class="contact-art" aria-hidden="true"></div>
+      <div class="contact-content reveal">
+        <p class="eyebrow">The next chapter</p>
+        <h2 id="contact-title">Let’s build something meaningful.</h2>
+        <p>Open to game development opportunities in gameplay systems, AI and VR. Send a message and I’ll reply soon.</p>
+        <a class="btn contact-cta" href="mailto:utsavagarwal2002@gmail.com">Let’s Talk <span aria-hidden="true">↗</span></a>
+        <a class="contact-email" href="mailto:utsavagarwal2002@gmail.com">utsavagarwal2002@gmail.com</a>
+      </div>
+      <footer class="site-footer">
+        <a class="footer-mark" href="#hero">UA</a>
+        <span>© <span id="footer-year">2026</span> Utsav Agarwal</span>
+        <a href="#hero">Back to the beginning ↑</a>
+      </footer>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

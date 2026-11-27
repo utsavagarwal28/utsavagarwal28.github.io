@@ -11,7 +11,7 @@
   <style>
     :root { color-scheme: light; }
     * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; }
+    html, body { width:100%; height:auto; min-height:100%; margin:0; overflow-x:hidden; overflow-y:auto; }
     body { background: #101214; color: #17191b; font-family: Inter, Arial, sans-serif; }
     .resume-topbar {
       position: sticky; top: 0; z-index: 10;
@@ -26,11 +26,11 @@
     .resume-action.secondary { background:transparent; border-color:rgba(255,255,255,.35); }
 
     /* The resume itself is a fixed A4 canvas. The viewport changes only its uniform scale. */
-    .resume-viewport { width:100%; padding:16px 0 28px; display:flex; justify-content:center; align-items:flex-start; overflow:hidden; }
+    .resume-viewport { width:100%; padding:16px 0 28px; display:flex; justify-content:center; align-items:flex-start; overflow:visible; }
     .resume-stage { position:relative; flex:0 0 auto; width:794px; height:1122.54px; }
     .resume-sheet {
       position:absolute; top:0; left:0; width:794px; height:1122.54px;
-      aspect-ratio:210 / 297; transform-origin:top left; overflow:hidden; padding:32px 42px 27px;
+      aspect-ratio:210 / 297; transform-origin:top left; overflow:visible; padding:32px 42px 27px;
       background:#fff; box-shadow:0 12px 50px rgba(0,0,0,.28);
     }
     .resume-header { position:relative; display:flex; justify-content:space-between; align-items:flex-start; gap:15px; padding-bottom:8px; border-bottom:2px solid #a52d33; }
@@ -218,11 +218,14 @@
         const scale = Math.min(availableWidth / pageWidth, 1.2);
         sheet.style.transform = 'scale(' + scale + ')';
         stage.style.width = (pageWidth * scale) + 'px';
-        stage.style.height = (pageHeight * scale) + 'px';
+        const contentHeight = Math.max(pageHeight, sheet.scrollHeight);
+        stage.style.height = (contentHeight * scale) + 'px';
         // The stage already determines the viewport height; don't persist a screen-sized min-height.
       }
       window.addEventListener('resize', fitA4Sheet, { passive: true });
       window.addEventListener('orientationchange', fitA4Sheet, { passive: true });
+      window.addEventListener('load', fitA4Sheet, { passive: true });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitA4Sheet);
       window.addEventListener('beforeprint', () => {
         // Reset all screen-scaled dimensions so the print tree is exactly one A4 page.
         viewport.style.minHeight = '297mm';
